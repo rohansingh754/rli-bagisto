@@ -22,6 +22,12 @@
                     <span class="control-error" v-if="errors.has('email')">{{ errors.first('email') }}</span>
                 </div>
 
+                <div class="control-group" :class="[errors.has('phone') ? 'has-error' : '']">
+                    <input type="number" name="phone" class="control" v-model="customer.phone" v-validate="'required'" :placeholder="$t('Phone Number')" :data-vv-as="$t('Email Address')"/>
+                    <label>{{ $t('Email Address') }}</label>
+                    <span class="control-error" v-if="errors.has('phone')">{{ errors.first('phone') }}</span>
+                </div>
+
                 <div class="control-group" :class="[errors.has('gender') ? 'has-error' : '']">
                     <select name="gender" class="control" v-model="customer.gender" v-validate="'required'" :placeholder="$t('Gender')" :data-vv-as="$t('Gender')">
                         <option value="Male">{{ $t('Male') }}</option>

@@ -1,11 +1,5 @@
 @php
-$channel = core()->getCurrentChannel();
-
 $themeAssetsPath = 'themes/pwa/build/assets/default/';
-
-if($channel->theme === 'enclaves'){
-    $themeAssetsPath = 'themes/pwa/build/assets/enclaves/';
-}
 @endphp
 
 <!DOCTYPE html>

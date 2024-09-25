@@ -1,9 +1,7 @@
 {
-    "/js/app.js": "/js/app.js?id=65f490554923dd1bf8a3",
-    "/css/pwa-admin.css": "/css/pwa-admin.css?id=5000c37495f878eb18aa",
-    "/css/pwa.css": "/css/pwa.css?id=3728f449ebbb44834363",
-    "/default/js/app.js": "/default/js/app.js?id=36e9689f5789b78fa72a",
+    "/default/js/app.js": "/default/js/app.js?id=ddc3f747dfd6b99770d5",
     "/default/css/pwa.css": "/default/css/pwa.css?id=3728f449ebbb44834363",
-    "/enclaves/css/pwa.css": "/enclaves/css/pwa.css?id=3728f449ebbb44834363",
-    "/enclaves/js/app.js": "/enclaves/js/app.js?id=2282120155f94b4fde92"
+    "/enclaves/css/pwa.css": "/enclaves/css/pwa.css?id=061d224e967c591a3f3b",
+    "/css/pwa-admin.css": "/css/pwa-admin.css?id=5000c37495f878eb18aa",
+    "/enclaves/js/app.js": "/enclaves/js/app.js?id=dd5a834630552090c8f1"
 }

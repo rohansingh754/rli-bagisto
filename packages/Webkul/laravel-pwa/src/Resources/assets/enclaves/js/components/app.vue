@@ -1,169 +1,81 @@
 <template>
     <div id="app-inner">
+        <!-- header -->
+        <header class="border-b-[1px] border-[#E9E9E9]">
+            <div class="container px-[18px] py-6">
+                <div class="flex items-center justify-between">
+                    <div class="homeful-toggler cursor-pointer py-[10px] pr-4">
+                        <span class="block h-3 w-[19px] border-b-[3px] border-t-[3px] border-dark" @click="OpneCloseMenuSidebar()"></span>
+                    </div>
+                    <a href="#" class="homeful-logo mr-auto">
+                        <img :src="themeAssets + 'images/logo.png'" alt="homeful">
+                    </a>
+                    <a href="#" class="homeful-share text-[24px] text-dark">
+                        <span class="icon-search"></span>
+                    </a>
+                </div>
+                <div v-if="menuSidebar" class="homeful-mobile-menu scrollbar-hide fixed bottom-0 left-[-100%] top-0 w-[90%] max-w-[360px] overflow-auto bg-white pl-8 pr-6 pt-[62px] shadow-[0px_4px_4px] shadow-black/10 transition-all active">
+                    <div class="flex items-start justify-between">
+                        <a href="#" class="homeful-logo mr-auto">
+                            <img :src="themeAssets + 'images/logo.png'" alt="homeful">
+                        </a>
+                        <span class="homeful-menu-close flex h-[35px] w-[35px] cursor-pointer items-center justify-center rounded-full bg-[#F3F4F6]" @click="OpneCloseMenuSidebar()">
+                            <span class="icon-cancel text-[14px] text-[#989898]"></span>
+                        </span>
+                    </div>
+                    <router-link :to="'/customer/login-register'" class="login-info" v-if="! currentUser">
 
+                        <a href="#" class="mt-10 flex items-center gap-[10px] rounded-[11px] border-[1px] border-[#F5F5F5] px-[13px] py-3 text-[14px] font-medium text-dark">
+                            <span class="flex h-[45px] w-[45px] items-center justify-center rounded-full bg-[#F5F5F5]">
+                                <svg width="17" height="21" viewBox="0 0 17 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M8.5 0C5.57536 0 3.1875 2.35977 3.1875 5.25C3.1875 8.14023 5.57536 10.5 8.5 10.5C11.4246 10.5 13.8125 8.14023 13.8125 5.25C13.8125 2.35977 11.4246 0 8.5 0ZM2.39062 12.6C1.0791 12.6 0 13.6664 0 14.9625V15.5928C0 17.1363 0.99056 18.5213 2.5013 19.4729C4.01204 20.4258 6.08032 21 8.5 21C10.9197 21 12.988 20.4258 14.4987 19.4729C16.0094 18.5213 17 17.1363 17 15.5928V14.9625C17 13.6664 15.9209 12.6 14.6094 12.6H2.39062Z" fill="#C4C4C4"/>
+                                    </svg>
+                            </span> Login My Account
+                        </a>
+                    </router-link>
+                    <div class="mt-8 grid gap-[29px]">
+                        <div class="border-b-[1px] border-[#E2E2E2] pb-5">
+                            <a href="#" class="text-[17px] font-medium text-dark decoration-black">Home</a>
+                        </div>
+                        <div class="border-b-[1px] border-[#E2E2E2] pb-5">
+                            <a href="./about-us.html" class="text-[17px] font-medium text-dark">About Us</a>
+                        </div>
+                        <div class="border-b-[1px] border-[#E2E2E2] pb-5">
+                            <a href="#" class="text-[17px] font-medium text-dark">Ask Joy</a>
+                        </div>
+                        <div class="homeful-submenu border-b-[1px] border-[#E2E2E2] pb-5">
+                            <a href="#" class="text-[17px] font-medium text-dark">Our Brands<span class="icon-arrow-down float-right mt-[-4px] flex h-[29px] w-[29px] items-center justify-center rounded-full border-[1px] border-[#EDEFF5] text-[24px] text-primary"></span></a>
+                            <div class="homeful-submenu-wrap mt-5 hidden gap-[29px] border-t-[1px] border-[#E2E2E2] pl-5 pt-[29px]">
+                                <div class="border-b-[1px] border-[#E2E2E2] pb-5">
+                                    <a href="#" class="text-[17px] font-medium text-dark">Elanvital</a>
+                                </div>
+                                <div class="border-b-[1px] border-[#E2E2E2] pb-5">
+                                    <a href="#" class="text-[17px] font-medium text-dark">Everyhome</a>
+                                </div>
+                                <div class="">
+                                    <a href="#" class="text-[17px] font-medium text-dark">Extraordinary</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="border-b-[1px] border-[#E2E2E2] pb-5">
+                            <a href="#" class="text-[17px] font-medium text-dark">Partner with us</a>
+                        </div>
+                        <div class="border-b-[1px] border-[#E2E2E2] pb-5">
+                            <a href="#" class="text-[17px] font-medium text-dark">Celebrations</a>
+                        </div>
+                        <div class="border-b-[1px] border-[#E2E2E2] pb-5">
+                            <a href="#" class="text-[17px] font-medium text-dark">Talk to Us</a>
+                        </div>
+                        <div class="border-b-[1px] border-[#E2E2E2] pb-5">
+                            <a href="#" class="text-[17px] font-medium text-dark">Support</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <!-- header end-->
         <div slot="content">
-            <header-nav @toggleDrawer="handleToggleDrawer"></header-nav>
-
             <div class="page-view-container">
-                <drawer-sidebar ref="drawer">
-                    <div class="drawer">
-
-                        <div class="drawer-header">
-                            <router-link :to="'/customer/login-register'" class="login-info" v-if="! currentUser">
-                                <div class="avatar"></div>
-                                <h2>{{ $t('Sign In') }}</h2>
-                                <p>{{ $t('to your account') }}</p>
-                                <i class="icon arrow-right-icon"></i>
-                            </router-link>
-
-                            <router-link :to="'/customer/account/dashboard'" class="login-info" v-if="currentUser">
-                                <div class="avatar"></div>
-                                <h2>{{ $t('Hello!') }}</h2>
-                                <p>{{ currentUser.name }}</p>
-                                <i class="icon arrow-right-icon"></i>
-                            </router-link>
-                        </div>
-
-                        <div class="drawer-content">
-
-                            <div class="drawer-box categories">
-                                <h2>{{ $t('Categories') }}</h2>
-
-                                <ul>
-                                    <li :key="category.id" v-for="category in categories" class="category-list-item">
-                                        <router-link :to="'/categories/' + category.id">
-                                            {{ category.name }}
-                                        </router-link>
-                                        <i class="icon sharp-arrow-right-icon"  @click="openSubcategories(category.id, $event)"></i>
-                                    </li>
-                                </ul>
-                            </div>
-
-                            <div class="drawer-box account" v-if="currentUser">
-                                <h2>{{ $t('Account') }}</h2>
-
-                                <ul>
-                                    <li>
-                                        <router-link :to="'/customer/account/dashboard'">
-                                            {{ $t('Dashboard') }}
-                                            <i class="icon sharp-arrow-right-icon"></i>
-                                        </router-link>
-                                    </li>
-
-                                    <li>
-                                        <router-link :to="'/customer/account/wishlist'">
-                                            {{ $t('Wishlist') }}
-                                            <i class="icon sharp-arrow-right-icon"></i>
-                                        </router-link>
-                                    </li>
-
-                                    <li>
-                                        <router-link :to="'/compare'">
-                                            {{ $t('Compare') }}
-                                            <i class="icon sharp-arrow-right-icon"></i>
-                                        </router-link>
-                                    </li>
-
-                                    <li>
-                                        <router-link :to="'/customer/account/orders'">
-                                            {{ $t('Orders') }}
-                                            <i class="icon sharp-arrow-right-icon"></i>
-                                        </router-link>
-                                    </li>
-
-                                    <li>
-                                        <router-link :to="'/customer/account/addresses'">
-                                            {{ $t('Address Book') }}
-                                            <i class="icon sharp-arrow-right-icon"></i>
-                                        </router-link>
-                                    </li>
-
-                                    <li>
-                                        <router-link :to="'/customer/account/reviews'">
-                                            {{ $t('Product Reviews') }}
-                                            <i class="icon sharp-arrow-right-icon"></i>
-                                        </router-link>
-                                    </li>
-                                </ul>
-                            </div>
-
-                            <div class="drawer-box preference" v-if="currencies.length > 1 || locales.length > 1">
-                                <h2>{{ $t('Preference') }}</h2>
-
-                                <ul>
-                                    <li v-if="currencies.length > 1" @click="handleToggleDrawer(); bottomSheets.currency = true">
-                                        {{ $t('Currency -') }} {{ currentCurrency.name }} ({{ currentCurrency.code }})
-                                        <i class="icon sharp-arrow-right-icon"></i>
-                                    </li>
-
-                                    <li v-if="locales.length > 1" @click="handleToggleDrawer(); bottomSheets.locale = true">
-                                        {{ $t('Language -') }} {{ currentLocale.name }} ({{ currentLocale.code }})
-                                        <i class="icon sharp-arrow-right-icon"></i>
-                                    </li>
-                                </ul>
-                            </div>
-
-                            <div class="drawer-box logout" v-if="currentUser">
-                                <button class="logout-btn" @click="logout">{{ $t('Log Out') }}</button>
-                            </div>
-
-                        </div>
-
-                    </div>
-                </drawer-sidebar>
-
-                <bottom-sheet :show="bottomSheets.subCategory" @onBottomSheetClose="bottomSheets.subCategory = false; ">
-                    <h4 slot="header">
-                    {{ $t('Sub Categories') }}
-                    </h4>
-
-                    <div slot="content">
-                        <ul>
-                            <li @click="redirectToCategory(subCategory.id)" :key="index" v-for="(subCategory, index) in subCategories[parent_id]">
-                                <template v-if="subCategory">
-                                    {{ subCategory.name }}
-                                </template>
-                            </li>
-                        </ul>
-                    </div>
-                </bottom-sheet>
-
-                <bottom-sheet v-if="currencies.length > 1" :show="bottomSheets.currency" @onBottomSheetClose="bottomSheets.currency = false; ">
-                    <div slot="header">
-                    {{ $t('Currency') }}
-                    </div>
-
-                    <div slot="content">
-                        <ul>
-                            <li :key="currency.id" v-for="currency in currencies">
-                                <span class="radio" :class="currency.code">
-                                    <input type="radio" :id="currency.code" name="currency" :checked="currency.code == currentCurrency.code" @change="switchCurrency(currency)">
-                                    <label class="radio-view" :for="currency.code"></label>
-                                    {{ currency.name }}
-                                </span>
-                            </li>
-                        </ul>
-                    </div>
-                </bottom-sheet>
-
-                <bottom-sheet v-if="locales.length > 1" :show="bottomSheets.locale" @onBottomSheetClose="bottomSheets.locale = false; ">
-                    <div slot="header">
-                        {{ $t('Languages') }}
-                    </div>
-
-                    <div slot="content">
-                        <ul>
-                            <li :key="index" v-for="(locale, index) in locales">
-                                <span class="radio" :class="locale.code">
-                                    <input type="radio" :id="locale.code" name="locale" :checked="locale.code == currentLocale.code" @change="switchLocale(locale)">
-                                    <label class="radio-view" :for="locale.code"></label>
-                                    {{ locale.name }}
-                                </span>
-                            </li>
-                        </ul>
-                    </div>
-                </bottom-sheet>
-
                 <router-view></router-view>
             </div>
         </div>
@@ -199,7 +111,10 @@
                     subCategory: false,
                 },
 
-                currentUser: false
+                currentUser: false,
+
+                themeAssets: window.config.themeAssetsPath,
+                menuSidebar: 0,
 			}
 		},
 
@@ -318,7 +233,15 @@
                 this.$router.push({ name: 'category', params: { id: categoryId } })
                 this.bottomSheets.subCategory = false;
 
-            }
+            },
+
+            OpneCloseMenuSidebar(){
+                if(this.menuSidebar){
+                    this.menuSidebar = 0
+                } else{
+                    this.menuSidebar = 1
+                }
+            },
         }
     }
 </script>
@@ -456,7 +379,6 @@
     }
 
     .page-view-container {
-        top: 56px;
         position: relative;
     }
 </style>
