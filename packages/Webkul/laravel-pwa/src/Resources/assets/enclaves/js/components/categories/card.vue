@@ -1,21 +1,19 @@
 <template>
-    <li class="category-card">
+    <div class="rounded-[9px] p-3 shadow-[0px_4px_4px] shadow-black/10">
+        <img
+            :src="category.logo_url ? category.logo_url : '/themes/pwa/default/build/assets/images/category-image.png'"
+            alt="elenvital"
+            class="w-auto"
+            />
+        <div class="mt-5 min-h-[58px]">
+            <p class="text-[9px] font-bold text-[#343064]">
+                {{category.name}}
+            </p>
+        </div>
         <router-link :to="'/categories/' + category.id">
-            <div class="image">
-                <img
-                    alt="category-image"
-                    onerror="this.src = '/themes/pwa/default/build/assets/images/category-image.png'"
-                    :src="category.logo_url
-                          ? category.logo_url
-                          : '/themes/pwa/default/build/assets/images/category-image.png'"
-                />
-            </div>
-
-            <div class="name">
-                {{ category.name }}
-            </div>
+            <button class="mt-5 inline-block w-full rounded-full border-[.5px] border-primary px-[5px] py-2 text-center font-poppins text-[7px] font-medium text-primary">Visit Store</button>
         </router-link>
-    </li>
+    </div>
 </template>
 
 <script>

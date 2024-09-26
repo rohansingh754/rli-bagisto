@@ -11,7 +11,7 @@
 <script>
 	export default {
         name: 'drawer-sidebar',
-        
+
 		data () {
 			return {
 				speed: '0.3s',
@@ -27,7 +27,7 @@
 				let opacity = window.getComputedStyle(this.$refs.overlay).getPropertyValue('opacity');
 
 				if (opacity <= 0) {
-					this.$refs.overlay.style.zIndex = -999;			
+					this.$refs.overlay.style.zIndex = -999;
 				}
 			},
 
@@ -35,7 +35,7 @@
 				this.$refs.overlay.style.opacity = opacity;
 
 				if (opacity > 0) {
-					this.$refs.overlay.style.zIndex = 999;				
+					this.$refs.overlay.style.zIndex = 999;
 				}
 			},
 
@@ -47,25 +47,25 @@
 
 				this.overlayOpacity(1);
 
-				this.$refs.element.classList.add('active');	
+				this.$refs.element.classList.add('active');
 
-				this.active = true;	
+				this.active = true;
 			},
 
 			close () {
 				this.translate = '-' + this.$refs.element.offsetWidth + 'px';
 
-				this.$refs.element.style.transform = 'translate3d(' + this.translate + ', 0, 0)';	
-				this.$refs.element.style.transitionDuration = this.speed;	
+				this.$refs.element.style.transform = 'translate3d(' + this.translate + ', 0, 0)';
+				this.$refs.element.style.transitionDuration = this.speed;
 
 				this.overlayOpacity(0);
 
-				this.$refs.element.classList.remove('active');	
+				this.$refs.element.classList.remove('active');
 
 				this.active = false;
 			}
 		}
-	}	
+	}
 </script>
 
 <style scoped lang="scss">

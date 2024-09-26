@@ -9,6 +9,7 @@ use Webkul\PWA\Http\Controllers\Shop\ReviewController;
 use Webkul\PWA\Http\Controllers\Shop\SmartButtonController;
 use Webkul\PWA\Http\Controllers\Shop\ThemeController;
 use Webkul\PWA\Http\Controllers\Shop\InvoiceController;
+use Webkul\PWA\Http\Controllers\Shop\PageController;
 use Webkul\PWA\Http\Controllers\SinglePageController;
 use Webkul\PWA\Http\Controllers\StandardController;
 
@@ -82,8 +83,13 @@ Route::group(['middleware' => ['locale', 'theme', 'currency']], function () {
 
         Route::get('print/Invoice/{id}', [InvoiceController::class, 'print']);
 
-        Route::get('sliders', [ThemeController::class, 'sliders']);
+        Route::controller(ThemeController::class)->group(function () {
+            Route::get('sliders', 'sliders');
+            Route::get('new-list', 'newAndUpadteList');
+        });
 
         Route::get('layout', [LayoutController::class, 'get']);
+
+        Route::get('page/{slug}', [PageController::class, 'getCmsPage']);
     });
 });

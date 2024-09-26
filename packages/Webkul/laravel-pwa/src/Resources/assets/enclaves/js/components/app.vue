@@ -2,6 +2,7 @@
     <div id="app-inner">
         <!-- header -->
         <header class="border-b-[1px] border-[#E9E9E9]">
+
             <div class="container px-[18px] py-6">
                 <div class="flex items-center justify-between">
                     <div class="homeful-toggler cursor-pointer py-[10px] pr-4">
@@ -14,63 +15,65 @@
                         <span class="icon-search"></span>
                     </a>
                 </div>
-                <div v-if="menuSidebar" class="homeful-mobile-menu scrollbar-hide fixed bottom-0 left-[-100%] top-0 w-[90%] max-w-[360px] overflow-auto bg-white pl-8 pr-6 pt-[62px] shadow-[0px_4px_4px] shadow-black/10 transition-all active">
-                    <div class="flex items-start justify-between">
-                        <a href="#" class="homeful-logo mr-auto">
-                            <img :src="themeAssets + 'images/logo.png'" alt="homeful">
-                        </a>
-                        <span class="homeful-menu-close flex h-[35px] w-[35px] cursor-pointer items-center justify-center rounded-full bg-[#F3F4F6]" @click="OpneCloseMenuSidebar()">
-                            <span class="icon-cancel text-[14px] text-[#989898]"></span>
-                        </span>
-                    </div>
-                    <router-link :to="'/customer/login-register'" class="login-info" v-if="! currentUser">
+                <drawer-sidebar ref="drawer">
+                    <div class="homeful-mobile-menu scrollbar-hide fixed bottom-0 left-[-100%] top-0 w-[90%] max-w-[360px] overflow-auto bg-white pl-8 pr-6 pt-[62px] shadow-[0px_4px_4px] shadow-black/10 transition-all active">
+                        <div class="flex items-start justify-between">
+                            <a href="#" class="homeful-logo mr-auto">
+                                <img :src="themeAssets + 'images/logo.png'" alt="homeful">
+                            </a>
+                            <span class="homeful-menu-close flex h-[35px] w-[35px] cursor-pointer items-center justify-center rounded-full bg-[#F3F4F6]" @click="OpneCloseMenuSidebar()">
+                                <span class="icon-cancel text-[14px] text-[#989898]"></span>
+                            </span>
+                        </div>
+                        <router-link :to="'/customer/login-register'" class="login-info" v-if="! currentUser">
 
-                        <a href="#" class="mt-10 flex items-center gap-[10px] rounded-[11px] border-[1px] border-[#F5F5F5] px-[13px] py-3 text-[14px] font-medium text-dark">
-                            <span class="flex h-[45px] w-[45px] items-center justify-center rounded-full bg-[#F5F5F5]">
-                                <svg width="17" height="21" viewBox="0 0 17 21" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M8.5 0C5.57536 0 3.1875 2.35977 3.1875 5.25C3.1875 8.14023 5.57536 10.5 8.5 10.5C11.4246 10.5 13.8125 8.14023 13.8125 5.25C13.8125 2.35977 11.4246 0 8.5 0ZM2.39062 12.6C1.0791 12.6 0 13.6664 0 14.9625V15.5928C0 17.1363 0.99056 18.5213 2.5013 19.4729C4.01204 20.4258 6.08032 21 8.5 21C10.9197 21 12.988 20.4258 14.4987 19.4729C16.0094 18.5213 17 17.1363 17 15.5928V14.9625C17 13.6664 15.9209 12.6 14.6094 12.6H2.39062Z" fill="#C4C4C4"/>
-                                    </svg>
-                            </span> Login My Account
-                        </a>
-                    </router-link>
-                    <div class="mt-8 grid gap-[29px]">
-                        <div class="border-b-[1px] border-[#E2E2E2] pb-5">
-                            <a href="#" class="text-[17px] font-medium text-dark decoration-black">Home</a>
-                        </div>
-                        <div class="border-b-[1px] border-[#E2E2E2] pb-5">
-                            <a href="./about-us.html" class="text-[17px] font-medium text-dark">About Us</a>
-                        </div>
-                        <div class="border-b-[1px] border-[#E2E2E2] pb-5">
-                            <a href="#" class="text-[17px] font-medium text-dark">Ask Joy</a>
-                        </div>
-                        <div class="homeful-submenu border-b-[1px] border-[#E2E2E2] pb-5">
-                            <a href="#" class="text-[17px] font-medium text-dark">Our Brands<span class="icon-arrow-down float-right mt-[-4px] flex h-[29px] w-[29px] items-center justify-center rounded-full border-[1px] border-[#EDEFF5] text-[24px] text-primary"></span></a>
-                            <div class="homeful-submenu-wrap mt-5 hidden gap-[29px] border-t-[1px] border-[#E2E2E2] pl-5 pt-[29px]">
-                                <div class="border-b-[1px] border-[#E2E2E2] pb-5">
-                                    <a href="#" class="text-[17px] font-medium text-dark">Elanvital</a>
-                                </div>
-                                <div class="border-b-[1px] border-[#E2E2E2] pb-5">
-                                    <a href="#" class="text-[17px] font-medium text-dark">Everyhome</a>
-                                </div>
-                                <div class="">
-                                    <a href="#" class="text-[17px] font-medium text-dark">Extraordinary</a>
+                            <a href="#" class="mt-10 flex items-center gap-[10px] rounded-[11px] border-[1px] border-[#F5F5F5] px-[13px] py-3 text-[14px] font-medium text-dark">
+                                <span class="flex h-[45px] w-[45px] items-center justify-center rounded-full bg-[#F5F5F5]">
+                                    <svg width="17" height="21" viewBox="0 0 17 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M8.5 0C5.57536 0 3.1875 2.35977 3.1875 5.25C3.1875 8.14023 5.57536 10.5 8.5 10.5C11.4246 10.5 13.8125 8.14023 13.8125 5.25C13.8125 2.35977 11.4246 0 8.5 0ZM2.39062 12.6C1.0791 12.6 0 13.6664 0 14.9625V15.5928C0 17.1363 0.99056 18.5213 2.5013 19.4729C4.01204 20.4258 6.08032 21 8.5 21C10.9197 21 12.988 20.4258 14.4987 19.4729C16.0094 18.5213 17 17.1363 17 15.5928V14.9625C17 13.6664 15.9209 12.6 14.6094 12.6H2.39062Z" fill="#C4C4C4"/>
+                                        </svg>
+                                </span> Login My Account
+                            </a>
+                        </router-link>
+                        <div class="mt-8 grid gap-[29px]">
+                            <div class="border-b-[1px] border-[#E2E2E2] pb-5">
+                                <a href="#" class="text-[17px] font-medium text-dark decoration-black">Home</a>
+                            </div>
+                            <div class="border-b-[1px] border-[#E2E2E2] pb-5">
+                                <a href="./about-us.html" class="text-[17px] font-medium text-dark">About Us</a>
+                            </div>
+                            <div class="border-b-[1px] border-[#E2E2E2] pb-5">
+                                <a href="#" class="text-[17px] font-medium text-dark">Ask Joy</a>
+                            </div>
+                            <div class="homeful-submenu border-b-[1px] border-[#E2E2E2] pb-5">
+                                <a href="#" class="text-[17px] font-medium text-dark">Our Brands<span class="icon-arrow-down float-right mt-[-4px] flex h-[29px] w-[29px] items-center justify-center rounded-full border-[1px] border-[#EDEFF5] text-[24px] text-primary"></span></a>
+                                <div class="homeful-submenu-wrap mt-5 hidden gap-[29px] border-t-[1px] border-[#E2E2E2] pl-5 pt-[29px]">
+                                    <div class="border-b-[1px] border-[#E2E2E2] pb-5">
+                                        <a href="#" class="text-[17px] font-medium text-dark">Elanvital</a>
+                                    </div>
+                                    <div class="border-b-[1px] border-[#E2E2E2] pb-5">
+                                        <a href="#" class="text-[17px] font-medium text-dark">Everyhome</a>
+                                    </div>
+                                    <div class="">
+                                        <a href="#" class="text-[17px] font-medium text-dark">Extraordinary</a>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="border-b-[1px] border-[#E2E2E2] pb-5">
-                            <a href="#" class="text-[17px] font-medium text-dark">Partner with us</a>
-                        </div>
-                        <div class="border-b-[1px] border-[#E2E2E2] pb-5">
-                            <a href="#" class="text-[17px] font-medium text-dark">Celebrations</a>
-                        </div>
-                        <div class="border-b-[1px] border-[#E2E2E2] pb-5">
-                            <a href="#" class="text-[17px] font-medium text-dark">Talk to Us</a>
-                        </div>
-                        <div class="border-b-[1px] border-[#E2E2E2] pb-5">
-                            <a href="#" class="text-[17px] font-medium text-dark">Support</a>
+                            <div class="border-b-[1px] border-[#E2E2E2] pb-5">
+                                <a href="#" class="text-[17px] font-medium text-dark">Partner with us</a>
+                            </div>
+                            <div class="border-b-[1px] border-[#E2E2E2] pb-5">
+                                <a href="#" class="text-[17px] font-medium text-dark">Celebrations</a>
+                            </div>
+                            <div class="border-b-[1px] border-[#E2E2E2] pb-5">
+                                <a href="#" class="text-[17px] font-medium text-dark">Talk to Us</a>
+                            </div>
+                            <div class="border-b-[1px] border-[#E2E2E2] pb-5">
+                                <a href="#" class="text-[17px] font-medium text-dark">Support</a>
+                            </div>
                         </div>
                     </div>
-                </div>
+                </drawer-sidebar>
             </div>
         </header>
         <!-- header end-->
@@ -114,7 +117,6 @@
                 currentUser: false,
 
                 themeAssets: window.config.themeAssetsPath,
-                menuSidebar: 0,
 			}
 		},
 
@@ -236,11 +238,11 @@
             },
 
             OpneCloseMenuSidebar(){
-                if(this.menuSidebar){
-                    this.menuSidebar = 0
-                } else{
-                    this.menuSidebar = 1
-                }
+                if (this.$refs.drawer.active) {
+					this.$refs.drawer.close();
+				} else {
+					this.$refs.drawer.open();
+				}
             },
         }
     }

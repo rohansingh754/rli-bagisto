@@ -83,7 +83,34 @@
         methods: {
             backToTop () {
                 $("html, body").animate({scrollTop: 0}, 1000);
-            }
+            },
+
+            getTranslates () {
+                EventBus.$emit('show-ajax-loader');
+
+                var address = 'enclaves::app.shop.components.layouts.footer.address';
+                var email = 'enclaves::app.shop.components.layouts.footer.email';
+                var mobileNumber = 'enclaves::app.shop.components.layouts.footer.mobile-number';
+
+                const translateKeys = [
+                    address,
+                    email,
+                    mobileNumber,
+                ];
+
+                this.$http.get("/api/v1/core-configs", {
+                    params: {
+                        _translate: translateKeys
+                    }
+                }).then(response => {
+
+                    EventBus.$emit('hide-ajax-loader');
+
+                })
+                .catch(error =>  {
+                    console.error(error);
+                });
+            },
         }
     }
 </script>

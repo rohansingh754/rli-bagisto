@@ -1,16 +1,9 @@
 @php
-$channel = core()->getCurrentChannel();
-
-$themeAssetsPath = 'themes/pwa/build/assets/default/';
-
-if($channel->theme === 'enclaves'){
     $themeAssetsPath = 'themes/pwa/build/assets/enclaves/';
-}
 @endphp
 
 <!DOCTYPE html>
 <html lang="{{ app()->getLocale() }}">
-
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -128,5 +121,4 @@ if($channel->theme === 'enclaves'){
             }
         </script>
     </body>
-
 </html>
