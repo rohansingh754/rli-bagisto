@@ -9,6 +9,7 @@ import SearchResult         from './components/search/result';
 import ImageSearchResult    from './components/search/image-search-result';
 import Category             from './components/categories/index';
 import Product              from './components/products/index';
+import page                 from './components/pages/index';
 import ProductReviewList    from './components/reviews/index';
 import ProductReviewCreate  from './components/reviews/create';
 import Customer             from './components/customers/index';
@@ -68,6 +69,10 @@ export default new Router({
             name: 'product',
             component: Product
         }, {
+            path: '/pages/:slug',
+            name: 'pages',
+            component: page
+        },{
             path: '/reviews/:id',
             name: 'product-review-list',
             component: ProductReviewList

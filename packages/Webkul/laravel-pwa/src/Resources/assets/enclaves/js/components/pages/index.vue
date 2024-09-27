@@ -1,35 +1,47 @@
 <template>
-	<div class="slide-card w-[155px]">
-        <div class="max-w-40 max-h-32">
-		    <img :src="news.base_image" alt="Affiliate Marketer" class="w-full max-h-32 max-w-40 rounded-[20px]">
-        </div>
-		<p class="mt-3 text-[14px] font-bold text-dark">{{truncateText(stripTags(news.short_description), 75)}}</p>
+    <div>
 
-        <router-link :to="'/celebrations/' + news.id">
-			<button class="mt-3 inline-block text-center text-[14px] font-normal text-primary underline">Read more</button>
-		</router-link>
+	<page-view :slug="slug">
+
+	</page-view>
+	<!-- features end-->
+	<div class="panel" style="margin-bottom: 0">
+            <div class="panel-content">
+                <footer-nav></footer-nav>
+            </div>
+        </div>
 	</div>
 </template>
 
 <script>
 
+	import FooterNav from '../layouts/footer-nav';
+	import PageView from './page-view';
     import {
         mapState,
         mapActions
     } from 'vuex';
 
-    export default {
-        name: 'news-card',
 
-        props: ['news', 'textTruncate'],
+    export default {
+        name: 'page',
+
+		components: {
+            FooterNav,
+			PageView,
+        },
+
+        props: ['page'],
 
 		data: function () {
 			return {
                 themeAssets: window.config.themeAssetsPath,
+				slug:'about-us',
 			}
         },
 
         mounted () {
+			this.slug = this.$route.params.slug
         },
 
         methods: {
@@ -51,10 +63,3 @@
         }
     }
 </script>
-<<style>
-    .slide-card img {
-        width: 100%;
-        max-width: 140px;
-        max-height: 132px;
-    }
-</style>

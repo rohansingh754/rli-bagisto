@@ -1,16 +1,19 @@
 <template>
     <div id="app-inner">
         <!-- header -->
-        <header class="border-b-[1px] border-[#E9E9E9]">
+        <welcome-model></welcome-model>
 
+        <header class="border-b-[1px] border-[#E9E9E9]">
             <div class="container px-[18px] py-6">
                 <div class="flex items-center justify-between">
                     <div class="homeful-toggler cursor-pointer py-[10px] pr-4">
                         <span class="block h-3 w-[19px] border-b-[3px] border-t-[3px] border-dark" @click="OpneCloseMenuSidebar()"></span>
                     </div>
-                    <a href="#" class="homeful-logo mr-auto">
-                        <img :src="themeAssets + 'images/logo.png'" alt="homeful">
-                    </a>
+                    <router-link :to="'/'">
+                        <a href="#" class="homeful-logo mr-auto">
+                            <img :src="themeAssets + 'images/logo.png'" alt="homeful">
+                        </a>
+                    </router-link>
                     <a href="#" class="homeful-share text-[24px] text-dark">
                         <span class="icon-search"></span>
                     </a>
@@ -37,25 +40,28 @@
                         </router-link>
                         <div class="mt-8 grid gap-[29px]">
                             <div class="border-b-[1px] border-[#E2E2E2] pb-5">
-                                <a href="#" class="text-[17px] font-medium text-dark decoration-black">Home</a>
+                                <router-link :to="'/'">
+                                    <a href="#" class="text-[17px] font-medium text-dark decoration-black">Home</a>
+                                </router-link>
                             </div>
                             <div class="border-b-[1px] border-[#E2E2E2] pb-5">
-                                <a href="./about-us.html" class="text-[17px] font-medium text-dark">About Us</a>
+                                <router-link :to="'/pages/about-us'">
+                                    <a href="./about-us.html" class="text-[17px] font-medium text-dark">About Us</a>
+                                </router-link>
                             </div>
                             <div class="border-b-[1px] border-[#E2E2E2] pb-5">
                                 <a href="#" class="text-[17px] font-medium text-dark">Ask Joy</a>
                             </div>
                             <div class="homeful-submenu border-b-[1px] border-[#E2E2E2] pb-5">
                                 <a href="#" class="text-[17px] font-medium text-dark">Our Brands<span class="icon-arrow-down float-right mt-[-4px] flex h-[29px] w-[29px] items-center justify-center rounded-full border-[1px] border-[#EDEFF5] text-[24px] text-primary"></span></a>
-                                <div class="homeful-submenu-wrap mt-5 hidden gap-[29px] border-t-[1px] border-[#E2E2E2] pl-5 pt-[29px]">
-                                    <div class="border-b-[1px] border-[#E2E2E2] pb-5">
-                                        <a href="#" class="text-[17px] font-medium text-dark">Elanvital</a>
-                                    </div>
-                                    <div class="border-b-[1px] border-[#E2E2E2] pb-5">
-                                        <a href="#" class="text-[17px] font-medium text-dark">Everyhome</a>
-                                    </div>
-                                    <div class="">
-                                        <a href="#" class="text-[17px] font-medium text-dark">Extraordinary</a>
+                                <div
+                                    v-if="categories.length"
+                                    class="homeful-submenu-wrap mt-5 gap-[29px] border-t-[1px] border-[#E2E2E2] pl-5 pt-[29px]"
+                                    >
+                                    <div v-for="(category, index) in categories" :key="index" class="border-b-[1px] border-[#E2E2E2] pb-5">
+                                        <router-link :to="'/categories/' + category.id">
+                                            <a href="#" class="text-[17px] font-medium text-dark">{{category.name}}</a>
+                                        </router-link>
                                     </div>
                                 </div>
                             </div>
@@ -92,11 +98,12 @@
     import HeaderNav     from './layouts/header-nav';
     import AjaxLoader    from './common/ajax-loader';
     import DrawerSidebar from './common/drawer-sidebar';
+    import WelcomeModel  from './layouts/welcome-model';
 
     export default {
         name: 'app',
 
-        components: { HeaderNav, BottomSheet, AjaxLoader, DrawerSidebar },
+        components: { HeaderNav, BottomSheet, AjaxLoader, DrawerSidebar, WelcomeModel },
 
         data () {
 			return {

@@ -57,7 +57,6 @@
         },
 
         mounted() {
-            console.log('type', this.product.type);
 
             if (this.product.type == "bundle") {
 

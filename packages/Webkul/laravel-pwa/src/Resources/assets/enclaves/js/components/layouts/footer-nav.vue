@@ -77,7 +77,22 @@
         data: function () {
 			return {
                 themeAssets: window.config.themeAssetsPath,
+                translateKeys: [
+                    'enclaves::app.shop.components.layouts.footer.address',
+                    'enclaves::app.shop.components.layouts.footer.email',
+                    'enclaves::app.shop.components.layouts.footer.mobile-number',
+                ],
+
+                translateKeyshort: {
+                    'enclaves::app.shop.components.layouts.footer.address': 'address',
+                    'enclaves::app.shop.components.layouts.footer.email': 'email',
+                    'enclaves::app.shop.components.layouts.footer.mobile-number': 'phone',
+                },
 			}
+        },
+
+        mounted() {
+            this.getTranslates()
         },
 
         methods: {
@@ -88,21 +103,17 @@
             getTranslates () {
                 EventBus.$emit('show-ajax-loader');
 
-                var address = 'enclaves::app.shop.components.layouts.footer.address';
-                var email = 'enclaves::app.shop.components.layouts.footer.email';
-                var mobileNumber = 'enclaves::app.shop.components.layouts.footer.mobile-number';
-
-                const translateKeys = [
-                    address,
-                    email,
-                    mobileNumber,
-                ];
-
-                this.$http.get("/api/v1/core-configs", {
+                this.$http.get("/api/pwa/translate", {
                     params: {
-                        _translate: translateKeys
+                        _translate: this.translateKeys
                     }
                 }).then(response => {
+                    let data = response.data.data;
+                    let keys = Object.keys(response.data.data)
+
+                    keys.forEach(element => {
+                        this.translateKeyshort[element] = data[element];
+                    });
 
                     EventBus.$emit('hide-ajax-loader');
 

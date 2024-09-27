@@ -9,7 +9,11 @@
             <p class="text-[9px] font-bold text-[#343064]">
                 {{category.name}}
             </p>
+            <p class="mt-2 text-[9px] font-bold text-[#343064]">
+                {{truncateText(stripTags(category.description), 95)}}
+            </p>
         </div>
+
         <router-link :to="'/categories/' + category.id">
             <button class="mt-5 inline-block w-full rounded-full border-[.5px] border-primary px-[5px] py-2 text-center font-poppins text-[7px] font-medium text-primary">Visit Store</button>
         </router-link>
@@ -20,44 +24,24 @@
     export default {
         name: 'category-card',
 
-        props: ['category']
+        props: ['category'],
+
+        methods: {
+			stripTags(html){
+                const div = document.createElement("div");
+                div.innerHTML = html;
+                let text = div.textContent || div.innerText || "";
+
+                return text;
+            },
+
+            truncateText(text, maxLength) {
+                if (text.length <= maxLength) {
+                    return text;
+                }
+
+                return text.substring(0, maxLength) + '...';
+            },
+        }
     }
 </script>
-
-<style lang="scss" scoped>
-    li.category-card {
-        width: 120px;
-        height: 152px;
-        margin-right: 15px;
-        position: relative;
-        vertical-align: top;
-        display: inline-block;
-        background: #FFFFFF;
-        box-shadow: 0 6px 10px 0 rgba(0,0,0,0.08), 0 1px 18px 0 rgba(0,0,0,0.08), 0 3px 5px -1px rgba(0,0,0,0.08);
-
-        &:last-child {
-            margin-right: 0;
-        }
-
-        .image {
-            height: 120px;
-
-            img {
-                width: 100%;
-                height: 100%;
-            }
-        }
-
-        .name {
-            width: 7rem;
-            height: 32px;
-            font-size: 12px;
-            margin: 0 auto;
-            overflow: hidden;
-            line-height: 32px;
-            text-align: center;
-            text-overflow: ellipsis;
-            color: rgba(0, 0, 0, 0.56);
-        }
-    }
-</style>

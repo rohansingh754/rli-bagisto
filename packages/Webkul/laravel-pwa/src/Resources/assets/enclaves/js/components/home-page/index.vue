@@ -1,7 +1,5 @@
 <template>
     <div class="content">
-        <welcome-model></welcome-model>
-
     	<section class="homeful-hero-slider">
             <div class="container">
                 <div class="mt-5 flex items-center justify-between">
@@ -71,7 +69,7 @@
             </div>
 	    </section>
         <!-- section about -->
-            <page-card :page="pages['about-us']" :textTruncate="175"></page-card>
+            <page-card v-if="pages.aboutHomeFul.data" :pageData="pages.aboutHomeFul" :textTruncate="175"></page-card>
         <!-- section about end -->
 
         <!-- section our brands (Categories) -->
@@ -160,11 +158,11 @@
         </section>
         <!-- section celebration end-->
 
-         <div class="panel" style="margin-bottom: 0">
+        <div class="panel" style="margin-bottom: 0">
             <div class="panel-content">
                 <footer-nav></footer-nav>
             </div>
-         </div>
+        </div>
     </div>
 </template>
 
@@ -173,8 +171,7 @@
     import ProductCard          from '../products/card';
     import CategoryCard         from '../categories/card';
     import FooterNav            from '../layouts/footer-nav';
-    import WelcomeModel         from '../layouts/welcome-model';
-    import PageCard             from '../page/card';
+    import PageCard             from '../pages/card';
     import NewsCard             from '../news/card';
     import {
         mapState,
@@ -190,7 +187,6 @@
             FooterNav,
             ProductCard,
             CategoryCard,
-            WelcomeModel,
             PageCard,
             NewsCard,
         },
@@ -215,9 +211,12 @@
                 },
                 slides: [],
                 pages: {
-                    'terms-of-use': {},
-                    'about-us': {},
-                    'hello-ji': {},
+                    'termsOfUse': {
+                        'slug':'terms-of-use',
+                    },
+                    'aboutHomeFul': {
+                        'slug': 'about-homeful',
+                    },
                 },
                 newses:[],
 			}
@@ -309,8 +308,6 @@
                     const response = await this.$http.get("/api/v1/descendant-categories", { params: { parent_id: window.channel.root_category_id } });
 
                     this.categories = response.data.data;
-                    console.log('categories', this.categories);
-
 
                     for (const category of this.categories) {
                         const products = await this.getProducts({ 'category_id': category.id, 'limit': 4 });
@@ -334,7 +331,6 @@
 
                     EventBus.$emit('hide-ajax-loader');
 
-                    console.log(this.sliderData, this.activeSliderData, this.slides);
                 } catch (error) {
                     console.error(error);
                 }
@@ -406,9 +402,10 @@
 
                 let data = Object.keys(pages);
 
-                for (const slug in pages) {
-                    const response = await this.$http.get("/api/pwa/page/" + slug);
-                    this.pages[slug] = response.data.data;
+                for (const page in pages) {
+
+                    const response = await this.$http.get("/api/pwa/page/" + pages[page].slug);
+                    this.pages[page].data = response.data.data;
                 }
 
                 EventBus.$emit('hide-ajax-loader');
@@ -417,10 +414,11 @@
             async getNews(){
                 EventBus.$emit('show-ajax-loader');
 
-                const response = await this.$http.get("/api/pwa/new-list");
+                const response = await this.$http.get("/api/pwa/news-list");
 
                 if (response.data.data) {
                     this.newses = response.data.data
+
                 }
 
                 EventBus.$emit('hide-ajax-loader');

@@ -1,12 +1,14 @@
 <template>
     <section class="pt-[26px]" id="about">
 		<div class="container">
-			<h2 class="text-[20px] font-bold text-dark">About Homeful</h2>
+			<h2 class="text-[20px] font-bold text-dark">{{page.page_title}}</h2>
 			<img :src="themeAssets + 'images/about-homeful.png'" alt="About Homeful" class="mt-[25px] w-[100%] rounded-[20px]">
 			<p class="mt-[25px] text-[15px] font-normal text-dark">
 				{{truncateText(stripTags(page.html_content), textTruncate)}}
 			</p>
-			<p class="text-[15px] font-bold text-dark"><a href="#" >Read More</a></p>
+            <router-link :to="'/pages/' + page.url_key">
+			    <p class="text-[15px] font-bold text-dark">Read More</p>
+            </router-link>
 		</div>
 	</section>
 </template>
@@ -21,15 +23,17 @@
     export default {
         name: 'page-card',
 
-        props: ['page', 'textTruncate'],
+        props: ['pageData', 'textTruncate'],
 
 		data: function () {
 			return {
                 themeAssets: window.config.themeAssetsPath,
+                page:{},
 			}
         },
 
         mounted () {
+            this.page = this.pageData.data;
         },
 
         methods: {
