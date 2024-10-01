@@ -89,7 +89,7 @@
 	    top: 0px;
 		transition: transform 0.3s ease;
 	    background: #fff;
-	    width: 300px;
+	    width: 360px;
 		overflow-y: auto;
 		overflow-x: hidden;
 		word-wrap: break-word;

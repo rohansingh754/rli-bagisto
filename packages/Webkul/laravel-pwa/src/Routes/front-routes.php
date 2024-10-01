@@ -11,6 +11,7 @@ use Webkul\PWA\Http\Controllers\Shop\ThemeController;
 use Webkul\PWA\Http\Controllers\Shop\InvoiceController;
 use Webkul\PWA\Http\Controllers\Shop\PageController;
 use Webkul\PWA\Http\Controllers\Shop\LocalController;
+use Webkul\PWA\Http\Controllers\Shop\BlogController;
 use Webkul\PWA\Http\Controllers\SinglePageController;
 use Webkul\PWA\Http\Controllers\StandardController;
 
@@ -86,7 +87,6 @@ Route::group(['middleware' => ['locale', 'theme', 'currency']], function () {
 
         Route::controller(ThemeController::class)->group(function () {
             Route::get('sliders', 'sliders');
-            Route::get('news-list', 'newAndUpadteList');
         });
 
         Route::get('layout', [LayoutController::class, 'get']);
@@ -94,5 +94,10 @@ Route::group(['middleware' => ['locale', 'theme', 'currency']], function () {
         Route::get('page/{slug}', [PageController::class, 'getCmsPage']);
 
         Route::get('translate', [LocalController::class, 'getTranslations']);
+
+        Route::controller(BlogController::class)->group(function () {
+            Route::get('news-list', 'blogFrontEnd');
+            Route::get('news/{id}', 'blogDetails');
+        });
     });
 });

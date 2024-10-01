@@ -1,233 +1,122 @@
 <template>
-    <div class="content" v-if="category">
-        <layered-navigation
-            :category-id="category.id"
-            @onFilterApplied="filterProducts($event)"
-            v-show="category.display_mode == 'products_only' || category.display_mode == 'products_and_description'"
-            >
-        </layered-navigation>
+    <div>
+    <!-- breadcrumb -->
+	<breadcrumb :links="breadcrumbLinks" ></breadcrumb>
+	<!-- breadcrumb end -->
 
-        <div class="category-banner" v-if="category.image_url">
-            <img alt="category-image" :src="category.image_url"/>
-        </div>
-
-        <div
-            v-if="category.display_mode == 'description_only' || category.display_mode == 'products_and_description'"
-            class="category-description panel">
-                <div class="panel-content" v-html="category.description">
-                </div>
-        </div>
-
-        <div v-if="category.display_mode == 'products_only' || category.display_mode == 'products_and_description'">
-            <div class="panel" v-if="products.length">
-                <div class="panel-content">
-                    <div class="product-list product-grid-2">
-
-                        <product-card v-for="product in products" :key='product.uid' :product="product"></product-card>
-
-                    </div>
-
-                    <pagination :label="$t('Load More Products')" v-bind="productPagination" @onPaginate="paginate($event)"></pagination>
-                </div>
-            </div>
-
-            <no-product-found v-else></no-product-found>
-        </div>
-
-        <div class="panel" v-if="childCategories.length">
-            <div class="panel-heading">
-                {{ $t('Explore') }} {{ category.name }}
-            </div>
-
-            <div class="panel-content">
-                <ul class="category-list">
-                    <li v-for="category in childCategories" :key="category.id">
-                        <router-link :to="'/categories/' + category.id">
-                            {{ category.name }}
-
-                            <i class="icon sharp-arrow-right-icon"></i>
-                        </router-link>
-                    </li>
-                </ul>
+    <section class="mt-3">
+        <div class="container">
+            <div class="flex items-center justify-between gap-4 rounded-[20px] border border-[#D9D9D9] px-5 py-2 max-385:gap-2 max-385:px-3">
+                <img :src="themeAssets + 'images/elanvital-product.png'" alt="" class="max-w-[90px]">
+                <a href="#" class="text-[12px] font-medium text-primary underline">Store Details</a>
             </div>
         </div>
+    </section>
 
-        <div v-if="category.display_mode == 'description_only'" class="panel" style="margin-bottom: 0">
-            <div class="panel-content">
-                <footer-nav></footer-nav>
-            </div>
-        </div>
+	<!-- posts -->
+	<section class="pt-6">
+		<div class="scrollbar-hide w-full overflow-x-auto pl-4 text-dark text-[18px]">
+			Projects
+		</div>
+		<div class="container">
+			<div class="mt-6 grid grid-cols-2 gap-[14px] ">
+				<product-card
+                    v-for="(product, index) in products" :key="index"
+                    :product="product"
+                    >
+                </product-card>
+			</div>
+		</div>
+	 </section>
+	<!-- posts end -->
     </div>
 </template>
 
 <script>
-    import FooterNav         from '../layouts/footer-nav';
-    import LayeredNavigation from './layered-navigation';
-    import ProductCard       from '../products/card';
-    import Pagination        from '../shared/pagination';
-    import NoProductFound    from './no-product-found';
+	import Breadcrumb from "../common/breadcrumb";
+    import ProductCard from "../products/card";
 
     export default {
         name: 'category',
 
-        components: { LayeredNavigation, FooterNav, ProductCard, Pagination, NoProductFound },
-
-        data () {
-			return {
-				category: null,
-
-				childCategories: [],
-
-                products: [],
-
-                productPagination: {},
-
-				params: {
-                    'category_id': this.$route.params.id,
-                    'limit': 1
-                },
-			}
+        components: {
+			Breadcrumb,
+            ProductCard,
 		},
 
-        watch: {
-            '$route.params.id': function (id) {
-                this.params = { 'category_id': id };
+        data: function () {
+			return {
+                themeAssets: window.config.themeAssetsPath,
+                products:[],
+                breadcrumbLinks:[
+					{
+						'name': 'Home',
+						'redirect':'/'
+					},
+					{
+						'name': 'Categories',
+						'redirect':'/categories'
+					},
+					{
+						'name': 'Category',
+					},
+				],
 
-                this.getCategory(id);
-            }
+                categoryId: this.$route.params.id,
+			}
         },
 
-        mounted () {
-            this.getCategory(this.$route.params.id);
+        async mounted() {
+           await this.getCategory();
+           await this.getCategoryProducts();
         },
 
         methods: {
-            getCategory (categoryId) {
-                var this_this = this;
-
-                EventBus.$emit('show-ajax-loader');
-
-                this.$http.get('/api/v1/categories/' + categoryId)
-                    .then(function(response) {
-
-                        this_this.category = response.data.data;
-
-                        this_this.childCategories = [];
-
-                        if (this_this.category.display_mode == 'description_only') {
-                            this_this.getChildCategories(categoryId);
-                        }
-
-                        this_this.products = [];
-
-                        this_this.getProducts();
-
-                        EventBus.$emit('hide-ajax-loader');
-                    })
-                    .catch(function (error) {});
+            async getCategory(){
+                const response = await this.$http.get("/api/v1/categories/" + this.categoryId);
+                if (response.data.data) {
+                    this.breadcrumbLinks[this.breadcrumbLinks.length - 1].name = response.data.data.name;
+                }
             },
 
-            getChildCategories (categoryId) {
-                var this_this = this;
+            async getCategoryProducts() {
+                try {
+                    EventBus.$emit('show-ajax-loader');
 
-                EventBus.$emit('show-ajax-loader');
+                    this.products = await this.getProducts({ 'category_id': this.categoryId, 'limit': 20 });
 
-                this.$http.get('/api/v1/descendant-categories', { params: { parent_id: categoryId } })
-                    .then(function(response) {
-                        this_this.childCategories = response.data.data;
-
-                        EventBus.$emit('hide-ajax-loader');
-                    })
-                    .catch(function (error) {});
+                    EventBus.$emit('hide-ajax-loader');
+                } catch (error) {
+                    console.error(error);
+                }
             },
 
-            getProducts () {
-                if (this.category.display_mode == 'description_only')
-                    return;
+            async getProducts(params) {
+                try {
+                    const response = await this.$http.get("/api/v1/products", { params: params });
 
-                var this_this = this;
-
-                EventBus.$emit('show-ajax-loader');
-
-                this.$http.get("/api/v1/products", { params: this.params })
-                    .then(function(response) {
-                        EventBus.$emit('hide-ajax-loader');
-
-                        response.data.data.forEach(function(product) {
-                            this_this.products.push(product);
-                        });
-
-                        this_this.productPagination = response.data.meta;
-                    })
-                    .catch(function (error) {});
+                    return response.data.data;
+                } catch (error) {
+                    console.error(error);
+                    return [];
+                }
             },
 
-            filterProducts (filters) {
-                this.products = [];
+			stripTags(html){
+                const div = document.createElement("div");
+                div.innerHTML = html;
+                let text = div.textContent || div.innerText || "";
 
-                delete this.params['page'];
+                return text;
+            },
 
-                for(var key in filters) {
-                    if (key == 'sort')  {
-                        this.params['sort'] = filters.sort;
-                    } else {
-                        if (filters[key].length) {
-                            if (key == 'price') {
-                                if (filters[key][1]) {
-                                    this.params[key] = filters[key].join(',');
-                                }
-                            } else {
-                                this.params[key] = filters[key].join(',');
-                            }
-                        } else {
-                            delete this.params[key];
-                        }
-                    }
+            truncateText(text, maxLength) {
+                if (text.length <= maxLength) {
+                    return text;
                 }
 
-                this.getProducts();
+                return text.substring(0, maxLength) + '...';
             },
-
-            paginate (page) {
-                this.params['page'] = page;
-
-                this.getProducts();
-            }
         }
     }
 </script>
-
-<style lang="scss" scoped>
-    @import '~@/_variables.scss';
-
-    .category-banner {
-        margin-bottom : 28px;
-
-        img {
-            width: 100%;
-        }
-    }
-
-    .category-list {
-        li {
-            margin-bottom: 8px;
-
-            &:last-child {
-                margin-bottom: 0;
-            }
-
-            a {
-                background: #F5F5F5;
-                font-size: 16px;
-                color: #000000;
-                padding: 15px;
-                display: block;
-                text-transform: uppercase;
-
-                .icon {
-                    float: right;
-                }
-            }
-        }
-    }
-</style>

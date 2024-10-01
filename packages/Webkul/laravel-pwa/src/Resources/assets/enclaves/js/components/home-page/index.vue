@@ -18,7 +18,8 @@
                             <div class="absolute bottom-0 left-0 right-0 flex items-start justify-between gap-4 bg-[linear-gradient(180deg,_#00000000_0%,_#000000_100%)] px-[20px] pb-[20px] pt-[120px] max-385:gap-2 max-385:px-3">
                                 <div class="">
                                     <h2 class="text-[20px] font-normal leading-none text-white max-385:text-[18px]">{{item.name}}</h2>
-                                    <p class="mt-1 text-[12px] font-normal leading-none text-[#CDCDCD]">{{item.description}}</p>
+                                    <p class="mt-1 text-[12px] font-normal leading-none text-[#CDCDCD]">
+                                    {{truncateText(stripTags(item.description), 15)}}</p>
                                 </div>
                                 <router-link :to="'/products/' + item.id">
                                 <button href="./product.html" class="flex items-center gap-2 rounded-full bg-[linear-gradient(268.1deg,_#CC035C_7.47%,_#FCB115_98.92%)] px-4 py-[14px] text-center text-[15px] font-medium text-white max-385:px-3 max-385:text-[13px]">
@@ -145,7 +146,7 @@
             <div class="container">
                 <div class="flex items-center justify-between gap-[10px]">
                     <h2 class="text-[20px] font-bold text-dark">Celebrations</h2>
-                    <router-link :to="'/celebrations'">
+                    <router-link :to="'/newses'">
                         <button class="inline-block rounded-full px-[7px] py-[9px] text-center font-mont text-[14px] font-semibold text-primary underline">View All</button>
                     </router-link>
                 </div>
@@ -414,7 +415,7 @@
             async getNews(){
                 EventBus.$emit('show-ajax-loader');
 
-                const response = await this.$http.get("/api/pwa/news-list");
+                const response = await this.$http.get("/api/pwa/news-list", {params: {limit: 10}});
 
                 if (response.data.data) {
                     this.newses = response.data.data

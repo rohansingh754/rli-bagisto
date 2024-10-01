@@ -1,17 +1,22 @@
 <template>
-	<about-us v-if="slug === 'about-us'" :slug="slug"></about-us>
+    <div>
+        <about-us v-if="slug === 'about-us'" :slug="slug"></about-us>
 
-	<join-us v-else-if="slug === 'join-us'" :slug="slug"></join-us>
+        <join-us v-if="slug === 'join-us'" :slug="slug"></join-us>
+
+        <contact-us v-if="slug === 'contact-us'" :slug="slug"></contact-us>
+
+        <support v-if="slug === 'support'" :slug="slug"></support>
+    </div>
 </template>
 
 <script>
 
-    import {
-        mapState,
-        mapActions
-    } from 'vuex';
-	import AboutUs from './about-us';
-	import JoinUs from './join-us';
+	import AboutUs                 from './about-us';
+	import JoinUs                  from './join-us';
+	import ContactUs                  from './contact-us';
+	import Support                  from './support';
+    import { mapState, mapActions} from 'vuex';
 
     export default {
         name: 'page-view',
@@ -19,6 +24,8 @@
 		components: {
 			AboutUs,
 			JoinUs,
+            ContactUs,
+            Support,
 		},
 
         props: ['slug'],
@@ -27,11 +34,22 @@
 			return {
                 themeAssets: window.config.themeAssetsPath,
                 page:{},
+                breadcrumbLinks:[
+                    {
+						'name': 'Home',
+						'redirect':'/'
+					},
+					{
+						'name': 'Page',
+					},
+                ],
 			}
         },
 
-        mounted () {
-            console.log('new ' ,this.slug);
+        watch: {
+            $route (to, from) {
+                window.location.href = window.config.app_base_url + '' + window.config.prefix.replace('/','') + to.fullPath;
+            }
         },
 
         methods: {

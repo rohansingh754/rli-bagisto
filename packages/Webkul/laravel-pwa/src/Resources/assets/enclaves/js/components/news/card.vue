@@ -5,7 +5,7 @@
         </div>
 		<p class="mt-3 text-[14px] font-bold text-dark">{{truncateText(stripTags(news.short_description), 75)}}</p>
 
-        <router-link :to="'/celebrations/' + news.id">
+        <router-link :to="'/newses/' + news.id">
 			<button class="mt-3 inline-block text-center text-[14px] font-normal text-primary underline">Read more</button>
 		</router-link>
 	</div>
@@ -51,7 +51,7 @@
         }
     }
 </script>
-<<style>
+<style>
     .slide-card img {
         width: 100%;
         max-width: 140px;

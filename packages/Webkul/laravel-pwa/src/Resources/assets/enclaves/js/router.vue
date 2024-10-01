@@ -7,6 +7,7 @@ import Search               from './components/search/index';
 import Compare              from './components/compare/index';
 import SearchResult         from './components/search/result';
 import ImageSearchResult    from './components/search/image-search-result';
+import Categories             from './components/categories/list';
 import Category             from './components/categories/index';
 import Product              from './components/products/index';
 import page                 from './components/pages/index';
@@ -34,6 +35,9 @@ import CustomerReviewList   from './components/customers/account/reviews/index';
 import CustomerReviewDetail from './components/customers/account/reviews/view';
 import Offline              from './components/offline/index';
 
+import Newses                 from './components/news/list'
+import NewsDetail             from './components/news/view'
+
 Vue.use(Router);
 
 export default new Router({
@@ -60,6 +64,10 @@ export default new Router({
             path: '/image-search/:term',
             name: 'image-search-result',
             component: ImageSearchResult
+        }, {
+            path: '/categories',
+            name: 'categories',
+            component: Categories
         }, {
             path: '/categories/:id',
             name: 'category',
@@ -170,6 +178,15 @@ export default new Router({
             path: '/offline',
             name: 'offline',
             component: Offline
+        },
+        {
+            path:'/newses',
+            name:'newses',
+            component: Newses,
+        }, {
+            path:"/newses/:id",
+            name:'news',
+            component: NewsDetail
         }
     ],
 });

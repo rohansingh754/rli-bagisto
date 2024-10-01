@@ -1,20 +1,21 @@
 <template>
-    <div class="product-additional-information" v-if="viewableAttributes.length">
-        <accordian :title="$t('More Information')" :active="true">
-            <div slot="body">
-
-                <table>
-                    <tbody>
-                        <tr v-for="attribute in viewableAttributes">
-                            <td>{{ attribute.label }}</td>
-
-                            <td>{{ attribute.value }}</td>
-                        </tr>
-                    </tbody>
-                </table>
-
+    <div class="mt-8">
+        <h2 class="text-[15px] font-medium text-dark">House Features</h2>
+        <div class="rounded-[20px] bg-[#F4F8FF]">
+            <div
+                v-for="(attribute, index) in viewableAttributes"
+                :key="index"
+                class="mt-5 grid grid-cols-2 items-start gap-x-10 gap-y-2 px-4 py-5 max-385:gap-x-4"
+                v-if="attribute.value"
+                >
+                <div class="flex items-center gap-5 text-[12px] font-normal text-dark">
+                    {{attribute.label}} :
+                </div>
+                <div class="">
+                    <p class="text-[12px] font-medium text-dark">{{stripTags(attribute.value)}}</p>
+                </div>
             </div>
-        </accordian>
+        </div>
     </div>
 </template>
 
@@ -48,44 +49,21 @@
                     .then(function(response) {
 
                         this_this.viewableAttributes = response.data.data;
+                        console.log('attri', this_this.viewableAttributes);
+
 
                         EventBus.$emit('hide-ajax-loader');
                     })
                     .catch(function (error) {});
-            }
+            },
+
+            stripTags (html){
+                const div = document.createElement("div");
+                div.innerHTML = html;
+                let text = div.textContent || div.innerText || "";
+
+                return text;
+            },
         }
     }
 </script>
-
-<style scoped lang="scss">
-    .product-additional-information {
-        table {
-            width: 100%;
-            border-collapse: collapse;
-
-            tr {
-                td {
-                    padding: 16px;
-                    border-bottom: 1px solid rgba(0, 0, 0, 0.12);
-                    font-size: 14px;
-
-                    &:first-child {
-                        border-right: 1px solid rgba(0, 0, 0, 0.12);
-                        font-weight: 600;
-                        color: rgba(0, 0, 0, 0.54);
-                    }
-
-                    &:last-child {
-                        color: rgba(0, 0, 0, 0.87);
-                    }
-                }
-
-                &:last-child {
-                    td {
-                        border-bottom: 0;
-                    }
-                }
-            }
-        }
-    }
-</style>

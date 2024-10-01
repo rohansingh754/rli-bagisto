@@ -53,9 +53,18 @@
                                 <a href="#" class="text-[17px] font-medium text-dark">Ask Joy</a>
                             </div>
                             <div class="homeful-submenu border-b-[1px] border-[#E2E2E2] pb-5">
-                                <a href="#" class="text-[17px] font-medium text-dark">Our Brands<span class="icon-arrow-down float-right mt-[-4px] flex h-[29px] w-[29px] items-center justify-center rounded-full border-[1px] border-[#EDEFF5] text-[24px] text-primary"></span></a>
+                                <button class="text-[17px] font-medium text-dark">
+                                    <!-- <router-link :to="'/categories'"> -->
+                                        Our Brands
+                                    <!-- </router-link> -->
+                                    <span
+                                        class="icon-arrow-down float-right mt-[-4px] flex h-[29px] w-[29px] items-center justify-center rounded-full border-[1px] border-[#EDEFF5] text-[24px] text-primary"
+                                        @click="categoryAccordianToggle()"
+                                        >
+                                    </span>
+                                </button>
                                 <div
-                                    v-if="categories.length"
+                                    v-if="categories.length && categoryAccordian"
                                     class="homeful-submenu-wrap mt-5 gap-[29px] border-t-[1px] border-[#E2E2E2] pl-5 pt-[29px]"
                                     >
                                     <div v-for="(category, index) in categories" :key="index" class="border-b-[1px] border-[#E2E2E2] pb-5">
@@ -66,16 +75,24 @@
                                 </div>
                             </div>
                             <div class="border-b-[1px] border-[#E2E2E2] pb-5">
-                                <a href="#" class="text-[17px] font-medium text-dark">Partner with us</a>
+                                <router-link :to="'/pages/join-us'">
+                                    <a href="#" class="text-[17px] font-medium text-dark">Partner with us</a>
+                                </router-link>
                             </div>
                             <div class="border-b-[1px] border-[#E2E2E2] pb-5">
-                                <a href="#" class="text-[17px] font-medium text-dark">Celebrations</a>
+                                <router-link :to="'/newses'">
+                                    <a href="#" class="text-[17px] font-medium text-dark">Celebrations</a>
+                                </router-link>
                             </div>
                             <div class="border-b-[1px] border-[#E2E2E2] pb-5">
-                                <a href="#" class="text-[17px] font-medium text-dark">Talk to Us</a>
+                                <router-link :to="'/pages/contact-us'">
+                                    <a href="#" class="text-[17px] font-medium text-dark">Talk to Us</a>
+                                </router-link>
                             </div>
                             <div class="border-b-[1px] border-[#E2E2E2] pb-5">
-                                <a href="#" class="text-[17px] font-medium text-dark">Support</a>
+                                <router-link :to="'/pages/support'">
+                                    <a href="#" class="text-[17px] font-medium text-dark">Support</a>
+                                </router-link>
                             </div>
                         </div>
                     </div>
@@ -108,6 +125,7 @@
         data () {
 			return {
                 categories: [],
+                categoryAccordian: false,
                 subCategories: {},
                 locales: window.config.locales,
                 currencies: window.config.currencies,
@@ -251,10 +269,17 @@
 					this.$refs.drawer.open();
 				}
             },
+
+            categoryAccordianToggle(){
+                if (this.categoryAccordian) {
+                    this.categoryAccordian = false;
+                } else{
+                    this.categoryAccordian = true;
+                }
+            }
         }
     }
 </script>
-
 
 <style lang="scss">
     @import '~@/_variables.scss';

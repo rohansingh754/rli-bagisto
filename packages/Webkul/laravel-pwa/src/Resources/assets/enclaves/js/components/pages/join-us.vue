@@ -1,18 +1,5 @@
 <template>
 	<div>
-		<!-- breadcrumb -->
-	 <section class="pt-[25px]">
-		<div class="container">
-			<div class="font-popins flex justify-start">
-				<div class="flex items-center gap-x-[10px]">
-					<p class="flex items-center gap-x-[10px] text-[12px] font-medium text-dark">Home <span
-							class="icon-arrow-right text-[10px] font-extrabold"></span></p>
-					<p class="text-[12px] font-medium text-text-gray">Join Us</p>
-				</div>
-			</div>
-		</div>
-	 </section>
-	<!-- breadcrumb end -->
 
 	<section class="pt-5">
 		<div class="container">
