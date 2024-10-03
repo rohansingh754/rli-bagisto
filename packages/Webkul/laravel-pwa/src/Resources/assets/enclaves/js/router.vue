@@ -9,6 +9,7 @@ import SearchResult         from './components/search/result';
 import ImageSearchResult    from './components/search/image-search-result';
 import Categories             from './components/categories/list';
 import Category             from './components/categories/index';
+import Products              from './components/products/list';
 import Product              from './components/products/index';
 import page                 from './components/pages/index';
 import ProductReviewList    from './components/reviews/index';
@@ -35,8 +36,9 @@ import CustomerReviewList   from './components/customers/account/reviews/index';
 import CustomerReviewDetail from './components/customers/account/reviews/view';
 import Offline              from './components/offline/index';
 
-import Newses                 from './components/news/list'
-import NewsDetail             from './components/news/view'
+import Newses               from './components/news/list';
+import NewsDetail           from './components/news/view';
+import Support              from './components/pages/support';
 
 Vue.use(Router);
 
@@ -72,6 +74,10 @@ export default new Router({
             path: '/categories/:id',
             name: 'category',
             component: Category
+        }, {
+            path: '/products',
+            name: 'products',
+            component: Products
         }, {
             path: '/products/:id',
             name: 'product',
@@ -178,8 +184,7 @@ export default new Router({
             path: '/offline',
             name: 'offline',
             component: Offline
-        },
-        {
+        },{
             path:'/newses',
             name:'newses',
             component: Newses,
@@ -187,7 +192,11 @@ export default new Router({
             path:"/newses/:id",
             name:'news',
             component: NewsDetail
-        }
+        }, {
+            path:'/support',
+            name:'support',
+            component: Support,
+        },
     ],
 });
 </script>

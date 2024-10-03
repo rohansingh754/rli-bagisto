@@ -1,6 +1,6 @@
 <template>
 	<section class="pt-6">
-		<div class="container">
+		<div class="container fixed top-0">
 			<h1 class="text-[20px] font-bold text-dark">Submit a Ticket</h1>
 			<div class="mt-11">
 				<form action="">

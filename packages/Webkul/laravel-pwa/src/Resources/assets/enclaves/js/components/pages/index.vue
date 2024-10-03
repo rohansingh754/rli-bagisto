@@ -4,7 +4,7 @@
 		<breadcrumb :links="breadcrumbLinks" ></breadcrumb>
 	<!-- breadcrumb end -->
 
-	<page-view :slug="slug"></page-view>
+	<cms-page-view v-if="cmsPage" :page="cmsPage"></cms-page-view>
 
 	<div class="panel" style="margin-bottom: 0">
             <div class="panel-content">
@@ -17,8 +17,10 @@
 <script>
 
 	import FooterNav              from '../layouts/footer-nav';
-	import PageView               from './page-view';
+	import CmsPageView               from './cms-page-view';
     import Breadcrumb             from "../common/breadcrumb";
+	import Support                  from './support';
+
     import {mapState, mapActions} from 'vuex';
 
     export default {
@@ -26,16 +28,23 @@
 
 		components: {
             FooterNav,
-			PageView,
-            Breadcrumb
+			CmsPageView,
+            Breadcrumb,
+            Support
         },
-
-        props: ['page'],
 
 		data: function () {
 			return {
                 themeAssets: window.config.themeAssetsPath,
-				slug:'about-us',
+				slug:null,
+                cmsPage: null,
+                actionPages:[
+                    {
+                        'title' : 'Support',
+                        'slug'  : 'support',
+                    },
+                ],
+                activeActionPage:{},
                 breadcrumbLinks:[
                     {
 						'name': 'Home',
@@ -51,18 +60,33 @@
         mounted () {
 			this.slug = this.$route.params.slug;
 
-            if (this.slug === 'about-us') {
-                this.breadcrumbLinks[this.breadcrumbLinks.length - 1].name = 'About Us';
-            } else if(this.slug === 'contact-us'){
-                this.breadcrumbLinks[this.breadcrumbLinks.length - 1].name = 'Task to Us';
-            } else if(this.slug === 'join-us'){
-                this.breadcrumbLinks[this.breadcrumbLinks.length - 1].name = 'Join Us';
-            } else if(this.slug === 'support'){
-                this.breadcrumbLinks[this.breadcrumbLinks.length - 1].name = 'Support';
-            }
+            this.getPage();
         },
 
         methods: {
+            getPage () {
+                EventBus.$emit('show-ajax-loader');
+
+                let isCMSPage = this.isCMSPage();
+                console.log(this.slug, this.activeActionPage, isCMSPage);
+
+                if (isCMSPage){
+
+                    this.$http.get('/api/pwa/page/' + this.slug)
+                    .then(response => {
+                        this.cmsPage = response.data.data;
+
+                        if (this.cmsPage) {
+                            this.breadcrumbLinks[this.breadcrumbLinks.length - 1].name = this.cmsPage.page_title;
+                        }
+
+                        EventBus.$emit('hide-ajax-loader');
+                    })
+                    .catch(function (error) {});
+                }
+
+            },
+
 			stripTags(html){
                 const div = document.createElement("div");
                 div.innerHTML = html;
@@ -71,12 +95,14 @@
                 return text;
             },
 
-            truncateText(text, maxLength) {
-                if (text.length <= maxLength) {
-                    return text;
+            isCMSPage(){
+                this.activeActionPage = this.actionPages.find(item => item.slug === this.slug);
+
+                if (this.activeActionPage) {
+                    return false;
                 }
 
-                return text.substring(0, maxLength) + '...';
+                return true;
             },
         }
     }

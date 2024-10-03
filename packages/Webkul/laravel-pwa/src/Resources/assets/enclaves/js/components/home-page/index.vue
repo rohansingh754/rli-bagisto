@@ -2,9 +2,10 @@
     <div class="content">
     	<section class="homeful-hero-slider">
             <div class="container">
-                <div class="mt-5 flex items-center justify-between">
+                <div class="mt-5 flex items-center justify-between ">
                     <h1 class="text-[20px] font-bold text-dark">Featured Projects</h1>
-                    <img :src="themeAssets + 'images/joy-icon.png'" alt="joy" class="mb-[-10px]">
+
+                    <img :src="themeAssets + 'images/joy-icon.png'" alt="joy" class="sticky top-0 mb-[-10px]">
                 </div>
                 <div class="homeful-slider-wrap relative mt-4">
                     <div

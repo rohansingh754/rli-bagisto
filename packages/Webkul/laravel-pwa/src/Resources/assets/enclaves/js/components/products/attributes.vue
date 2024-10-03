@@ -49,12 +49,11 @@
                     .then(function(response) {
 
                         this_this.viewableAttributes = response.data.data;
-                        console.log('attri', this_this.viewableAttributes);
 
-
-                        EventBus.$emit('hide-ajax-loader');
                     })
                     .catch(function (error) {});
+
+                EventBus.$emit('hide-ajax-loader');
             },
 
             stripTags (html){

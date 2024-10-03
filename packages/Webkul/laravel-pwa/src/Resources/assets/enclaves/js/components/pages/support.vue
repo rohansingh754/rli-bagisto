@@ -1,4 +1,7 @@
 <template>
+	<div>
+	<breadcrumb :links="breadcrumbLinks" ></breadcrumb>
+
 	<section class="pt-6">
 		<div class="container">
 			<h1 class="text-[20px] font-bold text-dark">Submit a Ticket</h1>
@@ -46,46 +49,42 @@
 			</div>
 		</div>
 	</section>
+	<div class="panel" style="margin-bottom: 0">
+		<div class="panel-content">
+			<footer-nav></footer-nav>
+		</div>
+	</div>
+	</div>
 </template>
 
 <script>
-
-    import {
-        mapState,
-        mapActions
-    } from 'vuex';
+    import Breadcrumb from "../common/breadcrumb";
+	import FooterNav              from '../layouts/footer-nav';
 
     export default {
         name: 'support',
 
-        props: ['slug'],
+		components:{
+			Breadcrumb,
+			FooterNav,
+		},
 
 		data: function () {
 			return {
                 themeAssets: window.config.themeAssetsPath,
-                page:{},
+				breadcrumbLinks:[
+                    {
+						'name': 'Home',
+						'redirect':'/'
+					},
+					{
+						'name': 'Support',
+					},
+                ],
 			}
         },
 
         mounted () {
         },
-
-        methods: {
-			stripTags(html){
-                const div = document.createElement("div");
-                div.innerHTML = html;
-                let text = div.textContent || div.innerText || "";
-
-                return text;
-            },
-
-            truncateText(text, maxLength) {
-                if (text.length <= maxLength) {
-                    return text;
-                }
-
-                return text.substring(0, maxLength) + '...';
-            },
-        }
     }
 </script>
