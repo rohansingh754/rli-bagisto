@@ -2,10 +2,16 @@
     <div class="content">
     	<section class="homeful-hero-slider">
             <div class="container">
-                <div class="mt-5 flex items-center justify-between ">
-                    <h1 class="text-[20px] font-bold text-dark">Featured Projects</h1>
-
-                    <img :src="themeAssets + 'images/joy-icon.png'" alt="joy" class="sticky top-0 mb-[-10px]">
+                <div class="mt-5 flex items-center justify-between">
+                    <h1 class="text-[20px] font-bold text-dark" >Featured Projects</h1>
+                    <span class="" @click="openAskToJoy()">
+                        <image-component
+                            :src="themeAssets + 'images/joy-icon.png'"
+                            :alt="'joy'"
+                            :class="''"
+                            >
+                        </image-component>
+                    </span>
                 </div>
                 <div class="homeful-slider-wrap relative mt-4">
                     <div
@@ -15,12 +21,19 @@
                         v-if="slides[index]"
                         >
                         <div class="relative overflow-hidden rounded-[20px]">
-                            <img  :src="item.base_image.medium_image_url" alt="Agapeya Towns" class="w-full">
+                            <image-component
+                                :src="item.base_image.medium_image_url"
+                                :alt="item.name"
+                                :class="'w-full'"
+                                >
+                            </image-component>
                             <div class="absolute bottom-0 left-0 right-0 flex items-start justify-between gap-4 bg-[linear-gradient(180deg,_#00000000_0%,_#000000_100%)] px-[20px] pb-[20px] pt-[120px] max-385:gap-2 max-385:px-3">
                                 <div class="">
                                     <h2 class="text-[20px] font-normal leading-none text-white max-385:text-[18px]">{{item.name}}</h2>
-                                    <p class="mt-1 text-[12px] font-normal leading-none text-[#CDCDCD]">
-                                    {{truncateText(stripTags(item.description), 15)}}</p>
+                                    <p
+                                        class="mt-1 text-[12px] font-normal leading-none text-[#CDCDCD]" v-html="truncateText(item.description, 15)"
+                                        >
+                                    </p>
                                 </div>
                                 <router-link :to="'/products/' + item.id">
                                 <button href="./product.html" class="flex items-center gap-2 rounded-full bg-[linear-gradient(268.1deg,_#CC035C_7.47%,_#FCB115_98.92%)] px-4 py-[14px] text-center text-[15px] font-medium text-white max-385:px-3 max-385:text-[13px]">
@@ -40,7 +53,12 @@
                                 <p class="mt-[5px] text-[20px] font-bold leading-5 text-black">200+</p>
                             </div>
                             <div class="">
-                                <img :src="themeAssets + 'images/elenvital.png'" alt="elenvital">
+                                <image-component
+                                    :src="themeAssets + 'images/elenvital.png'"
+                                    :alt="item.name"
+                                    :class="'w-full'"
+                                    >
+                                </image-component>
                             </div>
                         </div>
                         <div class="mt-6">
@@ -63,7 +81,12 @@
                             :class="{ 'active': slider.category.id === activeSliderData.category.id }"
                             @click="changeSlideCategory(slider)"
                             >
-                            <img :src="slider.category.logo_url" alt="Agapeya" class="rounded-[8px] border border-transparent transition hover:border-primary">
+                            <image-component
+                                :src="slider.category.logo_url"
+                                :alt="slider.category.name"
+                                :class="'rounded-[8px] border border-transparent transition hover:border-primary'"
+                                >
+                            </image-component>
                             <p class="mt-[5px] text-[12px] font-normal leading-none text-text-gray transition">{{slider.category.name}}</p>
                         </div>
                     </div>
@@ -91,7 +114,12 @@
                 <div class="w-[184px]">
                     <h2 class="text-[22px] font-bold leading-[26px] text-white">Looking for a home that suits you? Ask Joy</h2>
                     <a href="#" class="mt-2 inline-block rounded-full bg-white px-9 py-4 text-center text-[14px] font-normal text-primary">Ask Joy</a>
-                    <img :src="themeAssets + 'images/ask-joy.png'" alt="Ask Joy" class="absolute bottom-[-18px] right-0 top-[-19px] max-[360px]:hidden">
+                    <image-component
+                        :src="themeAssets + 'images/ask-joy.png'"
+                        :alt="'Ask Joy'"
+                        :class="'absolute bottom-[-18px] right-0 top-[-19px] max-[360px]:hidden'"
+                        >
+                    </image-component>
                 </div>
             </div>
         </section>
@@ -165,20 +193,26 @@
                 <footer-nav></footer-nav>
             </div>
         </div>
+
+        <div>
+            <drawer-up ref="drawerAskToJoy">
+                <ask-to-joy ></ask-to-joy>
+            </drawer-up>
+        </div>
     </div>
 </template>
 
 <script>
-    import { Carousel, Slide }  from 'vue-carousel';
-    import ProductCard          from '../products/card';
-    import CategoryCard         from '../categories/card';
-    import FooterNav            from '../layouts/footer-nav';
-    import PageCard             from '../pages/card';
-    import NewsCard             from '../news/card';
-    import {
-        mapState,
-        mapActions
-    } from 'vuex';
+    import { Carousel, Slide }    from 'vue-carousel';
+    import {mapState, mapActions} from 'vuex';
+    import ProductCard            from '../products/card';
+    import CategoryCard           from '../categories/card';
+    import FooterNav              from '../layouts/footer-nav';
+    import PageCard               from '../pages/card';
+    import NewsCard               from '../news/card';
+    import ImageComponent         from "../common/image-component";
+    import AskToJoy               from '../ask-to-joy/index';
+    import DrawerUp               from '../common/drawer-up';
 
     export default {
         name: 'home',
@@ -191,6 +225,9 @@
             CategoryCard,
             PageCard,
             NewsCard,
+            ImageComponent,
+            AskToJoy,
+            DrawerUp,
         },
 
         data: function () {
@@ -424,6 +461,10 @@
                 }
 
                 EventBus.$emit('hide-ajax-loader');
+            },
+
+            openAskToJoy(){
+                EventBus.$emit('drawer-up-toggle');
             }
         }
     }

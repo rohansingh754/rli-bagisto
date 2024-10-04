@@ -18,7 +18,6 @@
                     <a href="#" class="homeful-share text-[24px] text-dark">
                         <span class="icon-search"></span>
                     </a>
-                    <span class="block h-3 w-[19px] border-b-[3px] border-t-[3px] border-dark" @click="handleToggleDrawerAskToJoy()"></span>
                 </div>
                 <drawer-sidebar ref="drawer">
                     <div class="homeful-mobile-menu scrollbar-hide fixed bottom-0 left-[-100%] top-0 w-[90%] max-w-[360px] overflow-auto bg-white pl-8 pr-6 pt-[62px] shadow-[0px_4px_4px] shadow-black/10 transition-all active">
@@ -107,11 +106,6 @@
                 <router-view></router-view>
             </div>
         </div>
-        <div>
-            <drawer-up ref="drawerAskToJoy">
-                <ask-to-joy @closeAskTojoy="handleToggleDrawerAskToJoy"></ask-to-joy>
-            </drawer-up>
-        </div>
 
         <ajax-loader></ajax-loader>
     </div>
@@ -123,10 +117,6 @@
     import AjaxLoader    from './common/ajax-loader';
     import DrawerSidebar from './common/drawer-sidebar';
     import WelcomeModel  from './layouts/welcome-model';
-    import DrawerUp      from './common/drawer-up';
-    import AskToJoy from './ask-to-joy/index';
-    import AskToJoyStart from './ask-to-joy/start';
-    import AskToJoyStepTwo from './ask-to-joy/step-2';
 
     export default {
         name: 'app',
@@ -137,10 +127,6 @@
             AjaxLoader,
             DrawerSidebar,
             WelcomeModel,
-            DrawerUp,
-            AskToJoy,
-            // AskToJoyStart,
-            // AskToJoyStepTwo
         },
 
         data () {
@@ -195,15 +181,6 @@
 					this.$refs.drawer.close();
 				} else {
 					this.$refs.drawer.open();
-				}
-			},
-
-            handleToggleDrawerAskToJoy () {
-
-				if (this.$refs.drawerAskToJoy.active) {
-					this.$refs.drawerAskToJoy.close();
-				} else {
-					this.$refs.drawerAskToJoy.open();
 				}
 			},
 

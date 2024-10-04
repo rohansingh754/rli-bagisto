@@ -23,13 +23,23 @@
 		},
 
 		mounted() {
-			const computedStyle = window.getComputedStyle(this.$refs.element);
-			// this.$refs.element.style.transform = 'translate3d(0, '+ this.$refs.element.offsetWidth +', 0)';
+			let this_this = this;
 
-			this.translate = computedStyle.height;
+			EventBus.$on('drawer-up-toggle', function() {
+                this_this.handleToggleDrawerAskToJoy();
+            });
 		},
 
 		methods: {
+
+			handleToggleDrawerAskToJoy () {
+				if (this.active) {
+					this.close();
+				} else {
+					this.open();
+				}
+			},
+
 			handleZindex () {
 				let opacity = window.getComputedStyle(this.$refs.overlay).getPropertyValue('opacity');
 

@@ -39,6 +39,7 @@ import Offline              from './components/offline/index';
 import Newses               from './components/news/list';
 import NewsDetail           from './components/news/view';
 import Support              from './components/pages/support';
+import AskToJoyResult       from './components/ask-to-joy/ask-joy-result';
 
 Vue.use(Router);
 
@@ -196,6 +197,10 @@ export default new Router({
             path:'/support',
             name:'support',
             component: Support,
+        }, {
+            path:'/ask-joy-result',
+            name:'ask-joy-result',
+            component: AskToJoyResult,
         },
     ],
 });

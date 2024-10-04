@@ -1,5 +1,5 @@
 <template>
-    <div class="ask-joy-step-1-parent">
+	<div class="ask-joy-step-1-parent">
 		<div class="ask-joy-step-1 rounded-t-[30px] bg-white">
 			<div class="overflow-hidden rounded-[30px] bg-[linear-gradient(237.46deg,_#FCB11533_-23.76%,_#E1458A33_44.76%)]">
 				<img :src="themeAssets + 'images/ask-joy-1.png'" alt="ask joy">
@@ -32,14 +32,14 @@
 			}
 		},
 
-		mounted() {
-
-		},
-
         methods: {
 			closeAskTojoy(){
-				this.$emit('closeAskTojoy');
-			}
+                EventBus.$emit('drawer-up-toggle');
+			},
+
+			incrementStep(){
+                EventBus.$emit('ask-to-joy-next-step');
+			},
         }
     }
 </script>

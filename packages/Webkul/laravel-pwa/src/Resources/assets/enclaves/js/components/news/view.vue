@@ -1,7 +1,7 @@
 <template>
 	<div>
     <!-- breadcrumb -->
-		<breadcrumb :links="breadcrumbLinks" ></breadcrumb>
+		<breadcrumb :links="breadcrumbLinks"></breadcrumb>
 	<!-- breadcrumb end -->
 
 	<!-- post section -->

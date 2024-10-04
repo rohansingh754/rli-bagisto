@@ -1,11 +1,11 @@
 <template>
-    <div v-if="step === 4">
+    <div>
 		<div class="ask-joy-step-1 flex min-h-[80vh] flex-col items-center justify-between gap-[30px] rounded-t-[30px] bg-white">
 			<div class="w-full overflow-hidden rounded-[30px] bg-[linear-gradient(237.46deg,_#FCB11533_-23.76%,_#E1458A33_44.76%)]">
 				<img :src="themeAssets + 'images/ask-joy-4.png'" alt="ask joy">
 			</div>
 			<div class="flex w-full max-w-[306px] flex-col items-center justify-center gap-7 pb-9">
-				<div class="w-full border-b-[1px] border-[#E2E2E2] pb-5">
+				<div class="w-full border-b-[1px] border-[#E2E2E2] pb-5" @click="updateParams(FilterKey, 10)">
 					<span class="text-[17px] font-medium text-dark">Starts at 40,500<span class="icon-arrow-right float-right mt-[-4px] flex h-7 w-7 items-center justify-center rounded-full border-[1px] border-[#EDEFF5] text-[24px] text-primary"></span></span>
 				</div>
 				<div class="w-full border-b-[1px] border-[#E2E2E2] pb-5">
@@ -44,22 +44,35 @@
 
 <script>
     export default {
-        name: 'ask-to-joy-start',
+        name: 'ask-to-joy-step-4',
 
 		data() {
 			return {
                 themeAssets: window.config.themeAssetsPath,
+				FilterKey: 'PriceRange',
 			}
 		},
 
 		mounted() {
+			let askToJoy = localStorage.getItem('askToJoy');
 
+			if (askToJoy && askToJoy.typeFilter) {
+				this.FilterKey = askToJoy.typeFilter
+			}
 		},
 
         methods: {
+			decrementStep(){
+                EventBus.$emit('ask-to-joy-previous-step');
+			},
+
 			closeAskTojoy(){
-				this.$emit('closeAskTojoy');
-			}
+                EventBus.$emit('drawer-up-toggle');
+			},
+
+			updateParams(key, value){
+                EventBus.$emit('ask-to-joy-filter-update', key, value);
+			},
         }
     }
 </script>

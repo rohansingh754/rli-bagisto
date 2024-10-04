@@ -1,9 +1,9 @@
 import Vue from 'vue';
-import router from './router';
+import router from './router.vue';
 import store from './store';
 import Toasted from 'vue-toasted';
 import i18n from './plugins/i18n';
-import App from './components/app';
+import App from './components/app.vue';
 import VueCurrencyFilter from 'vue-currency-filter';
 import './plugins/push-notification';
 // import './../../../../../../../public/firebase-messaging-sw';     // (File from the public folder)

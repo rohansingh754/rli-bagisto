@@ -92,7 +92,7 @@
         },
 
         mounted() {
-            this.getTranslates()
+            // this.getTranslates()
         },
 
         methods: {

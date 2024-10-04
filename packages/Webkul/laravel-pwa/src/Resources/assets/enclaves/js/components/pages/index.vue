@@ -68,7 +68,6 @@
                 EventBus.$emit('show-ajax-loader');
 
                 let isCMSPage = this.isCMSPage();
-                console.log(this.slug, this.activeActionPage, isCMSPage);
 
                 if (isCMSPage){
 

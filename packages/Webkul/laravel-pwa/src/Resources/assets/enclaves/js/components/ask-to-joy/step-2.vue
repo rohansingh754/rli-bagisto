@@ -7,18 +7,18 @@
 			<div class="mx-auto flex max-w-[289px] flex-col items-center justify-center gap-4 pb-9 pt-[60px] max-sm:pt-[140px]">
 				<span
 					class="w-full rounded-[100px] bg-[#F7F7F7] py-7 text-center text-[15px] font-normal text-dark"
-					@click="updateParams('house', 'house')"
+					@click="updateParams('type', 'house')"
 					>
 						House & Lot
 					</span>
 				<span
 					class="w-full rounded-[100px] bg-[#F7F7F7] py-7 text-center text-[15px] font-normal text-dark"
-					@click="updateParams(['house', 'Condominuim'])"
+					@click="updateParams('type', 'Condominuim')"
 						>Condominuim
 				</span>
 				<span
 					class="w-full rounded-[100px] bg-[#F7F7F7] py-7 text-center text-[15px] font-normal text-dark"
-					@click="updateParams('house', 'all')"
+					@click="updateParams('type', 'all')"
 					>All Kinds
 				</span>
 				<span
@@ -47,6 +47,13 @@
 		},
 
         methods: {
+			closeAskTojoy(){
+                EventBus.$emit('drawer-up-toggle');
+			},
+
+			updateParams(key, value){
+                EventBus.$emit('ask-to-joy-filter-update', key, value);
+			}
         }
     }
 </script>

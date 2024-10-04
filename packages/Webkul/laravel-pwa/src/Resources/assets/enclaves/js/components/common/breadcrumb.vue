@@ -19,6 +19,9 @@
 					</p>
 				</div>
 			</div>
+			<div>
+				<slot></slot>
+			</div>
 		</div>
 	</section>
 </template>
