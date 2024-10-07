@@ -1,6 +1,6 @@
 <template>
     <div class="content">
-        <custom-header>
+        <!-- <custom-header>
             <div slot="back-botton" @click="handleBack">
                 <i class="icon back-icon"></i>
             </div>
@@ -8,7 +8,7 @@
             <div slot="content">
                 <h2>{{ $t('Sign In or Register') }}</h2>
             </div>
-        </custom-header>
+        </custom-header> -->
 
         <div class="form-container" v-if="! popups.login && ! popups.register && ! popups.forgot_password">
             <div class="shop-title">{{ app_name }}</div>
@@ -22,7 +22,7 @@
             </div>
         </div>
 
-        <login 
+        <login
             v-if="popups.login"
             @onPopClose="popups.login = false"
             @onOpenPopup="openPopup($event)"
@@ -61,7 +61,7 @@
                 channel: window.channel,
 
                 popups: {
-                    login: false,
+                    login: true,
                     register: false,
                     forgot_password: false
                 },

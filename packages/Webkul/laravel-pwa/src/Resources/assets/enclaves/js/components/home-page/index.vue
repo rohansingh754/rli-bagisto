@@ -4,7 +4,7 @@
             <div class="container">
                 <div class="mt-5 flex items-center justify-between">
                     <h1 class="text-[20px] font-bold text-dark" >Featured Projects</h1>
-                    <span class="" @click="openAskToJoy()">
+                    <span class="" @click="openAskToJoyDrawer()">
                         <image-component
                             :src="themeAssets + 'images/joy-icon.png'"
                             :alt="'joy'"
@@ -126,44 +126,12 @@
         <!-- section looking for home end -->
 
         <!-- section partners -->
-        <section :class="'bg-[url(' + themeAssets + 'images/bg-image.png)] pt-[60px]'">
+        <section v-if="partners.length" :class="'bg-[url(' + themeAssets + 'images/bg-image.png)] pt-[60px]'">
             <div class="container">
                 <h2 class="text-[20px] font-bold text-dark">Partner with us</h2>
                 <div class="scrollbar-hide mt-8 w-full overflow-auto">
-                    <div class="flex w-[max-content] gap-4">
-                        <div class="slide-card w-[205px] rounded-[9px] bg-white p-[10px] shadow-[0px_4px_4px] shadow-black/10">
-                            <img :src="themeAssets + 'images/partner-1.png'" alt="Affiliate Marketer" class="w-full rounded-[8px]">
-                            <h3 class="mt-[10px] text-[17px] font-bold text-dark">Affiliate Marketer</h3>
-                            <p class="mt-[10px] text-[14px] font-normal text-dark">Are you looking to boost your income effortlessly? <br><br>
-                                Join our "Affiliate Marketer" program today! Perfect for digital marketers, social media influencers, housewives and office worker.<br><br>
-                                Here’s how it works...</p>
-                            <div class="mt-[10px] flex items-center gap-[2px]">
-                                <a href="#" class="inline-block rounded-full px-[7px] py-[9px] text-center text-[14px] font-medium text-primary underline">Read more</a>
-                                <a href="#" class="inline-block rounded-full bg-[linear-gradient(268.1deg,_#CC035C_7.47%,_#FCB115_98.92%)] px-[26px] py-[9px] text-center text-[14px] font-medium text-white">Join Us</a>
-                            </div>
-                        </div>
-                        <div class="slide-card w-[205px] rounded-[9px] bg-white p-[10px] shadow-[0px_4px_4px] shadow-black/10">
-                            <img :src="themeAssets + 'images/partner-1.png'" alt="Affiliate Marketer" class="w-full rounded-[8px]">
-                            <h3 class="mt-[10px] text-[17px] font-bold text-dark">Affiliate Marketer</h3>
-                            <p class="mt-[10px] text-[14px] font-normal text-dark">Are you looking to boost your income effortlessly? <br><br>
-                                Join our "Affiliate Marketer" program today! Perfect for digital marketers, social media influencers, housewives and office worker.<br><br>
-                                Here’s how it works...</p>
-                            <div class="mt-[10px] flex items-center gap-[2px]">
-                                <a href="#" class="inline-block rounded-full px-[7px] py-[9px] text-center text-[14px] font-medium text-primary underline">Read more</a>
-                                <a href="#" class="inline-block rounded-full bg-[linear-gradient(268.1deg,_#CC035C_7.47%,_#FCB115_98.92%)] px-[26px] py-[9px] text-center text-[14px] font-medium text-white">Join Us</a>
-                            </div>
-                        </div>
-                        <div class="slide-card w-[205px] rounded-[9px] bg-white p-[10px] shadow-[0px_4px_4px] shadow-black/10">
-                            <img :src="themeAssets + 'images/partner-1.png'" alt="Affiliate Marketer" class="w-full rounded-[8px]">
-                            <h3 class="mt-[10px] text-[17px] font-bold text-dark">Affiliate Marketer</h3>
-                            <p class="mt-[10px] text-[14px] font-normal text-dark">Are you looking to boost your income effortlessly? <br><br>
-                                Join our "Affiliate Marketer" program today! Perfect for digital marketers, social media influencers, housewives and office worker.<br><br>
-                                Here’s how it works...</p>
-                            <div class="mt-[10px] flex items-center gap-[2px]">
-                                <a href="#" class="inline-block rounded-full px-[7px] py-[9px] text-center text-[14px] font-medium text-primary underline">Read more</a>
-                                <a href="#" class="inline-block rounded-full bg-[linear-gradient(268.1deg,_#CC035C_7.47%,_#FCB115_98.92%)] px-[26px] py-[9px] text-center text-[14px] font-medium text-white">Join Us</a>
-                            </div>
-                        </div>
+                    <div class="flex w-[max-content] gap-4" @click="openPartnerUsDrawer()">
+                        <partner-card v-for="(partner, index) in partners" :key="index" :partner="partners"></partner-card>
                     </div>
                 </div>
             </div>
@@ -195,8 +163,14 @@
         </div>
 
         <div>
-            <drawer-up ref="drawerAskToJoy">
-                <ask-to-joy ></ask-to-joy>
+            <drawer-up>
+                <span ref="partnerDrawerRef">
+                    <partner-drawer v-if="partnerDrawer"></partner-drawer>
+                </span>
+
+                <span ref="asktoJoyRef">
+                    <ask-to-joy v-if="AskToJoyDrawer"></ask-to-joy>
+                </span>
             </drawer-up>
         </div>
     </div>
@@ -210,9 +184,11 @@
     import FooterNav              from '../layouts/footer-nav';
     import PageCard               from '../pages/card';
     import NewsCard               from '../news/card';
+    import PartnerCard            from '../partners/card';
     import ImageComponent         from "../common/image-component";
-    import AskToJoy               from '../ask-to-joy/index';
     import DrawerUp               from '../common/drawer-up';
+    import AskToJoy               from '../ask-to-joy/index';
+    import PartnerDrawer            from '../partners/partner-drawer';
 
     export default {
         name: 'home',
@@ -224,10 +200,13 @@
             ProductCard,
             CategoryCard,
             PageCard,
+            PartnerCard,
             NewsCard,
             ImageComponent,
             AskToJoy,
             DrawerUp,
+            PartnerCard,
+            PartnerDrawer
         },
 
         data: function () {
@@ -258,6 +237,9 @@
                     },
                 },
                 newses:[],
+                partners: ['one', 'two', 'three', 'Demo'],
+                AskToJoyDrawer: 0,
+                partnerDrawer:0,
 			}
         },
 
@@ -463,9 +445,22 @@
                 EventBus.$emit('hide-ajax-loader');
             },
 
-            openAskToJoy(){
+            openAskToJoyDrawer(){
+                this.partnerDrawer = 0;
+                this.AskToJoyDrawer = 1;
+                EventBus.$emit('drawer-up-heigth-update', this.$refs.asktoJoyRef.offsetHeight);
+
+
                 EventBus.$emit('drawer-up-toggle');
-            }
+            },
+
+            openPartnerUsDrawer(){
+                this.AskToJoyDrawer = 0;
+                this.partnerDrawer = 1;
+                EventBus.$emit('drawer-up-heigth-update', this.$refs.partnerDrawerRef.offsetHeight);
+
+                EventBus.$emit('drawer-up-toggle');
+            },
         }
     }
 </script>

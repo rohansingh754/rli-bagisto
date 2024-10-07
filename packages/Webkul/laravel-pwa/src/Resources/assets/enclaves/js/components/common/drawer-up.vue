@@ -1,6 +1,6 @@
 <template>
 	<section>
-		<div class="drawer-up" :style="'transform:translate3d(0,617px, 0);'" ref="element">
+		<div class="drawer-up" :style="'transform:translate3d(0,'+translate+', 0);'" ref="element">
 			<slot></slot>
 		</div>
 
@@ -18,20 +18,26 @@
 
 				translate: null,
 
-				active: false
+				active: false,
 			}
 		},
 
 		mounted() {
 			let this_this = this;
+			this.translate = '617px';
 
 			EventBus.$on('drawer-up-toggle', function() {
                 this_this.handleToggleDrawerAskToJoy();
             });
+
+			EventBus.$on('drawer-up-heigth-update', function(height) {
+				console.log('updated');
+
+				this.translate = height;
+            });
 		},
 
 		methods: {
-
 			handleToggleDrawerAskToJoy () {
 				if (this.active) {
 					this.close();
@@ -58,6 +64,7 @@
 
 			open () {
 				this.translate = 0;
+				console.log('check is run');
 
 				this.$refs.element.style.transform = 'translate3d(' + '0, 0 ,0)';
 				this.$refs.element.style.transitionDuration = this.speed;
@@ -106,5 +113,7 @@
 		overflow-y: auto;
 		overflow-x: hidden;
 		word-wrap: break-word;
+		border-radius: 40px 40px 0px 0px;
+		padding-top: 2px;
 	}
 </style>

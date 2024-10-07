@@ -3,7 +3,7 @@
 	<breadcrumb :links="breadcrumbLinks" >
 		<div class="mt-5 text-[12px] font-normal text-dark">
 			Filter Results (2): House & Lot - Monthly Budget 19,900
-			<span class="fixed right-6 z-[999] top-[96px]" @click="openAskToJoy()">
+			<span class="fixed right-6 z-[999] top-[96px]" @click="openAskToJoyDrawer()">
 				<image-component
 					:src="themeAssets + 'images/joy-icon.png'"
 					:alt="'joy'"
@@ -28,7 +28,7 @@
 	 </section>
 	<!-- Ask Joy result end-->
 	<div>
-		<drawer-up ref="drawerAskToJoy">
+		<drawer-up>
 			<ask-to-joy ></ask-to-joy>
 		</drawer-up>
 	</div>
@@ -89,7 +89,7 @@
                 EventBus.$emit('hide-ajax-loader');
             },
 
-			openAskToJoy(){
+			openAskToJoyDrawer(){
                 EventBus.$emit('drawer-up-toggle');
             },
         }

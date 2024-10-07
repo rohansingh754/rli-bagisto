@@ -63,10 +63,12 @@
 
         methods: {
 			decrementStep(){
-                EventBus.$emit('ask-to-joy-previous-step');
+                EventBus.$emit('ask-to-joy-update-step', 'decremnet');
 			},
 
 			closeAskTojoy(){
+                EventBus.$emit('ask-to-joy-update-step');
+
                 EventBus.$emit('drawer-up-toggle');
 			},
 

@@ -38,12 +38,17 @@
                 this_this.updateParams(key, value);
             });
 
-			EventBus.$on('ask-to-joy-next-step', function() {
-                this_this.incrementStep();
-            });
+			EventBus.$on('ask-to-joy-update-step', function(action) {
+                if (action == 'increment') {
+					this_this.incrementStep();
 
-			EventBus.$on('ask-to-joy-previous-step', function() {
-                this_this.decrementStep();
+				} else if (action == 'decremnet') {
+
+					this_this.decrementStep();
+
+				} else{
+					this_this.step = 1;
+				}
             });
 		},
 

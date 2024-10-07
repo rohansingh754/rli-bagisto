@@ -34,11 +34,13 @@
 
         methods: {
 			closeAskTojoy(){
+                EventBus.$emit('ask-to-joy-update-step');
+
                 EventBus.$emit('drawer-up-toggle');
 			},
 
 			incrementStep(){
-                EventBus.$emit('ask-to-joy-next-step');
+                EventBus.$emit('ask-to-joy-update-step', 'increment');
 			},
         }
     }

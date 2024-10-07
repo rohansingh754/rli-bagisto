@@ -48,6 +48,8 @@
 
         methods: {
 			closeAskTojoy(){
+                EventBus.$emit('ask-to-joy-update-step');
+
                 EventBus.$emit('drawer-up-toggle');
 			},
 

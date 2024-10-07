@@ -1,49 +1,43 @@
 <template>
-    <section class="fixed inset-0 flex flex-col justify-center items-center gap-16 bg-[url(./../images/bg-image-2.png)] bg-cover">
-		<img :src="themeAssets + 'images/homefull-logo-large.png'" alt="Log in your Account" class="w-72">
-		<div class="bg-white shadow-[0px_4px_40px] shadow-black/5 px-4 pt-9 pb-7 rounded-[10px] w-96 max-w-[95%]">
-			<h2 class="font-bold text-[25px] text-center text-dark">Log in your Account</h2>
-			<form action="POST" class="mt-16" @submit.prevent="validateBeforeSubmit">
-				<label for="email" class="block font-semibold text-[14px] text-dark">{{$t('Email Address')}}</label>
-				<div class="relative border-[0.5px] mt-3 border-text-gray rounded-full overflow-hidden">
-					<input
-                        type="email"
-                        name="email"
-                        v-model="user.email"
-                        v-validate="'required|email'"
-                        placeholder="Enter you email"
-                        :data-vv-as="$t('Email Address')"
-                        class="border-0 bg-transparent px-7 py-5 w-full font-normal placeholder:font-normal text-[16px] text-dark placeholder:text-[16px] placeholder:text-text-gray leading-none outline-none"
-                        />
-				</div>
+    <div class="content">
+        <custom-header>
+            <div slot="back-botton" @click="$emit('onPopClose')">
+                <i class="icon sharp-cross-icon"></i>
+            </div>
 
-				<label for="password" class="block mt-7 font-semibold text-[14px] text-dark">Password</label>
-				<div class="relative border-[0.5px] mt-3 border-text-gray rounded-full overflow-hidden">
-					<input
-                        type="password"
-                        name="password"
-                        v-model="user.password"
-                        :placeholder="$t('Enter your password')"
-                        v-validate="'required|min:6'"
-                        :data-vv-as="$t('Password')"
-                        class="border-0 bg-transparent px-7 py-5 w-full font-normal placeholder:font-normal text-[16px] text-dark placeholder:text-[16px] placeholder:text-text-gray leading-none outline-none">
-				</div>
-				<span
-                    class="block mt-9 font-semibold text-[#1973E8] text-[14px]"
-                    @click="$emit('onOpenPopup', 'forgot_password')"
-                    >
-                    {{ $t('Forgot Password?') }}
-                </span>
-				<button
-                    type="submit"
-                    :disabled="loading"
-                    class="inline-block bg-[linear-gradient(268.1deg,_#CC035C_7.47%,_#FCB115_98.92%)] disabled:opacity-[0.4] mt-9 px-7 py-5 rounded-full w-full font-medium text-[15px] text-center text-white"
-                    >
-                        Submit
-                </button>
-			</form>
-		</div>
-	</section>
+            <div slot="content">
+                <h2>{{ $t('Sign In') }}</h2>
+            </div>
+        </custom-header>
+
+        <form action="POST" @submit.prevent="validateBeforeSubmit">
+            <div class="form-container">
+                <div class="control-group" :class="[errors.has('email') ? 'has-error' : '']">
+                    <input type="text" name="email" class="control" v-model="user.email" v-validate="'required|email'" :placeholder="$t('Email Address')" :data-vv-as="$t('Email Address')"/>
+                    <label>{{ $t('Email Address') }}</label>
+                    <span class="control-error" v-if="errors.has('email')">{{ errors.first('email') }}</span>
+                </div>
+
+                <div class="control-group" :class="[errors.has('password') ? 'has-error' : '']">
+                    <input type="password" name="password" class="control" v-model="user.password" v-validate="'required|min:6'" :placeholder="$t('Password')" :data-vv-as="$t('Password')"/>
+                    <label>{{ $t('Password') }}</label>
+                    <span class="control-error" v-if="errors.has('password')">{{ errors.first('password') }}</span>
+                </div>
+
+                <div class="control-group">
+                    <span class="forgot-password" @click="$emit('onOpenPopup', 'forgot_password')">{{ $t('Forgot Password?') }}</span>
+                </div>
+
+                <div class="button-group">
+                    <button type="submit" class="btn btn-black btn-lg" :disabled="loading">{{ $t('Sign In') }}</button>
+
+                    <span style="color: red;" id="login-error"></span>
+
+                    <button class="btn btn-outline-black" @click="$emit('onOpenPopup', 'register')">{{ $t('Create An Account') }}</button>
+                </div>
+            </div>
+        </form>
+    </div>
 </template>
 
 <script>
@@ -61,8 +55,7 @@
                 user: {
                     'email': '',
                     'password': ''
-                },
-                themeAssets: window.config.themeAssetsPath,
+                }
             }
         },
 
@@ -90,7 +83,6 @@
 
                 EventBus.$emit('show-ajax-loader');
                 this.user.device_name = window.config.device.model;
-                console.log();
 
                 this.$http.post("/api/v1/customer/login", this.user)
                     .then(function(response) {
