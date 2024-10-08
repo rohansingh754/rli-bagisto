@@ -31,8 +31,6 @@
             });
 
 			EventBus.$on('drawer-up-heigth-update', function(height) {
-				console.log('updated');
-
 				this.translate = height;
             });
 		},
@@ -64,7 +62,6 @@
 
 			open () {
 				this.translate = 0;
-				console.log('check is run');
 
 				this.$refs.element.style.transform = 'translate3d(' + '0, 0 ,0)';
 				this.$refs.element.style.transitionDuration = this.speed;

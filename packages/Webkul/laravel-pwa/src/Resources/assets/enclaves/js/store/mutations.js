@@ -71,7 +71,7 @@ const GET_CART = (state) => {
                 state.cart = response.data.data;
                 state.pagination = response.data.meta;
             })
-            .catch((error) => {});
+            .catch((error) => { });
     }
 
     EventBus.$emit("hide-ajax-loader");

@@ -29,8 +29,6 @@ class AuthController extends BaseAuthController
      */
     public function login(Request $request)
     {
-        \Log::info('new funcotn');
-
         $request->validate([
             'email'    => 'required|email',
             'password' => 'required',

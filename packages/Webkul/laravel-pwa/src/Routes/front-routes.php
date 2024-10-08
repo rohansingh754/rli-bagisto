@@ -14,6 +14,7 @@ use Webkul\PWA\Http\Controllers\Shop\LocalController;
 use Webkul\PWA\Http\Controllers\Shop\BlogController;
 use Webkul\PWA\Http\Controllers\SinglePageController;
 use Webkul\PWA\Http\Controllers\StandardController;
+use Webkul\PWA\Http\Controllers\Shop\EnclaveSupport;
 
 Route::group(['middleware' => ['web']], function () {
     /**
@@ -46,6 +47,11 @@ Route::group(['middleware' => ['locale', 'theme', 'currency']], function () {
             Route::group(['prefix' => 'checkout'], function () {
 
                 Route::post('save-address', [CheckoutController::class, 'saveAddress']);
+            });
+
+            Route::controller(EnclaveSupport::class)->group(function () {
+                Route::get('customer/support/reasons', 'getTicketReasons');
+                Route::post('customer/support/ticket/store', 'store');
             });
         });
 

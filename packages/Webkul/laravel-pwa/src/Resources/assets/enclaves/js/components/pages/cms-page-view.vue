@@ -3,14 +3,12 @@
 </template>
 
 <script>
-	import Support                  from './support';
     import { mapState, mapActions} from 'vuex';
 
     export default {
         name: 'cms-page-view',
 
 		components: {
-            Support,
 		},
 
         props: ['page'],

@@ -17,10 +17,8 @@
 <script>
 
 	import FooterNav              from '../layouts/footer-nav';
-	import CmsPageView               from './cms-page-view';
+	import CmsPageView            from './cms-page-view';
     import Breadcrumb             from "../common/breadcrumb";
-	import Support                  from './support';
-
     import {mapState, mapActions} from 'vuex';
 
     export default {
@@ -30,7 +28,6 @@
             FooterNav,
 			CmsPageView,
             Breadcrumb,
-            Support
         },
 
 		data: function () {

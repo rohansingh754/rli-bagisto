@@ -38,8 +38,11 @@ import Offline              from './components/offline/index';
 
 import Newses               from './components/news/list';
 import NewsDetail           from './components/news/view';
-import Support              from './components/pages/support';
+import Support              from './components/customers/account/support';
 import AskToJoyResult       from './components/ask-to-joy/ask-joy-result';
+
+import MyProperties       from './components/customers/account/my-properties';
+
 
 Vue.use(Router);
 
@@ -116,7 +119,7 @@ export default new Router({
                     path: 'login-register',
                     name: 'login-register',
                     component: LoginRegister
-                }, {
+                },{
                     path: 'account',
                     name: 'account',
                     component: Account,
@@ -177,7 +180,15 @@ export default new Router({
                             path: 'reviews/:id',
                             name: 'customer-review-detail',
                             component: CustomerReviewDetail
-                        }
+                        }, {
+                            path:'support',
+                            name:'support',
+                            component: Support,
+                        }, {
+                            path:'my-properties',
+                            name:'my-properties',
+                            component: MyProperties,
+                        },
                     ]
                 }
             ]
@@ -193,10 +204,6 @@ export default new Router({
             path:"/newses/:id",
             name:'news',
             component: NewsDetail
-        }, {
-            path:'/support',
-            name:'support',
-            component: Support,
         }, {
             path:'/ask-joy-result',
             name:'ask-joy-result',

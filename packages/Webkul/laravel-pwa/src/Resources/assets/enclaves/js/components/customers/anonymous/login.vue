@@ -68,7 +68,7 @@
 
         mounted () {
             if (JSON.parse(localStorage.getItem('currentUser'))){
-                this.$router.push({name: 'dashboard'})
+                this.$router.push({name: 'home'})
             }
         },
 
@@ -90,7 +90,6 @@
 
                 EventBus.$emit('show-ajax-loader');
                 this.user.device_name = window.config.device.model;
-                console.log();
 
                 this.$http.post("/api/v1/customer/login", this.user)
                     .then(function(response) {
@@ -104,7 +103,7 @@
 
                     EventBus.$emit('user-logged-in', response.data);
 
-                    this_this.$router.push({name: 'dashboard'})
+                    this_this.$router.push({name: 'home'})
                 })
                 .catch(function (error) {
                     console.error(error);
