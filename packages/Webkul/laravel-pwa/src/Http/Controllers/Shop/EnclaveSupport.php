@@ -56,8 +56,5 @@ class EnclaveSupport extends Controller
         return response()->json([
             'data' => 'success',
         ]);
-        // return new JsonResponse([
-        //     'redirect' => route('enclaves.customers.account.inquiries.index'),
-        // ]);
     }
 }

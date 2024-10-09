@@ -18,7 +18,6 @@
         data: function () {
 			return {
                 themeAssets: window.config.themeAssetsPath,
-                // customer:null,
 			}
         },
 
@@ -29,8 +28,6 @@
         },
 
         mounted () {
-            // this.customer = JSON.parse(localStorage.getItem('currentUser'));
-            console.log(this.customer);
 
         },
 

@@ -15,6 +15,7 @@ use Webkul\PWA\Http\Controllers\Shop\BlogController;
 use Webkul\PWA\Http\Controllers\SinglePageController;
 use Webkul\PWA\Http\Controllers\StandardController;
 use Webkul\PWA\Http\Controllers\Shop\EnclaveSupport;
+use Webkul\PWA\Http\Controllers\Shop\Customer;
 
 Route::group(['middleware' => ['web']], function () {
     /**
@@ -52,6 +53,13 @@ Route::group(['middleware' => ['locale', 'theme', 'currency']], function () {
             Route::controller(EnclaveSupport::class)->group(function () {
                 Route::get('customer/support/reasons', 'getTicketReasons');
                 Route::post('customer/support/ticket/store', 'store');
+            });
+
+            Route::controller(Customer::class)->group(function () {
+                Route::group(['prefix' => 'customer'], function () {
+                    Route::get('/attributes', 'getCustomerAttributes');
+                    Route::post('/update-password', 'updatePassword');
+                });
             });
         });
 

@@ -1,16 +1,9 @@
 <template>
-    <div class="content">
-        <!-- <custom-header>
-            <div slot="back-botton" @click="handleBack">
-                <i class="icon back-icon"></i>
-            </div>
-
-            <div slot="content">
-                <h2>{{ $t('Sign In or Register') }}</h2>
-            </div>
-        </custom-header> -->
-
-        <div class="form-container" v-if="! popups.login && ! popups.register && ! popups.forgot_password">
+    <div>
+        <div
+            class="form-container"
+            v-if="! popups.login && ! popups.register && ! popups.forgot_password"
+            >
             <div class="shop-title">{{ app_name }}</div>
 
             <h3>{{ $t('Sign In or Register') }}</h3>

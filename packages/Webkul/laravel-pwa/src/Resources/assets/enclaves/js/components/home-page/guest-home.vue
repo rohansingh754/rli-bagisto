@@ -261,6 +261,12 @@
             this.getPage(this.pages);
 
             this.getNews();
+
+            let this_this = this
+
+            EventBus.$on('open-ask-to-joy-drawer', function() {
+                this_this.openAskToJoyDrawer();
+            });
         },
 
         methods: {

@@ -5,7 +5,7 @@
 				<div class="flex items-center gap-x-[10px]">
 					<p
 						v-for="(link, index) in links" :key="index"
-						:class="link.redirect ? 'flex items-center gap-x-[10px] text-[12px] font-medium text-dark' : 'text-[12px] font-medium text-text-gray'"
+						:class="link.redirect ? 'flex items-center gap-x-[10px] text-[12px] font-medium text-dark '+ classes : 'text-[12px] font-medium text-text-gray ' + classes"
 					>
 						<span v-if="link.redirect">
         					<router-link :to="link.redirect">
@@ -36,7 +36,7 @@
     export default {
         name: 'breadcrumb',
 
-        props: ['links'],
+        props: ['links', 'classes'],
 
 		methods: {
             truncateText(text, maxLength) {

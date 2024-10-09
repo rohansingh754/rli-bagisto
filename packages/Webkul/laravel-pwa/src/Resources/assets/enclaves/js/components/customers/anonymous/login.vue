@@ -1,5 +1,5 @@
 <template>
-    <section class="fixed inset-0 flex flex-col justify-center items-center gap-16 bg-[url(./../images/bg-image-2.png)] bg-cover">
+    <section class="flex flex-col justify-center items-center gap-16 bg-[url(./../images/bg-image-2.png)] bg-cover">
 		<img :src="themeAssets + 'images/homefull-logo-large.png'" alt="Log in your Account" class="w-72">
 		<div class="bg-white shadow-[0px_4px_40px] shadow-black/5 px-4 pt-9 pb-7 rounded-[10px] w-96 max-w-[95%]">
 			<h2 class="font-bold text-[25px] text-center text-dark">Log in your Account</h2>

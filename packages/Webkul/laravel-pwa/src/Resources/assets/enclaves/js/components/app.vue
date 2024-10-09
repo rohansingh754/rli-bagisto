@@ -8,7 +8,11 @@
             <div class="container px-[18px] py-6">
                 <div class="flex items-center justify-between">
                     <div class="homeful-toggler cursor-pointer py-[10px] pr-4">
-                        <span class="block h-3 w-[19px] border-b-[3px] border-t-[3px] border-dark" @click="OpneCloseMenuSidebar()"></span>
+                        <span
+                            class="block h-3 w-[19px] border-b-[3px] border-t-[3px] border-dark"
+                            @click="opneCloseMenuSidebar()"
+                            >
+                        </span>
                     </div>
                     <router-link :to="'/'">
                         <span class="homeful-logo mr-auto">
@@ -22,11 +26,14 @@
                                 </svg>
                                 <span class="absolute right-2 top-1 flex h-4 w-4 items-center justify-center rounded-full bg-primary text-[11px] font-medium text-white">2</span>
                         </a>
-                        <a href="#" class="flex h-[42px] w-[42px] items-center justify-center rounded-full bg-[#F5F5F5]">
+                        <span
+                            class="flex h-[42px] w-[42px] items-center justify-center rounded-full bg-[#F5F5F5]"
+                            @click="opneCloseMenuSidebar()"
+                            >
                             <svg width="17" height="21" viewBox="0 0 17 21" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M8.5 0C5.57536 0 3.1875 2.35977 3.1875 5.25C3.1875 8.14023 5.57536 10.5 8.5 10.5C11.4246 10.5 13.8125 8.14023 13.8125 5.25C13.8125 2.35977 11.4246 0 8.5 0ZM2.39062 12.6C1.0791 12.6 0 13.6664 0 14.9625V15.5928C0 17.1363 0.99056 18.5213 2.5013 19.4729C4.01204 20.4258 6.08032 21 8.5 21C10.9197 21 12.988 20.4258 14.4987 19.4729C16.0094 18.5213 17 17.1363 17 15.5928V14.9625C17 13.6664 15.9209 12.6 14.6094 12.6H2.39062Z" fill="#C4C4C4"/>
                             </svg>
-                        </a>
+                        </span>
                     </div>
                     <a v-else href="#" class="homeful-share text-[24px] text-dark">
                         <span class="icon-search"></span>
@@ -38,7 +45,7 @@
                             <a href="#" class="homeful-logo mr-auto">
                                 <img :src="themeAssets + 'images/logo.png'" alt="homeful">
                             </a>
-                            <span class="homeful-menu-close flex h-[35px] w-[35px] cursor-pointer items-center justify-center rounded-full bg-[#F3F4F6]" @click="OpneCloseMenuSidebar()">
+                            <span class="homeful-menu-close flex h-[35px] w-[35px] cursor-pointer items-center justify-center rounded-full bg-[#F3F4F6]" @click="opneCloseMenuSidebar()">
                                 <span class="icon-cancel text-[14px] text-[#989898]"></span>
                             </span>
                         </div>
@@ -88,7 +95,12 @@
                                 v-if="! currentUser"
                                 class="border-b-[1px] border-[#E2E2E2] pb-5"
                                 >
-                                <a href="#" class="text-[17px] font-medium text-dark">Ask Joy</a>
+                                <span
+                                    @click="openAsktoJoyDreawer()"
+                                    class="text-[17px] font-medium text-dark"
+                                    >
+                                    Ask Joy
+                                </span>
                             </div>
                             <div
                                 v-if="! currentUser"
@@ -152,7 +164,7 @@
                                 class="border-b-[1px] border-[#E2E2E2] pb-5"
                                 >
                                 <router-link
-                                    :to="'/support'"
+                                    :to="'/customer/account/change-password'"
                                     class="text-[17px] font-medium text-dark"
                                     >
                                     My Profile
@@ -358,7 +370,7 @@
 
                         EventBus.$emit('user-logged-out');
 
-                        this.$route.push('/')
+                        this.$router.push({name: 'home'})
                     });
             },
 
@@ -379,12 +391,20 @@
 
             },
 
-            OpneCloseMenuSidebar(){
+            opneCloseMenuSidebar(){
                 if (this.$refs.drawer.active) {
 					this.$refs.drawer.close();
 				} else {
 					this.$refs.drawer.open();
 				}
+            },
+
+            openAsktoJoyDreawer() {
+                if (this.$refs.drawer.active) {
+					this.$refs.drawer.close();
+                }
+
+                EventBus.$emit('open-ask-to-joy-drawer');
             },
 
             categoryAccordianToggle(){

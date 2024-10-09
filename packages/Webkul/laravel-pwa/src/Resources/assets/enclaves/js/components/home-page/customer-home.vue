@@ -75,66 +75,18 @@
                             </div>
                         </div>
                         <div class="mt-8 grid w-full grid-cols-2 items-center gap-2">
-                            <a href="#" class="block rounded-full bg-[linear-gradient(268.1deg,_#CC035C_7.47%,_#FCB115_98.92%)] px-6 py-4 text-center text-[14px] font-medium text-white">Go to my Documents</a>
-                            <a href="#" class="block rounded-full border border-primary px-6 py-4 text-center text-[14px] font-medium text-primary">Contact Support</a>
+                            <a
+                                class="block rounded-full bg-[linear-gradient(268.1deg,_#CC035C_7.47%,_#FCB115_98.92%)] px-6 py-4 text-center text-[14px] font-medium text-white"
+                                @click="openQuickGuideDrawer()"
+                                >
+                                Go to my Documents
+                            </a>
+                            <router-link :to="'/customer/account/support'">
+                                <span class="block rounded-full border border-primary px-6 py-4 text-center text-[14px] font-medium text-primary">Contact Support</span>
+                            </router-link>
                         </div>
                         <div class="mt-5 rounded-[24px] bg-[#DBEBFF] px-7 py-5 text-[14px] font-normal text-[#1973E8]">
                             Please upload all required documents by <strong>June 27, 2024</strong> to confirm your booking. Otherwise, your chosen property may be allocated to another buyer. Contact our support team with any questions.
-                        </div>
-                    </div>
-                </div>
-                <div class="property-card group mt-4 border-b border-[#E9E9E9] pb-5">
-                    <div class="accordian-toggle flex cursor-pointer items-center">
-                        <p class="mr-auto text-[15px] font-medium text-text-gray">My Property</p>
-                        <p class="mr-2 text-[15px] font-medium text-text-gray">Ref. Code: JN-091-22</p>
-                        <span class="icon-arrow-down text-[28px] text-primary group-[:not(.active)]:rotate-180"></span>
-                    </div>
-                    <div class="mt-4 flex items-center gap-5">
-                        <img :src="themeAssets + 'images/hero-thumbnail-2.png'" alt="" class="w-[84px]">
-                        <div class="mr-auto">
-                            <p class="text-[14px] font-semibold text-dark">Agapeya Towns Graceful Pink</p>
-                            <p class="text-[14px] font-semibold text-dark">₱2,500,000</p>
-                            <p class="text-[12px] font-normal text-text-gray">Total Contract Price</p>
-                        </div>
-                        <a href="#" class="text-[14px] font-semibold text-primary underline">Details</a>
-                    </div>
-                    <div class="mt-3 group-[:not(.active)]:hidden">
-                        <p class="text-[13px] font-medium text-text-gray">Home Loan Status</p>
-                        <div class="mt-5"></div>
-                        <p class="mt-6 text-[13px] font-medium text-text-gray">Documents</p>
-                        <div class="mt-3 grid grid-cols-3 gap-3">
-                            <div class="rounded-[20px] bg-[#F6FAFF] p-3">
-                                <p class="text-[27px] font-medium text-dark">25</p>
-                                <p class="text-[12px] font-normal text-[#6A6A6A]">For Uploading</p>
-                                <a href="#" class="text-[10px] font-normal text-primary">View</a>
-                            </div>
-                            <div class="rounded-[20px] bg-[#F6FAFF] p-3">
-                                <p class="text-[27px] font-medium text-dark">0</p>
-                                <p class="text-[12px] font-normal text-[#6A6A6A]">For Approval</p>
-                                <a href="#" class="text-[10px] font-normal text-primary">View</a>
-                            </div>
-                            <div class="rounded-[20px] bg-[#F6FAFF] p-3">
-                                <p class="text-[27px] font-medium text-dark">0</p>
-                                <p class="text-[12px] font-normal text-[#6A6A6A]">For Re-upload</p>
-                                <a href="#" class="text-[10px] font-normal text-primary">View</a>
-                            </div>
-                            <div class="rounded-[20px] bg-[#F6FAFF] p-3">
-                                <p class="text-[27px] font-medium text-dark">0</p>
-                                <p class="text-[12px] font-normal text-[#6A6A6A]">For Signing</p>
-                                <a href="#" class="text-[10px] font-normal text-primary">View</a>
-                            </div>
-                            <div class="rounded-[20px] bg-[#F6FAFF] p-3">
-                                <p class="text-[27px] font-medium text-dark">0</p>
-                                <p class="text-[12px] font-normal text-[#6A6A6A]">Signed Docs</p>
-                                <a href="#" class="text-[10px] font-normal text-primary">View</a>
-                            </div>
-                        </div>
-                        <div class="mt-8 grid w-full grid-cols-2 items-center gap-2">
-                            <a href="#" class="block rounded-full bg-[linear-gradient(268.1deg,_#CC035C_7.47%,_#FCB115_98.92%)] px-6 py-4 text-center text-[14px] font-medium text-white opacity-40">Go to my Documents</a>
-                            <a href="#" class="block rounded-full border border-primary px-6 py-4 text-center text-[14px] font-medium text-primary">Contact Support</a>
-                        </div>
-                        <div class="mt-5 rounded-[24px] bg-[#FFDCEC] px-7 py-5 text-[14px] font-normal text-[#CC035C]">
-                            Hey there! Looks like your consultation has expired because you didn't upload all the required documents on time. If you have any concerns about your reservation, just click on "Contact Support".
                         </div>
                     </div>
                 </div>
@@ -142,12 +94,8 @@
         </section>
         <div>
             <drawer-up>
-                <span ref="partnerDrawerRef">
-                    <partner-drawer v-if="partnerDrawer"></partner-drawer>
-                </span>
-
-                <span ref="asktoJoyRef">
-                    <ask-to-joy v-if="AskToJoyDrawer"></ask-to-joy>
+                <span ref="quickGuideDrawerRef">
+                    <quick-guide-drawer v-if="quickGuideDrawer"></quick-guide-drawer>
                 </span>
             </drawer-up>
         </div>
@@ -156,24 +104,21 @@
 
 <script>
 
-    import DrawerUp      from '../common/drawer-up';
-    import AskToJoy      from '../ask-to-joy/index';
-    import PartnerDrawer from '../partners/partner-drawer';
+    import DrawerUp          from '../common/drawer-up';
+    import QuickGuideDrawer  from '../customers/account/documents/quick-guide-drawer';
 
     export default {
         name: 'guest-home',
 
         components: {
             DrawerUp,
-            AskToJoy,
-            PartnerDrawer,
+            QuickGuideDrawer
         },
 
         data: function () {
 			return {
                 themeAssets: window.config.themeAssetsPath,
-                AskToJoyDrawer: 0,
-                partnerDrawer:0,
+                quickGuideDrawer:0,
 			}
         },
 
@@ -182,7 +127,12 @@
         },
 
         methods: {
+            openQuickGuideDrawer(){
+                this.quickGuideDrawer = 1;
+                EventBus.$emit('drawer-up-heigth-update', this.$refs.quickGuideDrawerRef.offsetHeight);
 
+                EventBus.$emit('drawer-up-toggle');
+            },
         }
     }
 </script>
