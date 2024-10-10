@@ -77,7 +77,7 @@
                         <div class="mt-8 grid w-full grid-cols-2 items-center gap-2">
                             <a
                                 class="block rounded-full bg-[linear-gradient(268.1deg,_#CC035C_7.47%,_#FCB115_98.92%)] px-6 py-4 text-center text-[14px] font-medium text-white"
-                                @click="openQuickGuideDrawer()"
+                                @click="handleToggleDrawerUP('quickGuide')"
                                 >
                                 Go to my Documents
                             </a>
@@ -92,33 +92,20 @@
                 </div>
             </div>
         </section>
-        <div>
-            <drawer-up>
-                <span ref="quickGuideDrawerRef">
-                    <quick-guide-drawer v-if="quickGuideDrawer"></quick-guide-drawer>
-                </span>
-            </drawer-up>
-        </div>
     </div>
 </template>
 
 <script>
 
-    import DrawerUp          from '../common/drawer-up';
-    import QuickGuideDrawer  from '../customers/account/documents/quick-guide-drawer';
-
     export default {
         name: 'guest-home',
 
         components: {
-            DrawerUp,
-            QuickGuideDrawer
         },
 
         data: function () {
 			return {
                 themeAssets: window.config.themeAssetsPath,
-                quickGuideDrawer:0,
 			}
         },
 
@@ -127,11 +114,8 @@
         },
 
         methods: {
-            openQuickGuideDrawer(){
-                this.quickGuideDrawer = 1;
-                EventBus.$emit('drawer-up-heigth-update', this.$refs.quickGuideDrawerRef.offsetHeight);
-
-                EventBus.$emit('drawer-up-toggle');
+            handleToggleDrawerUP(key) {
+                EventBus.$emit('drawer-up-toggle-popup', key);
             },
         }
     }

@@ -54,7 +54,8 @@ class EnclaveSupport extends Controller
         $this->ticketsRepository->uploadImages($ticket);
 
         return response()->json([
-            'data' => 'success',
+            'status' => 'success',
+            'message' => trans('enclaves::app.admin.inquiries.tickets.form.create.create-success'),
         ]);
     }
 }

@@ -11,7 +11,7 @@
                 <img :src="themeAssets + 'images/elanvital-product.png'" alt="" class="max-w-[90px]">
                 <button
                     class="text-[12px] font-medium text-primary underline"
-                    @click="openCategoryDrawer()">
+                    @click="handleToggleDrawerUP('storeDetails')">
                     Store Details
                 </button>
             </div>
@@ -22,7 +22,7 @@
 	<section class="pt-6">
         <div class="pl-4 flex items-center justify-between">
             <h1 class="text-[20px] font-bold text-dark" >Projects</h1>
-            <span class="" @click="openAskToJoyDrawer()">
+            <span class="" @click="handleToggleDrawerUP('askToJoy')">
                 <image-component
                     :src="themeAssets + 'images/joy-icon.png'"
                     :alt="'joy'"
@@ -43,18 +43,6 @@
 	</section>
 	<!-- posts end -->
 
-    <div>
-        <drawer-up>
-            <span ref="categoryDrawerRef">
-                <category-drawer v-if="categoryDrawer"></category-drawer>
-            </span>
-            <div ref="asktoJoyRef">
-                <ask-to-joy v-if="AskToJoyDrawer"></ask-to-joy>
-            </div>
-
-        </drawer-up>
-    </div>
-
     </div>
 </template>
 
@@ -62,9 +50,6 @@
 	import Breadcrumb      from "../common/breadcrumb";
     import ProductCard     from "../products/card";
     import ImageComponent  from "../common/image-component";
-    import DrawerUp        from '../common/drawer-up';
-    import AskToJoy        from '../ask-to-joy/index';
-    import categoryDrawer  from './category-drawer';
 
     export default {
         name: 'category',
@@ -73,9 +58,6 @@
 			Breadcrumb,
             ProductCard,
             ImageComponent,
-            DrawerUp,
-            AskToJoy,
-            categoryDrawer,
 		},
 
         data: function () {
@@ -97,8 +79,6 @@
 				],
 
                 categoryId: this.$route.params.id,
-                categoryDrawer:0,
-                AskToJoyDrawer:0,
 			}
         },
 
@@ -154,20 +134,8 @@
                 return text.substring(0, maxLength) + '...';
             },
 
-            openAskToJoyDrawer(){
-                this.categoryDrawer = 0;
-                this.AskToJoyDrawer = 1;
-                EventBus.$emit('drawer-up-heigth-update', this.$refs.asktoJoyRef.offsetHeight);
-
-                EventBus.$emit('drawer-up-toggle');
-            },
-
-            openCategoryDrawer(){
-                this.categoryDrawer = 1;
-                this.AskToJoyDrawer = 0;
-                EventBus.$emit('drawer-up-heigth-update', this.$refs.categoryDrawerRef.offsetHeight);
-
-                EventBus.$emit('drawer-up-toggle');
+            handleToggleDrawerUP(key) {
+                EventBus.$emit('drawer-up-toggle-popup', key);
             },
         }
     }

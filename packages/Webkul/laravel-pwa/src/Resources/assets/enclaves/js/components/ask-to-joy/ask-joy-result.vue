@@ -3,7 +3,7 @@
 	<breadcrumb :links="breadcrumbLinks" >
 		<div class="mt-5 text-[12px] font-normal text-dark">
 			Filter Results (2): House & Lot - Monthly Budget 19,900
-			<span class="fixed right-6 z-[999] top-[96px]" @click="openAskToJoyDrawer()">
+			<span class="fixed right-6 z-[999] top-[96px]" @click="handleToggleDrawerUP('askToJoy')">
 				<image-component
 					:src="themeAssets + 'images/joy-icon.png'"
 					:alt="'joy'"
@@ -23,23 +23,23 @@
 				<product-card v-for="(product, index) in products" :key="index" :product="product"></product-card>
 			</div>
 
-			<a href="#" class="mt-6 inline-block w-full rounded-full bg-[linear-gradient(268.1deg,_#CC035C_7.47%,_#FCB115_98.92%)] px-7 py-5 text-center text-[14px] font-medium text-white">compare</a>
+			<router-link
+				v-if="productIds.length > 1"
+				:to="{ path: '/ask-joy-result/compare', query: { ids: productIds } }"
+				class="mt-6 inline-block w-full rounded-full bg-[linear-gradient(268.1deg,_#CC035C_7.47%,_#FCB115_98.92%)] px-7 py-5 text-center text-[14px] font-medium text-white"
+				>
+				Compare
+			</router-link>
+
 		</div>
 	 </section>
-	<!-- Ask Joy result end-->
-	<div>
-		<drawer-up>
-			<ask-to-joy ></ask-to-joy>
-		</drawer-up>
-	</div>
+
 	</div>
 </template>
 
 <script>
 	import Breadcrumb        from "../common/breadcrumb";
 	import ImageComponent    from "../common/image-component";
-	import AskToJoy          from '../ask-to-joy/index';
-    import DrawerUp          from '../common/drawer-up';
 	import ProductCard 		 from '../products/card';
 
     export default {
@@ -48,8 +48,6 @@
 		components:{
 			Breadcrumb,
             ImageComponent,
-			AskToJoy,
-            DrawerUp,
 			ProductCard,
 		},
 
@@ -65,7 +63,8 @@
 						'name': 'Ask to Joy',
 					},
                 ],
-				products:[],
+				products: [],
+				productIds:[],
 			}
 		},
 
@@ -83,14 +82,21 @@
                 const response = await this.$http.get("/api/v1/products", {params: {limit: 10}});
 
                 if (response.data.data) {
-                    this.products = response.data.data
+					this.products = response.data.data
+
+					if (this.products.length) {
+
+						this.productIds = this.products.map(item => item.id);
+
+					}
+
                 }
 
                 EventBus.$emit('hide-ajax-loader');
             },
 
-			openAskToJoyDrawer(){
-                EventBus.$emit('drawer-up-toggle');
+			handleToggleDrawerUP(key) {
+                EventBus.$emit('drawer-up-toggle-popup', key);
             },
         }
     }

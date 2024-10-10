@@ -143,13 +143,22 @@
 			},
 
 			updatePassword() {
-				console.log('user', this.user);
 
 				this.$http.post('/api/pwa/customer/update-password', this.user)
 					.then(response => {
-						// this.reasons = response.data.data;
-						console.log(response);
+						this.$toasted.show(response.data.message, { type: response.data.status })
 
+						this.$validator.pause();
+
+						Object.keys(this.user).forEach(key => {
+							this.user[key] = '';
+						});
+
+						// Reset the validator's state
+						this.$validator.reset();
+
+						// Clear all validation errors
+						this.errors.clear();
 					})
 					.catch(error => {
 						console.error('Error fetching support reasons:', error);

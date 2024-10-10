@@ -55,11 +55,17 @@
         </title>
     </head>
 
-    <body @if (app()->getLocale() == 'ar') class="rtl" dir="rtl" @endif style="scroll-behavior: smooth;">
+    <body
+
+        @if (app()->getLocale() == 'ar') class="rtl" dir="rtl" @endif style="scroll-behavior: smooth;"
+        >
 
         {!! view_render_event('bagisto.pwa.layout.body.before') !!}
 
-        <div id="app">
+        <div
+            id="app"
+            class="font-roboto"
+            >
             <app></app>
         </div>
         <script type="text/javascript">

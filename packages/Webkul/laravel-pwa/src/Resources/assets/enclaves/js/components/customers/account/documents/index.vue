@@ -58,13 +58,7 @@
 		<document-phase-4 v-if="documentPhase == 4"></document-phase-4>
 		<document-phase-5 v-if="documentPhase == 5"></document-phase-5>
 	 </section>
-	<div>
-		<drawer-up>
-			<span ref="signAllDrawerRef">
-				<sign-all-drawer v-if="signAllDrawer"></sign-all-drawer>
-			</span>
-		</drawer-up>
-	</div>
+
     </div>
 </template>
 
@@ -119,10 +113,6 @@
 	mounted() {
 			let this_this = this;
 
-			EventBus.$on('document-sign-all-toggle', function() {
-                this_this.openSignAllDrawer();
-			});
-
             this.getCustomer();
         },
 
@@ -134,13 +124,6 @@
 			updateDocumentPhase(phase) {
 				this.documentPhase = phase;
 			},
-
-			openSignAllDrawer() {
-				this.signAllDrawer = 1
-				EventBus.$emit('drawer-up-heigth-update', this.$refs.signAllDrawerRef.offsetHeight);
-
-                EventBus.$emit('drawer-up-toggle');
-			}
         }
     }
 </script>

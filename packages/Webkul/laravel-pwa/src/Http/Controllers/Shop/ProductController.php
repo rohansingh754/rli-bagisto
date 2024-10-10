@@ -10,6 +10,9 @@ use Webkul\Product\Repositories\ProductReviewRepository;
 use Webkul\Product\Helpers\ConfigurableOption;
 use Webkul\Sales\Repositories\DownloadableLinkPurchasedRepository;
 use Webkul\PWA\Http\Controllers\Controller;
+use Webkul\PWA\Http\Controllers\Restapi\Shop\Catalog\ProductController as APIProductController;
+use Webkul\PWA\Http\Resources\Catalog\ProductResource;
+
 
 class ProductController extends Controller
 {
@@ -22,8 +25,33 @@ class ProductController extends Controller
         protected ProductReviewRepository $reviewRepository,
         protected ProductRepository $productRepository,
         protected ConfigurableOption $configurableOption,
-        protected DownloadableLinkPurchasedRepository $downloadableLinkPurchasedRepository
+        protected DownloadableLinkPurchasedRepository $downloadableLinkPurchasedRepository,
+        protected APIProductController $aPIProductController
     ) {}
+
+    /**
+     * Resource class name.
+     */
+    public function resource(): string
+    {
+        return ProductResource::class;
+    }
+
+    public function getCompareAbleProducts()
+    {
+        $products = $this->productRepository
+            ->getAll(array_merge(request()->query(), [
+                'channel_id'           => core()->getCurrentChannel()->id,
+                'status'               => 1,
+                'visible_individually' => 1,
+
+            ]))
+            ->whereIn('id', request()->query('ids'));
+
+        return response()->json([
+            'data' => ProductResource::collection($products),
+        ]);
+    }
 
     /**
      * Store a newly created resource in storage.

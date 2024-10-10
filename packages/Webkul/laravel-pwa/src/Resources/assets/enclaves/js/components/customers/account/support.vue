@@ -157,8 +157,7 @@
 				params:{},
 				selectedReason:'Nature of Concern',
 				images:null,
-				imagePreviewURL:null
-
+				imagePreviewURL:null,
 			}
         },
 
@@ -197,10 +196,14 @@
 
 				this.$http.post("api/pwa/customer/support/ticket/store", formData)
 					.then(response => {
-						this.params = {}
-						this.images = null
-						this.$refs.file.files = [];
-						this.imagePreviewURL = null;
+						if (response.data.status == 'success') {
+							this.$toasted.show(response.data.message, { type: response.data.status })
+							this.params = {}
+							this.images = null
+							this.$refs.file.value = '';
+							this.imagePreviewURL = null;
+						}
+
 					})
 					.catch(error => {});
 			},
@@ -215,7 +218,6 @@
 				this.$http.get('/api/pwa/customer/support/reasons')
 					.then(response => {
 						this.reasons = response.data.data;
-						console.log(this.reasons);
 
 					})
 					.catch(error => {

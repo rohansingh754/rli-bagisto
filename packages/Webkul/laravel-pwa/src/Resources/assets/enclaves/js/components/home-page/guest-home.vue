@@ -4,7 +4,7 @@
             <div class="container">
                 <div class="mt-5 flex items-center justify-between">
                     <h1 class="text-[20px] font-bold text-dark" >Featured Projects</h1>
-                    <span @click="openAskToJoyDrawer()">
+                    <span @click="handleToggleDrawerUP('askToJoy')">
                         <image-component
                             :src="themeAssets + 'images/joy-icon.png'"
                             :alt="'joy'"
@@ -114,7 +114,7 @@
                 <div class="w-[184px]">
                     <h2 class="text-[22px] font-bold leading-[26px] text-white">Looking for a home that suits you? Ask Joy</h2>
                     <span
-                        @click="openAskToJoyDrawer()"
+                        @click="handleToggleDrawerUP('askToJoy')"
                         class="mt-2 inline-block rounded-full bg-white px-9 py-4 text-center text-[14px] font-normal text-primary"
                         >
                         Ask Joy
@@ -135,7 +135,7 @@
             <div class="container">
                 <h2 class="text-[20px] font-bold text-dark">Partner with us</h2>
                 <div class="scrollbar-hide mt-8 w-full overflow-auto">
-                    <div class="flex w-[max-content] gap-4" @click="openPartnerDrawer()">
+                    <div class="flex w-[max-content] gap-4" @click="handleToggleDrawerUP('partners')">
                         <partner-card v-for="(partner, index) in partners" :key="index" :partner="partners"></partner-card>
                     </div>
                 </div>
@@ -166,18 +166,6 @@
                 <footer-nav></footer-nav>
             </div>
         </div>
-
-        <div>
-            <drawer-up>
-                <span ref="partnerDrawerRef">
-                    <partner-drawer v-if="partnerDrawer"></partner-drawer>
-                </span>
-
-                <span ref="asktoJoyRef">
-                    <ask-to-joy v-if="AskToJoyDrawer"></ask-to-joy>
-                </span>
-            </drawer-up>
-        </div>
     </div>
 </template>
 
@@ -191,9 +179,6 @@
     import NewsCard               from '../news/card';
     import PartnerCard            from '../partners/card';
     import ImageComponent         from "../common/image-component";
-    import DrawerUp               from '../common/drawer-up';
-    import AskToJoy               from '../ask-to-joy/index';
-    import PartnerDrawer            from '../partners/partner-drawer';
 
     export default {
         name: 'guest-home',
@@ -208,9 +193,6 @@
             PartnerCard,
             NewsCard,
             ImageComponent,
-            AskToJoy,
-            DrawerUp,
-            PartnerDrawer
         },
 
         data: function () {
@@ -242,8 +224,6 @@
                 },
                 newses:[],
                 partners: ['one', 'two', 'three', 'Demo'],
-                AskToJoyDrawer: 0,
-                partnerDrawer:0,
 			}
         },
 
@@ -262,11 +242,6 @@
 
             this.getNews();
 
-            let this_this = this
-
-            EventBus.$on('open-ask-to-joy-drawer', function() {
-                this_this.openAskToJoyDrawer();
-            });
         },
 
         methods: {
@@ -455,21 +430,8 @@
                 EventBus.$emit('hide-ajax-loader');
             },
 
-            openAskToJoyDrawer(){
-                this.partnerDrawer = 0;
-                this.AskToJoyDrawer = 1;
-                EventBus.$emit('drawer-up-heigth-update', this.$refs.asktoJoyRef.offsetHeight);
-
-
-                EventBus.$emit('drawer-up-toggle');
-            },
-
-            openPartnerDrawer(){
-                this.AskToJoyDrawer = 0;
-                this.partnerDrawer = 1;
-                EventBus.$emit('drawer-up-heigth-update', this.$refs.partnerDrawerRef.offsetHeight);
-
-                EventBus.$emit('drawer-up-toggle');
+            handleToggleDrawerUP(key) {
+                EventBus.$emit('drawer-up-toggle-popup', key);
             },
         }
     }

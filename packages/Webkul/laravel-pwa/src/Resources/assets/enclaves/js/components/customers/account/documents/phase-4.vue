@@ -11,7 +11,8 @@
 			<div class="mt-1 flex w-full items-center justify-center gap-3">
 				<span
 					class="block rounded-full bg-[linear-gradient(268.1deg,_#CC035C_7.47%,_#FCB115_98.92%)] px-6 py-4 text-center text-[14px] font-medium text-white"
-					@click="openSignAllDrawer()"
+                    @click="handleToggleDrawerUP('signAll')"
+
 					>
 					Sign All
 				</span>
@@ -46,9 +47,10 @@
 		},
 
         methods: {
-			openSignAllDrawer() {
-				EventBus.$emit('document-sign-all-toggle');
-			},
+
+			handleToggleDrawerUP(key) {
+                EventBus.$emit('drawer-up-toggle-popup', key);
+            },
         }
     }
 </script>

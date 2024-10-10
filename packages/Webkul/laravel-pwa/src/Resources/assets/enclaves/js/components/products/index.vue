@@ -99,7 +99,7 @@
 	<div class="schedule-visit fixed inset-x-0 bottom-0 z-50 flex items-center justify-center gap-7 bg-white p-6 w-full">
 		<span
             class="flex flex-col items-center gap-1 text-[12px] font-normal text-[#8B8B8B] w-24"
-            @click="openScheduleVisitDrawer()"
+            @click="handleToggleDrawerUP('scheduleVisit')"
             >
 			<span>
 				<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -115,7 +115,7 @@
 			Schedule Visit
 		</span>
 		<span
-            @click="openAvailDrawer()"
+            @click="handleToggleDrawerUP('availNow')"
             class="flex items-center gap-2 rounded-full bg-[linear-gradient(268.1deg,_#CC035C_7.47%,_#FCB115_98.92%)] px-11 py-[14px] text-[16px] font-medium text-white max-385:px-6 max-385:text-[13px]">
             Avail Now
             <br>for P10,000
@@ -126,18 +126,6 @@
             </span>
         </span>
 	</div>
-
-     <div>
-        <drawer-up>
-            <span ref="scheduleVisitDrawerRef">
-                <schedule-visit-drawer v-if="scheduleVisitDrawer"></schedule-visit-drawer>
-            </span>
-            <span ref="availNowDrawerRef">
-                <avail-now-drawer v-if="availDrawer" ></avail-now-drawer>
-            </span>
-
-        </drawer-up>
-    </div>
 
     </div>
 </template>
@@ -159,9 +147,6 @@
     import FooterNav                from '../layouts/footer-nav';
     import ImageComponent           from "../common/image-component";
 	import Breadcrumb               from "../common/breadcrumb";
-    import DrawerUp                 from '../common/drawer-up';
-    import ScheduleVisitDrawer      from './schedule-visit-drawer';
-    import AvailNowDrawer              from './avail-now-drawer';
 
     export default {
         name: 'product',
@@ -183,9 +168,6 @@
             FooterNav,
             ImageComponent,
             Breadcrumb,
-            DrawerUp,
-            ScheduleVisitDrawer,
-            AvailNowDrawer,
         },
 
         data () {
@@ -416,22 +398,8 @@
               this.showMore = !this.showMore;
             },
 
-            openScheduleVisitDrawer() {
-                this.availDrawer = 0;
-                this.scheduleVisitDrawer = 1;
-
-                EventBus.$emit('drawer-up-heigth-update', this.$refs.scheduleVisitDrawerRef.offsetHeight);
-
-                EventBus.$emit('drawer-up-toggle');
-            },
-
-            openAvailDrawer(){
-                this.availDrawer = 1;
-                this.scheduleVisitDrawer = 0;
-
-                EventBus.$emit('drawer-up-heigth-update', this.$refs.availNowDrawerRef.offsetHeight);
-
-                EventBus.$emit('drawer-up-toggle');
+            handleToggleDrawerUP(key) {
+                EventBus.$emit('drawer-up-toggle-popup', key);
             },
         }
     }

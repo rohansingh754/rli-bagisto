@@ -27,7 +27,7 @@
 			this.translate = '617px';
 
 			EventBus.$on('drawer-up-toggle', function() {
-                this_this.handleToggleDrawerAskToJoy();
+                this_this.handleToggleDrawer();
             });
 
 			EventBus.$on('drawer-up-heigth-update', function(height) {
@@ -36,7 +36,7 @@
 		},
 
 		methods: {
-			handleToggleDrawerAskToJoy () {
+			handleToggleDrawer () {
 				if (this.active) {
 					this.close();
 				} else {
@@ -63,7 +63,7 @@
 			open () {
 				this.translate = 0;
 
-				this.$refs.element.style.transform = 'translate3d(' + '0, 0 ,0)';
+				this.$refs.element.style.transform = 'translate3d(0, 0 ,0)';
 				this.$refs.element.style.transitionDuration = this.speed;
 
 				this.overlayOpacity(1);

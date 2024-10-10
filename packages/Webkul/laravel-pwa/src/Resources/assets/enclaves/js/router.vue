@@ -34,11 +34,12 @@ import Account              from './components/customers/account/index';
 // import EditAddress          from './components/customers/account/addresses/edit';
 // import CustomerReviewList   from './components/customers/account/reviews/index';
 // import CustomerReviewDetail from './components/customers/account/reviews/view';
-import Offline              from './components/offline/index';
+import Offline                 from './components/offline/index';
 
-import Newses               from './components/news/list';
-import NewsDetail           from './components/news/view';
-import AskToJoyResult       from './components/ask-to-joy/ask-joy-result';
+import Newses                      from './components/news/list';
+import NewsDetail                  from './components/news/view';
+import AskToJoyResult              from './components/ask-to-joy/ask-joy-result';
+import AskToJoyResultCompare       from './components/ask-to-joy/ask-joy-result-compare';
 
 import Support            from './components/customers/account/support';
 import MyProperties       from './components/customers/account/my-properties';
@@ -229,6 +230,10 @@ export default new Router({
             path:'/ask-joy-result',
             name:'ask-joy-result',
             component: AskToJoyResult,
+        },  {
+            path:'/ask-joy-result/compare',
+            name:'ask-joy-result-compare',
+            component: AskToJoyResultCompare,
         },
     ],
 });

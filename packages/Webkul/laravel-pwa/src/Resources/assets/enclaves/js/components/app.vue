@@ -1,8 +1,7 @@
 <template>
     <div id="app-inner">
         <!-- header -->
-        <welcome-model></welcome-model>
-
+        <welcome-model v-if="this.$router.currentRoute.path == '/'"></welcome-model>
 
         <header class="border-b-[1px] border-[#E9E9E9]">
             <div class="container px-[18px] py-6">
@@ -96,7 +95,7 @@
                                 class="border-b-[1px] border-[#E2E2E2] pb-5"
                                 >
                                 <span
-                                    @click="openAsktoJoyDreawer()"
+                                    @click="handleToggleDrawerUP('askToJoy')"
                                     class="text-[17px] font-medium text-dark"
                                     >
                                     Ask Joy
@@ -164,7 +163,7 @@
                                 class="border-b-[1px] border-[#E2E2E2] pb-5"
                                 >
                                 <router-link
-                                    :to="'/customer/account/change-password'"
+                                    :to="'/customer/account/my-profile'"
                                     class="text-[17px] font-medium text-dark"
                                     >
                                     My Profile
@@ -213,6 +212,38 @@
             <div class="page-view-container">
                 <router-view></router-view>
             </div>
+
+            <div>
+                <drawer-up>
+                    <span ref="partnerDrawerRef">
+                        <partner-drawer v-if="drawersUp.partners.status"></partner-drawer>
+                    </span>
+
+                    <span ref="asktoJoyRef">
+                        <ask-to-joy v-if="drawersUp.askToJoy.status"></ask-to-joy>
+                    </span>
+
+                    <span ref="storeDetailsRef">
+                        <category-drawer v-if="drawersUp.storeDetails.status"></category-drawer>
+                    </span>
+
+                    <span ref="scheduleVisitDrawerRef">
+                        <schedule-visit-drawer v-if="drawersUp.scheduleVisit.status"></schedule-visit-drawer>
+                    </span>
+
+                    <span ref="availNowDrawerRef">
+                        <avail-now-drawer v-if="drawersUp.availNow.status" ></avail-now-drawer>
+                    </span>
+
+                    <span ref="quickGuideDrawerRef">
+                        <quick-guide-drawer v-if="drawersUp.quickGuide.status"></quick-guide-drawer>
+                    </span>
+
+                    <span ref="signAllDrawerRef">
+                        <sign-all-drawer v-if="drawersUp.signAll.status"></sign-all-drawer>
+                    </span>
+                </drawer-up>
+            </div>
         </div>
 
         <ajax-loader></ajax-loader>
@@ -222,11 +253,19 @@
 <script>
 
     import {mapState, mapActions} from 'vuex';
-    import BottomSheet   from './shared/bottom-sheet';
-    import HeaderNav     from './layouts/header-nav';
-    import AjaxLoader    from './common/ajax-loader';
-    import DrawerSidebar from './common/drawer-sidebar';
-    import WelcomeModel  from './layouts/welcome-model';
+    import BottomSheet            from './shared/bottom-sheet';
+    import HeaderNav              from './layouts/header-nav';
+    import AjaxLoader             from './common/ajax-loader';
+    import DrawerSidebar          from './common/drawer-sidebar';
+    import WelcomeModel           from './layouts/welcome-model';
+    import DrawerUp               from './common/drawer-up';
+    import AskToJoy               from './ask-to-joy/index';
+    import PartnerDrawer          from './partners/partner-drawer';
+    import categoryDrawer         from "./categories/category-drawer";
+    import ScheduleVisitDrawer    from './products/schedule-visit-drawer';
+    import AvailNowDrawer         from './products/avail-now-drawer';
+    import QuickGuideDrawer       from "./customers/account/documents/quick-guide-drawer";
+    import SignAllDrawer          from "./customers/account/documents/sign-all-drawer";
 
     export default {
         name: 'app',
@@ -237,7 +276,16 @@
             AjaxLoader,
             DrawerSidebar,
             WelcomeModel,
+            DrawerUp,
+            AskToJoy,
+            PartnerDrawer,
+            categoryDrawer,
+            ScheduleVisitDrawer,
+            AvailNowDrawer,
+            QuickGuideDrawer,
+            SignAllDrawer,
         },
+
 
         data () {
 			return {
@@ -259,6 +307,36 @@
                 currentUser: false,
 
                 themeAssets: window.config.themeAssetsPath,
+                drawersUp: {
+                    askToJoy: {
+                        status: 0,
+                        ref: null,
+                    },
+                    partners:{
+                        status: 0,
+                        ref: null,
+                    },
+                    storeDetails: {
+                        status: 0,
+                        ref:null,
+                    },
+                    scheduleVisit: {
+                        status: 0,
+                        ref:null,
+                    },
+                    availNow: {
+                        status: 0,
+                        ref:null,
+                    },
+                    quickGuide: {
+                        status: 0,
+                        ref:null,
+                    },
+                    signAll: {
+                        status: 0,
+                        ref:null,
+                    },
+                },
 			}
 		},
 
@@ -266,7 +344,16 @@
             customer: state => state.customer,
         }),
 
-        mounted () {
+        mounted() {
+            // Store components reference in drawersUp object.
+            this.drawersUp.askToJoy.ref = this.$refs.asktoJoyRef;
+            this.drawersUp.partners.ref = this.$refs.partnerDrawerRef;
+            this.drawersUp.storeDetails.ref = this.$refs.storeDetailsRef;
+            this.drawersUp.scheduleVisit.ref = this.$refs.scheduleVisitDrawerRef;
+            this.drawersUp.availNow.ref = this.$refs.availNowDrawerRef;
+            this.drawersUp.quickGuide.ref = this.$refs.quickGuideDrawerRef;
+            this.drawersUp.signAll.ref = this.$refs.signAllDrawerRef;
+
             this.getCustomer();
 
             this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
@@ -280,6 +367,10 @@
 
             EventBus.$on('user-logged-out', function() {
                 this_this.currentUser = null;
+            });
+
+            EventBus.$on('drawer-up-toggle-popup', function(drawerKey) {
+                this_this.handleToggleDrawerUP(drawerKey);
             });
 
             this.getCategories();
@@ -362,7 +453,7 @@
                 EventBus.$emit('show-ajax-loader');
 
                 this.$http.post("/api/v1/customer/logout")
-                    .then(function(response) {
+                    .then((response) => {
                         EventBus.$emit('hide-ajax-loader');
 
                         localStorage.removeItem('currentUser');
@@ -370,7 +461,14 @@
 
                         EventBus.$emit('user-logged-out');
 
-                        this.$router.push({name: 'home'})
+                        if (this.$router.currentRoute.path !== '/') {
+                            this.$router.push({ name: 'home' });
+                        } else {
+                            window.location.reload();
+                        }
+                    })
+                    .catch((error) => {
+                        console.error('Logout error:', error);
                     });
             },
 
@@ -399,12 +497,26 @@
 				}
             },
 
-            openAsktoJoyDreawer() {
+            handleToggleDrawerUP(key) {
+                this.hideAllDrawersUpPopups();
+
                 if (this.$refs.drawer.active) {
 					this.$refs.drawer.close();
-                }
+				}
 
-                EventBus.$emit('open-ask-to-joy-drawer');
+                this.drawersUp[key].status = 1;
+
+                // EventBus.$emit('drawer-up-heigth-update', this.drawersUp[key].ref.offsetHeight);
+
+                EventBus.$emit('drawer-up-toggle');
+            },
+
+            hideAllDrawersUpPopups() {
+                for (const key in this.drawersUp) {
+                    if (this.drawersUp.hasOwnProperty(key)) {
+                        this.drawersUp[key].status = 0;
+                    }
+                }
             },
 
             categoryAccordianToggle(){

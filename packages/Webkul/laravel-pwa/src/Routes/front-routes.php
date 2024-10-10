@@ -84,7 +84,7 @@ Route::group(['middleware' => ['locale', 'theme', 'currency']], function () {
          */
         Route::controller(ProductController::class)->prefix('products')->group(function () {
 
-            Route::get('', 'allResources');
+            Route::get('compare', 'getCompareAbleProducts');
 
             Route::group(['prefix' => 'downloadable-products'], function () {
                 Route::get('', 'getCustomerDownloadAbleProducts');

@@ -22,11 +22,11 @@
 				<li class="font-normal text-[14px] text-primary">We only accept PNG, JPEG, and PDF file formats.</li>
 				<li class="font-normal text-[14px] text-primary">Further documentation may be necessary depending on the buyer's status.</li>
 			</ul>
-			<router-link :to="'/customer/account/documents'">
-				<span class="block bg-[linear-gradient(268.1deg,_#CC035C_7.47%,_#FCB115_98.92%)] mx-auto mt-7 px-[7 py-5 rounded-full w-3/4 font-medium text-[14px] text-center text-white">
+				<span
+					@click="handelDrawerRedirect()"
+					class="block bg-[linear-gradient(268.1deg,_#CC035C_7.47%,_#FCB115_98.92%)] mx-auto mt-7 px-[7 py-5 rounded-full w-3/4 font-medium text-[14px] text-center text-white">
 					{{'I Agree & Continue'}}
 				</span>
-            </router-link>
 		</div>
 	</section>
 </template>
@@ -40,8 +40,6 @@
 		data() {
 			return {
                 themeAssets: window.config.themeAssetsPath,
-				step:1,
-				params: {},
 			}
 		},
 
@@ -50,10 +48,12 @@
 		},
 
         methods: {
-			closeAskTojoy(){
-				EventBus.$emit('drawer-up-toggle');
-				this.step = 1;
-			},
+
+			handelDrawerRedirect() {
+                EventBus.$emit('drawer-up-toggle');
+
+				this.$router.push('/customer/account/documents');
+            }
         }
     }
 </script>
