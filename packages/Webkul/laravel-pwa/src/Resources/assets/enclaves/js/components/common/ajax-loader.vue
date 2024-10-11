@@ -2,6 +2,12 @@
     <div class="loader-overlay" v-if="requestCount">
         <div class="fade-overlay"></div>
 
+        <list-shimmer v-if="listViews.includes($route.name)"></list-shimmer>
+
+        <product-view-shimmer v-else-if="$route.name === 'product'"></product-view-shimmer>
+
+        <home-shimmer v-else ></home-shimmer>
+
         <div class="main-loader">
             <div id="loader" class="cp-spinner cp-round"></div>
         </div>
@@ -9,13 +15,29 @@
 </template>
 
 <script>
+    import HomeShimmer from "../shimmers/home-shimmer";
+    import ListShimmer from "../shimmers/list-shimmer";
+    import ProductViewShimmer from "../shimmers/product-view-shimmer";
+
     export default {
         name: 'ajax-loader',
 
+        components: {
+            HomeShimmer,
+            ListShimmer,
+            ProductViewShimmer,
+        },
+
         data () {
 			return {
-                requestCount: 0
+                requestCount: 0,
+                listViews:['category', 'categories', 'products'],
             }
+        },
+
+        mounted() {
+             console.log('routenae', this.$route.name);
+
         },
 
         created () {
@@ -45,7 +67,7 @@
         text-align: center;
         top: 0;
         width: 100%;
-        z-index: 100;
+        z-index: 1000;
 
         .fade-overlay {
             background: #fff;

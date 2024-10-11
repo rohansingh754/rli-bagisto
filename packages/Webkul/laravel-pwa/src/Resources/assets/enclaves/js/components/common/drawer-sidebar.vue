@@ -33,8 +33,10 @@
 
 			overlayOpacity (opacity) {
 				this.$refs.overlay.style.opacity = opacity;
+				this.$refs.overlay.style.display = 'none';
 
 				if (opacity > 0) {
+					this.$refs.overlay.style.display = 'block';
 					this.$refs.overlay.style.zIndex = 999;
 				}
 			},
@@ -79,6 +81,7 @@
 	    width: 100%;
 	    height: 100%;
 	    transition: opacity 0.3s ease;
+		display: none;
 	}
 
 	.sidebar {

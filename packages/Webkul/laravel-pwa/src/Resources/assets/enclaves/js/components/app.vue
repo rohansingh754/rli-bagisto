@@ -3,7 +3,7 @@
         <!-- header -->
         <welcome-model v-if="this.$router.currentRoute.path == '/'"></welcome-model>
 
-        <header class="border-b-[1px] border-[#E9E9E9]">
+        <header class="sticky top-0 z-[999] bg-white border-b-[1px] border-[#E9E9E9]">
             <div class="container px-[18px] py-6">
                 <div class="flex items-center justify-between">
                     <div class="homeful-toggler cursor-pointer py-[10px] pr-4">

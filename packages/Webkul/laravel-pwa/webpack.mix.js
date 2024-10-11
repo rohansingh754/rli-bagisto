@@ -30,6 +30,7 @@ mix.js(path.resolve("src/Resources/assets/default/js/app.js"), "default/js/app.j
     })
     .copy(path.resolve("src/Resources/assets/enclaves/images"), publicPath + "/enclaves/images")
     .sass(path.resolve("src/Resources/assets/enclaves/sass/app.scss"), "enclaves/css/pwa.css")
+    .sass(path.resolve("src/Resources/assets/enclaves/sass/enclave.scss"), "enclaves/css/enclave.css")
     .copy(path.resolve("src/Resources/assets/enclaves/fonts"), publicPath + "/enclaves/fonts")
     .copy(path.resolve("src/Resources/assets/firebase"), "../../../public/")
     .sass(

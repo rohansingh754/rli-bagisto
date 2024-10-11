@@ -4,21 +4,23 @@ import { getMessaging, onMessage, getToken } from "firebase/messaging";
 // Initialize variables
 var topic;
 var serverAPI;
-var messagingId;
-var authDomain;
-var databaseUrl;
-var projectId;
-var appId;
+
 var webAPIKey;
+var authDomain;
+var projectId;
+var databaseUrl;
+var messagingId;
+var appId;
 
 var topicKey = "pwa.settings.push-notification.topic";
 var serverAPIKey = "pwa.settings.push-notification.api-key";
-var messagingIdKey = "pwa.settings.push-notification.messaging-id";
-var authDomainKey = "pwa.settings.push-notification.auth-domain";
-var databaseUrlKey = "pwa.settings.push-notification.database-url";
-var projectIdKey = "pwa.settings.push-notification.project-id";
-var appIdKey = "pwa.settings.push-notification.app-id";
+
 var webAPIKeyKey = "pwa.settings.push-notification.web-api-key";
+var authDomainKey = "pwa.settings.push-notification.auth-domain";
+var projectIdKey = "pwa.settings.push-notification.project-id";
+var databaseUrlKey = "pwa.settings.push-notification.database-url";
+var messagingIdKey = "pwa.settings.push-notification.messaging-id";
+var appIdKey = "pwa.settings.push-notification.app-id";
 
 var isSafari = () => {
     return window.navigator.vendor == "Apple Computer, Inc.";
@@ -35,13 +37,15 @@ var setTokenSentToServer = (sent) => {
 if (!isSafari()) {
     const configKeys = [
         topicKey,
+
         serverAPIKey,
-        messagingIdKey,
-        authDomainKey,
-        databaseUrlKey,
-        projectIdKey,
-        appIdKey,
+
         webAPIKeyKey,
+        authDomainKey,
+        projectIdKey,
+        databaseUrlKey,
+        messagingIdKey,
+        appIdKey,
     ];
 
     // let url = `${window.config.app_base_url}api/v1/core-configs?_config=[${topicKey},${serverAPIKey},${messagingIdKey},${authDomainKey},${databaseUrlKey},${projectIdKey},${appIdKey},${webAPIKeyKey},]`;
@@ -49,9 +53,8 @@ if (!isSafari()) {
     const params = new URLSearchParams();
     configKeys.forEach((key) => params.append("_config[]", key));
 
-    let url = `${
-        window.config.app_base_url
-    }api/v1/core-configs?${params.toString()}`;
+    let url = `${window.config.app_base_url
+        }api/v1/core-configs?${params.toString()}`;
 
     fetch(url, {
         method: "GET",
@@ -63,16 +66,17 @@ if (!isSafari()) {
         .then((response) => response.json())
         .then((response) => {
             serverAPI = response.data[serverAPIKey];
+            topic = response.data[topicKey];
+
+            webAPIKey = response.data[webAPIKeyKey];
             authDomain = response.data[authDomainKey];
             projectId = response.data[projectIdKey];
             databaseUrl = response.data[databaseUrlKey];
             messagingId = response.data[messagingIdKey];
             appId = response.data[appIdKey];
-            topic = response.data[topicKey];
-            webAPIKey = response.data[webAPIKeyKey];
 
             const firebaseConfig = {
-                apiKey: serverAPI,
+                apiKey: webAPIKey,
                 authDomain: authDomain,
                 projectId: projectId,
                 storageBucket: databaseUrl,
@@ -80,12 +84,14 @@ if (!isSafari()) {
                 appId: appId,
             };
 
+            console.log('firebaseConfig', firebaseConfig);
+
+
             // Initialize Firebase App
             const app = initializeApp(firebaseConfig);
             const messaging = getMessaging(app);
 
             Notification.requestPermission().then((permission) => {
-                console.log("log in notificaiton", permission);
 
                 if (permission === "granted") {
                     console.log("Notification permission granted.");
@@ -131,6 +137,8 @@ function retriveCurrentToken(messaging) {
     })
         .then((currentToken) => {
             if (currentToken) {
+                console.log('current toketn', currentToken);
+
                 sendTokenToServer(currentToken);
                 subscribeToTopic(currentToken);
             } else {
@@ -175,9 +183,9 @@ function subscribeToTopic(currentToken) {
             if (response.status < 200 || response.status >= 400) {
                 throw new Error(
                     "Error subscribing to topic: " +
-                        response.status +
-                        " - " +
-                        response.statusText,
+                    response.status +
+                    " - " +
+                    response.statusText,
                 );
             }
             console.log('Subscribed to "' + topic + '"');

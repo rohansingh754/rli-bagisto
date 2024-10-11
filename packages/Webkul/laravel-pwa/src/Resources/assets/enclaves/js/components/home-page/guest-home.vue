@@ -8,7 +8,7 @@
                         <image-component
                             :src="themeAssets + 'images/joy-icon.png'"
                             :alt="'joy'"
-                            :class="''"
+                            :class="'fixed right-[20px] top-[100px] z-[999]'"
                             >
                         </image-component>
                     </span>
