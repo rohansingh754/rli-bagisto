@@ -21,7 +21,9 @@ class PushNotificationController extends Controller
      *
      * @return void
      */
-    public function __construct(protected PushNotificationRepository $pushNotificationRepository) {}
+    public function __construct(protected PushNotificationRepository $pushNotificationRepository)
+    {
+    }
 
     /**
      * Display a listing of the resource.
@@ -127,15 +129,12 @@ class PushNotificationController extends Controller
     public function pushToFirebase($id)
     {
         $topic = core()->getConfigData('pwa.settings.push-notification.topic');
-        // $serverKey = core()->getConfigData('pwa.settings.push-notification.api-key');
-        $serverKey = core()->getConfigData('pwa.settings.push-notification.web-api-key');
-
+        $serverKey = core()->getConfigData('pwa.settings.push-notification.api-key');
 
         if ($topic && $serverKey) {
             $pushNotification = $this->pushNotificationRepository->findOrFail($id);
 
-            $fcmUrl = 'https://fcm.googleapis.com/fcm/send';
-
+            $fcmUrl = 'https://fcm.googleapis.com/v1/messages:send';
             $headers = [
                 'Content-Type'  => 'application/json',
                 'Authorization' => "Bearer {$serverKey}",

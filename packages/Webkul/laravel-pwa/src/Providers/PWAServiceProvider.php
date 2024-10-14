@@ -3,10 +3,6 @@
 namespace Webkul\PWA\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use Webkul\RestApi\Http\Controllers\V1\Shop\Catalog\ProductController as BaseProductController;
-use Webkul\PWA\Http\Controllers\Restapi\Shop\Catalog\ProductController;
-use Webkul\RestApi\Http\Controllers\V1\Shop\Customer\AuthController as BaseAuthController;
-use Webkul\PWA\Http\Controllers\Restapi\Shop\Customer\AuthController;
 
 class PWAServiceProvider extends ServiceProvider
 {
@@ -22,9 +18,6 @@ class PWAServiceProvider extends ServiceProvider
         $this->app->register(EventServiceProvider::class);
 
         $this->app->register(ModuleServiceProvider::class);
-
-        $this->app->bind(BaseProductController::class, ProductController::class);
-        $this->app->bind(BaseAuthController::class, AuthController::class);
 
         $this->loadMigrationsFrom(__DIR__ . '/../Database/Migrations');
 

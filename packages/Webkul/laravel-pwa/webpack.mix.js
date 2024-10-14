@@ -4,39 +4,27 @@ require("laravel-mix-merge-manifest");
 if (mix.inProduction()) {
     var publicPath = "publishable/assets";
 } else {
-    var publicPath = "../../../public/themes/pwa/build/assets";
+    var publicPath = "../../../public/themes/pwa/default/build/assets";
 }
 
 mix.setPublicPath(publicPath).mergeManifest();
 mix.disableNotifications();
 
-mix.js(path.resolve("src/Resources/assets/default/js/app.js"), "default/js/app.js")
+mix.js(path.resolve("src/Resources/assets/js/app.js"), "js/app.js")
     .webpackConfig({
         resolve: {
             alias: {
-                "@": path.resolve("src/Resources/assets/default/sass"),
+                "@": path.resolve("src/Resources/assets/sass"),
             },
         },
     })
-    .copy(path.resolve("src/Resources/assets/default/images"), publicPath + "/default/images")
-    .sass(path.resolve("src/Resources/assets/default/sass/app.scss"), "default/css/pwa.css")
-    .js(path.resolve("src/Resources/assets/enclaves/js/app.js"), "enclaves/js/app.js")
-    .webpackConfig({
-        resolve: {
-            alias: {
-                "@": path.resolve("src/Resources/assets/enclaves/sass"),
-            },
-        },
-    })
-    .copy(path.resolve("src/Resources/assets/enclaves/images"), publicPath + "/enclaves/images")
-    .sass(path.resolve("src/Resources/assets/enclaves/sass/app.scss"), "enclaves/css/pwa.css")
-    .sass(path.resolve("src/Resources/assets/enclaves/sass/enclave.scss"), "enclaves/css/enclave.css")
-    .copy(path.resolve("src/Resources/assets/enclaves/fonts"), publicPath + "/enclaves/fonts")
+    .copy(path.resolve("src/Resources/assets/images"), publicPath + "/images")
     .copy(path.resolve("src/Resources/assets/firebase"), "../../../public/")
     .sass(
-        __dirname + "/src/Resources/assets/default/sass/admin.scss",
+        __dirname + "/src/Resources/assets/sass/admin.scss",
         "css/pwa-admin.css",
     )
+    .sass(path.resolve("src/Resources/assets/sass/app.scss"), "css/pwa.css")
     .options({
         processCssUrls: false,
     });

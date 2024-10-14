@@ -17,7 +17,7 @@ return [
             'messagingId'                         => 'Messaging Id',
             'api-key'                             => 'API Key',
             'auth-domain'                         => 'AUTH DOMAIN',
-            'database-url'                        => 'DATABASE URL (Storage Bucket)',
+            'database-url'                        => 'DATABASE URL',
             'project-id'                          => 'PROJECT ID',
             'app-id'                              => 'APP ID',
             'public-vapid-key'                    => 'PUBLIC VAPID Key',

@@ -26,14 +26,6 @@ class SinglePageController extends Controller
         $result = new Parser(request()->header('User-Agent'));
         $device = $result->device;
 
-        $view = 'pwa::shop.default.master';
-
-        $channel = core()->getCurrentChannel();
-
-        if ($channel->theme === 'enclaves') {
-            $view = 'pwa::shop.enclaves.master';
-        }
-
-        return view($view, compact('urlPath', 'device'));
+        return view('pwa::master', compact('urlPath', 'device'));
     }
 }

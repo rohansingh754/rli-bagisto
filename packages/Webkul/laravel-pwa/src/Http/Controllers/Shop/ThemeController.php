@@ -4,7 +4,6 @@ namespace Webkul\PWA\Http\Controllers\Shop;
 
 use Webkul\PWA\Http\Controllers\Controller;
 use Webkul\Theme\Repositories\ThemeCustomizationRepository;
-use Webkul\Blog\Http\Controllers\Shop\BlogController;
 
 class ThemeController extends Controller
 {
@@ -15,9 +14,9 @@ class ThemeController extends Controller
      * @return void
      */
     public function __construct(
-        protected ThemeCustomizationRepository $themeCustomizationRepository,
-        protected BlogController $blogController
-    ) {}
+        protected ThemeCustomizationRepository $themeCustomizationRepository
+    ) {
+    }
 
     /**
      * Get carousel images.
@@ -31,15 +30,5 @@ class ThemeController extends Controller
         ]);
 
         return $sliders->options;
-    }
-
-    /**
-     * Get carousel images.
-     */
-    public function newAndUpadteList()
-    {
-        $list = $this->blogController->blogFrontEnd();
-
-        return $list;
     }
 }
