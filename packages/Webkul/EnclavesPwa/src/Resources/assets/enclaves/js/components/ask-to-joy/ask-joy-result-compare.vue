@@ -8,38 +8,38 @@
 			<!-- fixed sidebar -->
 			 <div class="absolute bottom-0 left-0 top-0 z-10 w-[92px]">
 				<div class="flex h-[212px] items-center justify-center border-[1px] border-[#EEEEEE] bg-[#F3F4F6] px-2">
-					<p class="text-[12px] font-normal text-dark">Models</p>
+					<p class="text-[12px] font-normal text-dark">{{ $t('Models') }}</p>
 				</div>
 				<ul class="">
 					<li class="flex h-[65px] items-center justify-center overflow-hidden border-[1px] border-[#EEEEEE] bg-[#F3F4F6] px-[6px]">
-						<p class="text-[12px] font-normal text-dark">Location</p>
+						<p class="text-[12px] font-normal text-dark">{{ $t('Location') }}</p>
 					</li>
 					<li class="flex h-[65px] items-center justify-center overflow-hidden border-[1px] border-[#EEEEEE] bg-[#F3F4F6] px-[6px]">
-						<p class="text-[12px] font-normal text-dark">Price <br>Starts at</p>
+						<p class="text-[12px] font-normal text-dark">{{ $t('Price') }} <br>{{ $t('Starts at') }}</p>
 					</li>
 					<li class="flex h-[65px] items-center justify-center overflow-hidden border-[1px] border-[#EEEEEE] bg-[#F3F4F6] px-[6px]">
-						<p class="text-[12px] font-normal text-dark">Monthly Budget</p>
+						<p class="text-[12px] font-normal text-dark">{{ $t('Monthly Budget') }}</p>
 					</li>
 					<li class="flex h-[65px] items-center justify-center overflow-hidden border-[1px] border-[#EEEEEE] bg-[#F3F4F6] px-[6px]">
-						<p class="text-[12px] font-normal text-dark">Financing</p>
+						<p class="text-[12px] font-normal text-dark">{{ $t('Financing') }}</p>
 					</li>
 					<li class="flex h-[65px] items-center justify-center overflow-hidden border-[1px] border-[#EEEEEE] bg-[#F3F4F6] px-[6px]">
-						<p class="text-[12px] font-normal text-dark">Required <br>Gross Income</p>
+						<p class="text-[12px] font-normal text-dark">{{ $t('Required') }} <br>{{ $t('Gross Income') }}</p>
 					</li>
 					<li class="flex h-[65px] items-center justify-center overflow-hidden border-[1px] border-[#EEEEEE] bg-[#F3F4F6] px-[6px]">
-						<p class="text-[12px] font-normal text-dark">Product <br>Segment</p>
+						<p class="text-[12px] font-normal text-dark">{{ $t('Product') }} <br>{{ $t('Segment') }}</p>
 					</li>
 					<li class="flex h-[65px] items-center justify-center overflow-hidden border-[1px] border-[#EEEEEE] bg-[#F3F4F6] px-[6px]">
-						<p class="text-[12px] font-normal text-dark">Unit Type <br>(finish)</p>
+						<p class="text-[12px] font-normal text-dark">{{ $t('Unit Type') }} <br>({{ $t('finish') }})</p>
 					</li>
 					<li class="flex h-[65px] items-center justify-center overflow-hidden border-[1px] border-[#EEEEEE] bg-[#F3F4F6] px-[6px]">
-						<p class="text-[12px] font-normal text-dark">Floor Area</p>
+						<p class="text-[12px] font-normal text-dark">{{ $t('Floor Area') }}</p>
 					</li>
 					<li class="flex h-[65px] items-center justify-center overflow-hidden border-[1px] border-[#EEEEEE] bg-[#F3F4F6] px-[6px]">
-						<p class="text-[12px] font-normal text-dark">Lot Area</p>
+						<p class="text-[12px] font-normal text-dark">{{ $t('Lot Area') }}</p>
 					</li>
 					<li class="flex h-[80px] items-center justify-center overflow-hidden border-[1px] border-[#EEEEEE] bg-[#F3F4F6] px-[6px]">
-						<p class="text-[12px] font-normal text-dark">Feature</p>
+						<p class="text-[12px] font-normal text-dark">{{ $t('Feature') }}</p>
 					</li>
 				</ul>
 			 </div>
@@ -138,10 +138,8 @@
 
 		mounted() {
 			// Get ask to joy filters
-
 			this.productIds = this.$route.query.ids || [];
 			this.getProducts();
-
 		},
 
 		created() {
@@ -161,9 +159,6 @@
 
                 if (response.data.data) {
 					this.products = response.data.data
-
-					console.log(this.products);
-
                 }
 
                 EventBus.$emit('hide-ajax-loader');

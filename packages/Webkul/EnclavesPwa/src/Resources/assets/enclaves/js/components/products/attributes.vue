@@ -1,6 +1,10 @@
 <template>
-    <div class="mt-8">
-        <h2 class="text-[15px] font-medium text-dark">House Features</h2>
+    <div
+        class="mt-8"
+        v-if="viewableAttributes.length"
+        >
+        <h2 class="text-[15px] font-medium text-dark">{{ $t('House Features') }}
+        </h2>
         <div class="rounded-[20px] bg-[#F4F8FF]">
             <div
                 v-for="(attribute, index) in viewableAttributes"
@@ -36,6 +40,7 @@
         },
 
         mounted () {
+
             this.getProductAdditinalInformation(this.product.id);
         },
 
@@ -47,9 +52,9 @@
 
                 this.$http.get('/api/v1/products/'+productId+'/additional-information')
                     .then(function(response) {
-
-                        this_this.viewableAttributes = response.data.data;
-
+                        this_this.viewableAttributes = response.data.data.filter(attr => {
+                            return attr.value != null;
+                        });
                     })
                     .catch(function (error) {});
 

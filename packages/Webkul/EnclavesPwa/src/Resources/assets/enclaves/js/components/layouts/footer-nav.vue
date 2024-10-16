@@ -3,21 +3,25 @@
         <footer
             class="relative pt-[89px]">
             <div class="container">
-                <p class="text-[14px] font-bold text-dark">Talk to Us</p>
+                <p class="text-[14px] font-bold text-dark">{{ $t('Talk to Us') }}
+                </p>
                 <div class="before:contents='' z-10 before:absolute before:bottom-0 before:left-0 before:right-0 before:z-[-1] before:h-[298px] before:bg-cover before:bg-no-repeat">
                     <div class="">
                         <div class="mt-[25px] flex items-center gap-[18px]">
                             <span class="icon-email text-[38px] text-primary"></span>
                             <a class="text-[18px] font-normal text-black"
-                                href="mailto:sample@email.com">sample@email.com</a>
+                                href="mailto:sample@email.com">{{ $t('sample@email.com') }}
+                                </a>
                         </div>
                         <div class="mt-[17px] flex items-center gap-[18px]">
                             <span class="icon-contact text-[38px] text-primary"></span>
-                            <a class="text-[18px] font-normal text-black" href="phone:+63 9456677654">+63 9456677654</a>
+                            <a class="text-[18px] font-normal text-black" href="phone:+63 9456677654">{{ $t('+63 9456677654') }}
+                            </a>
                         </div>
                     </div>
                     <div class="mt-[24px]">
-                        <p class="text-[17px] font-bold text-dark"> Talk to Us </p>
+                        <p class="text-[17px] font-bold text-dark"> {{ $t('Talk to Us') }}
+                         </p>
                         <div class="mt-4 flex gap-5">
                             <div class="h-fit rounded-full !bg-gradient-to-r from-[#e0165d] to-yellow-500 p-[10px]">
                                 <a href="#" alt="facebook">
@@ -54,8 +58,10 @@
             <div
                 class="mt-5 bg-[linear-gradient(268.1deg,_#CC035C_7.47%,_#FCB115_98.92%)] py-5">
                 <div class="container">
-                    <p class="text-[12px] font-medium text-white"> © Copyright 2024 - 2025, Homeful.<br>
-                        All rights reserved.</p>
+                    <p class="text-[12px] font-medium text-white"> {{ $t('© Copyright 2024 - 2025, Homeful.') }}
+                    <br>
+                       {{ $t('All rights reserved.') }}
+                       </p>
                 </div>
             </div>
         </footer>

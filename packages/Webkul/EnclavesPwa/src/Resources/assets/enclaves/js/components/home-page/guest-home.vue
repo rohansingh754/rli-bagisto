@@ -3,7 +3,7 @@
     	<section class="homeful-hero-slider">
             <div class="container">
                 <div class="mt-5 flex items-center justify-between">
-                    <h1 class="text-[20px] font-bold text-dark" >Featured Projects</h1>
+                    <h1 class="text-[20px] font-bold text-dark" >{{ $t('Featured Projects') }} </h1>
                     <span @click="handleToggleDrawerUP('askToJoy')">
                         <image-component
                             :src="themeAssets + 'images/joy-icon.png'"
@@ -37,7 +37,8 @@
                                 </div>
                                 <router-link :to="'/products/' + item.id">
                                 <button href="./product.html" class="flex items-center gap-2 rounded-full bg-[linear-gradient(268.1deg,_#CC035C_7.47%,_#FCB115_98.92%)] px-4 py-[14px] text-center text-[15px] font-medium text-white max-385:px-3 max-385:text-[13px]">
-                                    View Project
+                                    {{ $t('View Project') }}
+
                                     <span class="icon-arrow-right-stylish inline-block text-[24px] max-385:text-[16px]"></span>
                                     </button>
                                 </router-link>
@@ -45,11 +46,13 @@
                         </div>
                         <div class="mt-6 flex items-center justify-between gap-[16px]">
                             <div class="">
-                                <p class="text-[12px] font-normal text-text-gray">Starts at</p>
+                                <p class="text-[12px] font-normal text-text-gray">{{ $t('Starts at') }}
+                                </p>
                                 <p class="homefull-text-gradient mt-[5px] text-[20px] font-bold leading-5">{{item.formatted_price}}</p>
                             </div>
                             <div class="w-[127px]">
-                                <p class="text-[12px] font-normal text-text-gray">Total Sold</p>
+                                <p class="text-[12px] font-normal text-text-gray">{{ $t('Total Sold') }}
+                                </p>
                                 <p class="mt-[5px] text-[20px] font-bold leading-5 text-black">200+</p>
                             </div>
                             <div class="">
@@ -62,7 +65,8 @@
                             </div>
                         </div>
                         <div class="mt-6">
-                            <p class="text-[12px] font-normal text-text-gray">Product type</p>
+                            <p class="text-[12px] font-normal text-text-gray">{{ $t('Product type') }}
+                            </p>
                             <p class="mt-[5px] text-[15px] font-normal text-black">{{truncateText(stripTags(item.description), 95)}}</p>
                         </div>
                     </div>
@@ -100,7 +104,8 @@
         <!-- section our brands (Categories) -->
         <section class="pt-9">
             <div class="container">
-                <h2 class="text-[20px] font-bold text-dark">Our Brands</h2>
+                <h2 class="text-[20px] font-bold text-dark">{{ $t('Our Brands') }}
+                </h2>
                 <div class="mt-3 grid grid-cols-3 gap-[9px]">
                     <category-card v-for="category in categories" :key='category.uid' :category="category"></category-card>
                 </div>
@@ -112,12 +117,14 @@
         <section class="relative mt-[76px] bg-[linear-gradient(268.1deg,_#CC035C_7.47%,_#FCB115_98.92%)] pb-[30px] pt-[30px]">
             <div class="container">
                 <div class="w-[184px]">
-                    <h2 class="text-[22px] font-bold leading-[26px] text-white">Looking for a home that suits you? Ask Joy</h2>
+                    <h2 class="text-[22px] font-bold leading-[26px] text-white">{{ $t('Looking for a home that suits you? Ask Joy') }}
+                    </h2>
                     <span
                         @click="handleToggleDrawerUP('askToJoy')"
                         class="mt-2 inline-block rounded-full bg-white px-9 py-4 text-center text-[14px] font-normal text-primary"
                         >
-                        Ask Joy
+                        {{ $t('Ask Joy') }}
+
                     </span>
                     <image-component
                         :src="themeAssets + 'images/ask-joy.png'"
@@ -133,7 +140,8 @@
         <!-- section partners -->
         <section v-if="partners.length" :class="'bg-[url(' + themeAssets + 'images/bg-image.png)] pt-[60px]'">
             <div class="container">
-                <h2 class="text-[20px] font-bold text-dark">Partner with us</h2>
+                <h2 class="text-[20px] font-bold text-dark">{{ $t('Partner with us') }}
+                </h2>
                 <div class="scrollbar-hide mt-8 w-full overflow-auto">
                     <div class="flex w-[max-content] gap-4" @click="handleToggleDrawerUP('partners')">
                         <partner-card v-for="(partner, index) in partners" :key="index" :partner="partners"></partner-card>
@@ -143,13 +151,15 @@
         </section>
         <!-- section partners end-->
 
-        <!-- section celebration (New and Updates)-->
+        <!-- section News and Events. (New and Updates)-->
         <section class="pt-[60px]" v-if="newses.length">
             <div class="container">
                 <div class="flex items-center justify-between gap-[10px]">
-                    <h2 class="text-[20px] font-bold text-dark">Celebrations</h2>
+                    <h2 class="text-[20px] font-bold text-dark">{{ $t('News and Events.') }}
+                    </h2>
                     <router-link :to="'/newses'">
-                        <button class="inline-block rounded-full px-[7px] py-[9px] text-center font-mont text-[14px] font-semibold text-primary underline">View All</button>
+                        <button class="inline-block rounded-full px-[7px] py-[9px] text-center font-mont text-[14px] font-semibold text-primary underline">{{ $t('View All') }}
+                        </button>
                     </router-link>
                 </div>
                 <div class="scrollbar-hide mt-[33px] w-full overflow-auto">
@@ -159,7 +169,7 @@
                 </div>
             </div>
         </section>
-        <!-- section celebration end-->
+        <!-- section News and Events. end-->
 
         <div class="panel" style="margin-bottom: 0">
             <div class="panel-content">
@@ -241,7 +251,6 @@
             this.getPage(this.pages);
 
             this.getNews();
-
         },
 
         methods: {

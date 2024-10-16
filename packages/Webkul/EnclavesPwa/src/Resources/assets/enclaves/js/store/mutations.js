@@ -56,7 +56,6 @@ const GET_CART = (state) => {
     if (!state.token) {
         state.token = token;
     }
-    console.log("token", token);
 
     if (token) {
         Vue.prototype.$http.defaults.headers.common[
@@ -66,7 +65,6 @@ const GET_CART = (state) => {
         Vue.prototype.$http
             .get("/api/v1/customer/cart")
             .then((response) => {
-                console.log("cart", response);
 
                 state.cart = response.data.data;
                 state.pagination = response.data.meta;

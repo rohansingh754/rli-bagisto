@@ -14,8 +14,10 @@
             </p>
         </div>
 
-        <router-link :to="'/categories/' + category.id">
-            <button class="mt-5 inline-block w-full rounded-full border-[.5px] border-primary px-[5px] py-2 text-center font-poppins text-[7px] font-medium text-primary">Visit Store</button>
+        <router-link
+        :to="{ name: 'category', params: { id: category.id, drawerKey:'storeDetails' } }"
+        >
+            <button class="mt-5 inline-block w-full rounded-full border-[.5px] border-primary px-[5px] py-2 text-center font-poppins text-[7px] font-medium text-primary">{{ $t('Visit Store') }}</button>
         </router-link>
     </div>
 </template>

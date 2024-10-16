@@ -1,7 +1,7 @@
 <template>
     <div>
     <!-- breadcrumb -->
-		<breadcrumb :links="breadcrumbLinks" ></breadcrumb>
+	<breadcrumb :links="breadcrumbLinks" ></breadcrumb>
 	<!-- breadcrumb end -->
 
 	<cms-page-view v-if="cmsPage" :page="cmsPage"></cms-page-view>

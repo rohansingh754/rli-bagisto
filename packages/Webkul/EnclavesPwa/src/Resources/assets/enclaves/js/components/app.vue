@@ -1,9 +1,9 @@
 <template>
     <div id="app-inner">
         <!-- header -->
-        <welcome-model v-if="this.$router.currentRoute.path == '/'"></welcome-model>
+        <welcome-model v-if="this.$route.params.welcomeModel"></welcome-model>
 
-        <header class="sticky top-0 z-[999] bg-white border-b-[1px] border-[#E9E9E9]">
+        <header class="ticky top-0 z-[999] border-b-[1px] border-[#E9E9E9] bg-white">
             <div class="container px-[18px] py-6">
                 <div class="flex items-center justify-between">
                     <div class="homeful-toggler cursor-pointer py-[10px] pr-4">
@@ -13,7 +13,7 @@
                             >
                         </span>
                     </div>
-                    <router-link :to="'/'">
+                    <router-link :to="{ name: 'home', params: { welcomeModel: true } }">
                         <span class="homeful-logo mr-auto">
                             <img :src="themeAssets + 'images/logo.png'" alt="homeful">
                         </span>
@@ -48,16 +48,16 @@
                                 <span class="icon-cancel text-[14px] text-[#989898]"></span>
                             </span>
                         </div>
-                        <router-link :to="'/customer/login-register'" class="login-info" v-if="! currentUser">
+                        <!-- <router-link :to="'/customer/login-register'" class="login-info" v-if="! currentUser">
 
-                            <a href="#" class="mt-10 flex items-center gap-[10px] rounded-[11px] border-[1px] border-[#F5F5F5] px-[13px] py-3 text-[14px] font-medium text-dark">
+                            <span href="#" class="mt-10 flex items-center gap-[10px] rounded-[11px] border-[1px] border-[#F5F5F5] px-[13px] py-3 text-[14px] font-medium text-dark">
                                 <span class="flex h-[45px] w-[45px] items-center justify-center rounded-full bg-[#F5F5F5]">
                                     <svg width="17" height="21" viewBox="0 0 17 21" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M8.5 0C5.57536 0 3.1875 2.35977 3.1875 5.25C3.1875 8.14023 5.57536 10.5 8.5 10.5C11.4246 10.5 13.8125 8.14023 13.8125 5.25C13.8125 2.35977 11.4246 0 8.5 0ZM2.39062 12.6C1.0791 12.6 0 13.6664 0 14.9625V15.5928C0 17.1363 0.99056 18.5213 2.5013 19.4729C4.01204 20.4258 6.08032 21 8.5 21C10.9197 21 12.988 20.4258 14.4987 19.4729C16.0094 18.5213 17 17.1363 17 15.5928V14.9625C17 13.6664 15.9209 12.6 14.6094 12.6H2.39062Z" fill="#C4C4C4"/>
                                         </svg>
                                 </span> Login My Account
-                            </a>
-                        </router-link>
+                            </span>
+                        </router-link> -->
                         <div
                             v-if="currentUser"
                             class="mt-10 flex items-center gap-[10px] rounded-[20px] bg-[#F3F4F6] px-8 py-5 text-[14px] font-medium text-dark max-385:flex-col max-385:items-start max-385:px-4">
@@ -69,14 +69,17 @@
                             <div class="">
                                 <p class="text-[24px] font-normal leading-none text-dark">{{currentUser.name}}</p>
                                 <p class="mt-2 text-[14px] font-normal text-text-gray">{{currentUser.email}}</p>
-                                <a href="#" class="mt-2 text-[15px] font-normal text-primary">View Profile</a>
+                                <a href="#" class="mt-2 text-[15px] font-normal text-primary">{{ $t('View Profile') }}
+                                </a>
                             </div>
                         </div>
                         <div class="mt-8 grid gap-[29px]">
                             <div class="border-b-[1px] border-[#E2E2E2] pb-5">
-                                <router-link :to="'/'" class="text-[17px] font-medium text-dark decoration-black">
-                                    <span v-if="! currentUser"> Home </span>
-                                    <span v-if="currentUser"> Homepage </span>
+                                <router-link
+                                    :to="{ name: 'home', params: { welcomeModel: true } }"
+                                    class="text-[17px] font-medium text-dark decoration-black">
+                                    <span> {{ $t('Home') }}
+                                     </span>
                                 </router-link>
                             </div>
                             <div
@@ -87,7 +90,8 @@
                                     :to="'/pages/about-us'"
                                     class="text-[17px] font-medium text-dark"
                                     >
-                                    About Us
+                                    {{ $t('About Us') }}
+
                                 </router-link>
                             </div>
                             <div
@@ -98,23 +102,18 @@
                                     @click="handleToggleDrawerUP('askToJoy')"
                                     class="text-[17px] font-medium text-dark"
                                     >
-                                    Ask Joy
+                                    {{ $t('Ask Joy') }}
                                 </span>
                             </div>
                             <div
                                 v-if="! currentUser"
-                                class="homeful-submenu border-b-[1px] border-[#E2E2E2] pb-5"
+                                class="homeful-submenu border-b-[1px] border-[#E2E2E2] pb-5 text-[17px] font-medium text-dark"
+                                @click="categoryAccordian = !categoryAccordian"
                                 >
-                                <button class="text-[17px] font-medium text-dark">
-                                    <!-- <router-link :to="'/categories'"> -->
-                                        Our Brands
-                                    <!-- </router-link> -->
-                                    <span
-                                        class="icon-arrow-down float-right mt-[-4px] flex h-[29px] w-[29px] items-center justify-center rounded-full border-[1px] border-[#EDEFF5] text-[24px] text-primary"
-                                        @click="categoryAccordianToggle()"
+                                    {{ $t('Our Brands') }}
+                                    <span class="icon-arrow-down float-right mt-[-4px] flex h-[29px] w-[29px] items-center justify-center rounded-full border-[1px] border-[#EDEFF5] text-[24px] text-primary"
                                         >
                                     </span>
-                                </button>
                                 <div
                                     v-if="categoryAccordian"
                                     class="homeful-submenu-wrap mt-5 gap-[29px] border-t-[1px] border-[#E2E2E2] pl-5 pt-[29px]"
@@ -133,7 +132,8 @@
                                     :to="'/pages/join-us'"
                                     class="text-[17px] font-medium text-dark"
                                     >
-                                    Partner with us
+                                    {{ $t('Partner with us') }}
+
                                 </router-link>
                             </div>
                             <div
@@ -144,7 +144,8 @@
                                     :to="'/newses'"
                                     class="text-[17px] font-medium text-dark"
                                     >
-                                    Celebrations
+                                    {{ $t('Celebrations') }}
+
                                 </router-link>
                             </div>
                             <div
@@ -155,7 +156,8 @@
                                     :to="'/pages/contact-us'"
                                     class="text-[17px] font-medium text-dark"
                                     >
-                                    Talk to Us
+                                    {{ $t('Talk to Us') }}
+
                                 </router-link>
                             </div>
                             <div
@@ -166,7 +168,8 @@
                                     :to="'/customer/account/my-profile'"
                                     class="text-[17px] font-medium text-dark"
                                     >
-                                    My Profile
+                                    {{ $t('My Profile') }}
+
                                 </router-link>
                             </div>
                             <div
@@ -177,7 +180,8 @@
                                     :to="'/customer/account/my-properties'"
                                     class="text-[17px] font-medium text-dark"
                                     >
-                                    My Property
+                                    {{ $t('My Property') }}
+
                                 </router-link>
                             </div>
                             <div
@@ -188,7 +192,8 @@
                                     :to="'/customer/account/support'"
                                     class="text-[17px] font-medium text-dark"
                                     >
-                                    Support
+                                    {{ $t('Support') }}
+
                                 </router-link>
                             </div>
                             <div
@@ -199,7 +204,8 @@
                                     @click="logout"
                                     class="text-[17px] font-medium text-dark"
                                     >
-                                    Logout
+                                    {{ $t('Logout') }}
+
                                 </button>
                             </div>
                         </div>
@@ -286,11 +292,10 @@
             SignAllDrawer,
         },
 
-
         data () {
 			return {
                 categories: [],
-                categoryAccordian: 0,
+                categoryAccordian: true,
                 subCategories: {},
                 locales: window.config.locales,
                 currencies: window.config.currencies,
@@ -379,6 +384,10 @@
         watch: {
             $route (to, from) {
                 this.$refs.drawer.close();
+
+                if (this.$route.params.drawerKey) {
+                    this.handleToggleDrawerUP(this.$route.params.drawerKey)
+                }
             }
         },
 
@@ -506,8 +515,6 @@
 
                 this.drawersUp[key].status = 1;
 
-                // EventBus.$emit('drawer-up-heigth-update', this.drawersUp[key].ref.offsetHeight);
-
                 EventBus.$emit('drawer-up-toggle');
             },
 
@@ -525,7 +532,7 @@
                 } else{
                     this.categoryAccordian = 1;
                 }
-            }
+            },
         }
     }
 </script>

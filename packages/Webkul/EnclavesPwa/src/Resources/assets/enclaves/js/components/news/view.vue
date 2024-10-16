@@ -10,8 +10,10 @@
 		<div class="container">
 			<h1 class="mt-6 text-[20px] font-bold text-dark"> {{news.name}} </h1>
 			<div class="mt-5">
-				<p class="text-normal font-mont text-[12px] text-dark">Author: {{news.author}}</p>
-				<p class="text-normal mt-1 font-mont text-[12px] text-dark">Date published: {{news.post_date}}</p>
+				<p class="text-normal font-mont text-[12px] text-dark">{{ $t('Author:') }}
+                 {{news.author}}</p>
+				<p class="text-normal mt-1 font-mont text-[12px] text-dark">{{ $t('Date published:') }}
+                 {{news.post_date}}</p>
 			</div>
 			<p class="mt-6 text-[12px] font-normal text-dark">
                 {{stripTags(news.description)}}
@@ -22,7 +24,8 @@
 
 	<!-- section related post -->
 	<section class="pl-4 pt-[76px]">
-		<h3 class="text-[14px] font-semibold text-dark">Check out our other news & updates</h3>
+		<h3 class="text-[14px] font-semibold text-dark">{{ $t('Check out our other news & updates') }}
+        </h3>
 		<div class="scrollbar-hide mt-7 w-full overflow-auto">
 			<div class="flex w-[max-content] gap-[14px]">
 				<news-card v-for="(news, index) in newses" :key="index" :news="news" :textTruncate="175"></news-card>
@@ -72,7 +75,8 @@
                 ],
                 news:{},
                 newsId: this.$route.params.id,
-                newses:[],
+                newses: [],
+                exceptsIds:[this.$route.params.id],
 			}
         },
 
@@ -98,7 +102,12 @@
             async getnewses(){
                 EventBus.$emit('show-ajax-loader');
 
-                const response = await this.$http.get("/api/pwa/news-list", {params: {limit: 10}});
+                const response = await this.$http.get("/api/pwa/news-list", {
+                    params: {
+                        limit: 10,
+                        id: this.newsId,
+                    }
+                });
 
                 if (response.data.data) {
                     this.newses = response.data.data

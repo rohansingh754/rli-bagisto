@@ -68,7 +68,7 @@ if (!isSafari()) {
 
             Notification.requestPermission().then((permission) => {
                 if (permission === "granted") {
-                    console.log("Notification permission granted.");
+                    // console.log("Notification permission granted.");
                     // Retrieve an Instance ID token for use with FCM
                     retriveCurrentToken(messaging);
                 } else {
@@ -77,7 +77,7 @@ if (!isSafari()) {
             });
 
             onMessage(messaging, (payload) => {
-                console.log("onMessage:", payload);
+                // console.log("onMessage:", payload);
 
                 const notificationTitle = payload.notification.title;
                 const notificationOptions = {
@@ -111,14 +111,14 @@ function retriveCurrentToken(messaging) {
                 sendTokenToServer(currentToken);
                 subscribeToTopic(currentToken);
             } else {
-                console.log(
-                    "No Instance ID token available. Request permission to generate one.",
-                );
+                // console.log(
+                //     "No Instance ID token available. Request permission to generate one.",
+                // );
                 setTokenSentToServer(false);
             }
         })
         .catch((err) => {
-            console.log("An error occurred while retrieving token. ", err);
+            // console.log("An error occurred while retrieving token. ", err);
             setTokenSentToServer(false);
         });
 }
@@ -126,9 +126,9 @@ function retriveCurrentToken(messaging) {
 // Send the Instance ID token to your application server
 function sendTokenToServer(currentToken) {
     if (!isTokenSentToServer()) {
-        console.log("Sending token to server...");
+        // console.log("Sending token to server...");
         setTokenSentToServer(true);
-        console.log("Token ID sent to server");
+        // console.log("Token ID sent to server");
     } else {
         console.log(
             "Token already sent to server so won't send it again unless it changes",
@@ -152,12 +152,12 @@ function subscribeToTopic(currentToken) {
             if (response.status < 200 || response.status >= 400) {
                 throw new Error(
                     "Error subscribing to topic: " +
-                        response.status +
-                        " - " +
-                        response.statusText,
+                    response.status +
+                    " - " +
+                    response.statusText,
                 );
             }
-            console.log('Subscribed to "' + topic + '"');
+            // console.log('Subscribed to "' + topic + '"');
         })
         .catch((error) => {
             console.log(error);

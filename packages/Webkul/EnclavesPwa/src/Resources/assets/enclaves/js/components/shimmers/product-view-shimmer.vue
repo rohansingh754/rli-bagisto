@@ -22,9 +22,9 @@
 	  <section class="mt-3">
 		<div class="container">
 			<div class="flex items-center justify-between gap-4 rounded-[20px] border border-[#D9D9D9] px-5 py-2 max-385:gap-2 max-385:px-3">
-				<div href="#" class="text-[12px] font-medium text-primary underline shimmer w-[102px] h-[34px]"></div>
-				<div href="#" class="text-[12px] font-medium text-primary underline shimmer w-[102px] h-[34px]"></div>
-				<div href="#" class="text-[12px] font-medium text-primary underline shimmer w-[55px] h-[18px]"></div>
+				<div href="#" class="text-[12px] font-medium text-primary underline shimmer w-[102px] h-[34px] rounded-[20px]"></div>
+				<div href="#" class="text-[12px] font-medium text-primary underline shimmer w-[102px] h-[34px] rounded-[20px]"></div>
+				<div href="#" class="text-[12px] font-medium text-primary underline shimmer w-[55px] h-[18px] rounded-[20px]"></div>
 			</div>
 		</div>
 	  </section>
@@ -38,35 +38,35 @@
 		</div>
 		<div class="scrollbar-hide mt-6 overflow-auto">
 			<div class="homeful-slider-thumbs flex w-[max-content] gap-3">
-				<div class="thumb active ml-5 w-[75px] cursor-pointer" data-slide="0">
+				<div class="thumb active ml-5 w-[75px] cursor-pointer rounded-[20px]">
 					<div class="shimmer w-[73px] h-[48px]"></div>
 					<p class="mt-[5px] shimmer w-[40px] h-[12px]"></p>
 				</div>
-				<div class="thumb active ml-5 w-[75px] cursor-pointer" data-slide="0">
+				<div class="thumb active ml-5 w-[75px] cursor-pointer rounded-[20px]">
 					<div class="shimmer w-[73px] h-[48px]"></div>
 					<p class="mt-[5px] shimmer w-[40px] h-[12px]"></p>
 				</div>
-				<div class="thumb active ml-5 w-[75px] cursor-pointer" data-slide="0">
+				<div class="thumb active ml-5 w-[75px] cursor-pointer rounded-[20px]">
 					<div class="shimmer w-[73px] h-[48px]"></div>
 					<p class="mt-[5px] shimmer w-[40px] h-[12px]"></p>
 				</div>
-				<div class="thumb active ml-5 w-[75px] cursor-pointer" data-slide="0">
+				<div class="thumb active ml-5 w-[75px] cursor-pointer rounded-[20px]">
 					<div class="shimmer w-[73px] h-[48px]"></div>
 					<p class="mt-[5px] shimmer w-[40px] h-[12px]"></p>
 				</div>
-				<div class="thumb active ml-5 w-[75px] cursor-pointer" data-slide="0">
+				<div class="thumb active ml-5 w-[75px] cursor-pointer rounded-[20px]">
 					<div class="shimmer w-[73px] h-[48px]"></div>
 					<p class="mt-[5px] shimmer w-[40px] h-[12px]"></p>
 				</div>
-				<div class="thumb active ml-5 w-[75px] cursor-pointer" data-slide="0">
+				<div class="thumb active ml-5 w-[75px] cursor-pointer rounded-[20px]">
 					<div class="shimmer w-[73px] h-[48px]"></div>
 					<p class="mt-[5px] shimmer w-[40px] h-[12px]"></p>
 				</div>
-				<div class="thumb active ml-5 w-[75px] cursor-pointer" data-slide="0">
+				<div class="thumb active ml-5 w-[75px] cursor-pointer rounded-[20px]">
 					<div class="shimmer w-[73px] h-[48px]"></div>
 					<p class="mt-[5px] shimmer w-[40px] h-[12px]"></p>
 				</div>
-				<div class="thumb active ml-5 w-[75px] cursor-pointer" data-slide="0">
+				<div class="thumb active ml-5 w-[75px] cursor-pointer rounded-[20px]">
 					<div class="shimmer w-[73px] h-[48px]"></div>
 					<p class="mt-[5px] shimmer w-[40px] h-[12px]"></p>
 				</div>
@@ -107,47 +107,23 @@
 	</div>
 
 	<!-- footer  -->
-	<footer
-	class="relative pt-[89px]">
-		<div class="container">
-			<p class="text-[14px] font-bold text-dark shimmer w-[67px] h-[21px]"></p>
-			<div class="">
-				<div class="">
-					<div class="mt-[25px] flex items-center gap-[18px]">
-						<a class="text-[18px] font-normal text-black shimmer w-[180px] h-[27px]"></a>
-					</div>
-					<div class="mt-[17px] flex items-center gap-[18px]">
-						<a class="text-[18px] font-normal text-black shimmer w-[180px] h-[27px]"></a>
-					</div>
-				</div>
-				<div class="mt-[24px]">
-					<p class="text-[14px] font-bold text-dark shimmer w-[67px] h-[21px]"></p>
-
-					<div class="mt-[15px] flex gap-[20px]">
-						<div class="rounded-full shimmer w-[40px] h-[40px]"></div>
-						<div class="rounded-full shimmer w-[40px] h-[40px]"></div>
-						<div class="rounded-full shimmer w-[40px] h-[40px]"></div>
-						<div class="rounded-full shimmer w-[40px] h-[40px]"></div>
-						<div class="rounded-full shimmer w-[40px] h-[40px]"></div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="mt-[20px] shimmer w-full h-[60px]"></div>
-	</footer>
+	<footer-shimmer></footer-shimmer>
+	<!-- end footer  -->
     </div>
 
 </template>
 
 <script>
 	import HeaderShimmer from "./header-shimmer";
+	import FooterShimmer from "./footer-shimmer";
 
     export default {
-	name: 'product-view-shimmer',
+		name: 'product-view-shimmer',
 
-	components: {
-		HeaderShimmer,
-	}
+		components: {
+			HeaderShimmer,
+			FooterShimmer,
+		}
     }
 </script>
 

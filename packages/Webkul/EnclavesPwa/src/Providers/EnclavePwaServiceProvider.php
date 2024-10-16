@@ -21,9 +21,11 @@ class EnclavePwaServiceProvider extends ServiceProvider
     {
         $this->loadRoutesFrom(__DIR__ . '/../Routes/web.php');
 
-        $this->app->bind(BaseProductController::class, ProductController::class);
-        $this->app->bind(BaseAuthController::class, AuthController::class);
-        $this->app->bind(BaseSinglePageController::class, SinglePageController::class);
+        if (core()->getConfigData('pwa.settings.general.status')) {
+            $this->app->bind(BaseProductController::class, ProductController::class);
+            $this->app->bind(BaseAuthController::class, AuthController::class);
+            $this->app->bind(BaseSinglePageController::class, SinglePageController::class);
+        }
 
         $this->loadViewsFrom(__DIR__ . '/../Resources/views', 'enclave-pwa');
 

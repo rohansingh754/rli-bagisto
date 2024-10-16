@@ -1,5 +1,5 @@
 @php
-    $themeAssetsPath = 'themes/enclave-pwa/build/assets/enclaves/';
+    $themeAssetsPath = 'themes/enclave-pwa/build/assets/';
 @endphp
 
 <!DOCTYPE html>
@@ -112,7 +112,7 @@
                 window.addEventListener('load', function() {
                     navigator.serviceWorker.register("{{ asset('service-worker.js') }}")
                         .then(function(registration) {
-                            console.log('ServiceWorker registration successful with scope: ', registration.scope);
+                            {{-- console.log('ServiceWorker registration successful with scope: ', registration.scope); --}}
 
                             let deferredPrompt;
 

@@ -17,6 +17,6 @@
 <script>
 
     export default {
-        name: 'header-shimmer',
+        name: 'footer-shimmer',
     }
 </script>

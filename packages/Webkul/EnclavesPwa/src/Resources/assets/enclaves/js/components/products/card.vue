@@ -12,13 +12,15 @@
             {{product.title}}
         </p>
         <p class="mt-3 text-[12px] font-normal text-text-gray">
-            Starts at
+            {{ $t('Starts at') }}
+
         </p>
         <p class="mt-1 text-[12px] font-bold text-dark">
             {{product.formatted_price}}
         </p>
         <router-link :to="'/products/' + product.id">
-            <button class="mt-6 inline-block w-full rounded-[20px] border-[1px] border-primary px-6 py-2 text-center text-[14px] font-medium text-primary">View Property</button>
+            <button class="mt-6 inline-block w-full rounded-[20px] border-[1px] border-primary px-6 py-2 text-center text-[14px] font-medium text-primary">{{ $t('View Property') }}
+            </button>
         </router-link>
     </div>
 </template>

@@ -1,19 +1,7 @@
 <template>
 	<div class="content simmer-container">
-		<!-- header -->
-	<header class="sticky top-0 z-[999] border-b-[1px] border-[#E9E9E9] bg-white">
-		<div class="container px-[18px] py-6">
-			<div class="flex items-center justify-between">
-				<div class="homeful-toggler cursor-pointer py-[10px] pr-4 mr-4 w-[19px] h-[12px] shimmer">
-				</div>
-				<a href="#" class="homeful-logo mr-auto shimmer w-[139px] h-[28px]">
-					<!-- <img src="./../images/logo.png" alt="homeful"> -->
-				</a>
-				<a href="#" class="homeful-share text-[24px] text-dark w-[24px] h-[24px] shimmer">
-				</a>
-			</div>
-		</div>
-	</header>
+	<!-- header -->
+	<header-shimmer></header-shimmer>
 	<!-- header end-->
 
 	<!-- breadcrumb -->
@@ -74,42 +62,22 @@
 	<!-- posts end -->
 
 	<!-- footer  -->
-	<footer
-	class="relative pt-[89px]">
-		<div class="container">
-			<p class="text-[14px] font-bold text-dark shimmer w-[67px] h-[21px]"></p>
-			<div class="">
-				<div class="">
-					<div class="mt-[25px] flex items-center gap-[18px]">
-						<a class="text-[18px] font-normal text-black shimmer w-[180px] h-[27px]"></a>
-					</div>
-					<div class="mt-[17px] flex items-center gap-[18px]">
-						<a class="text-[18px] font-normal text-black shimmer w-[180px] h-[27px]"></a>
-					</div>
-				</div>
-				<div class="mt-[24px]">
-					<p class="text-[14px] font-bold text-dark shimmer w-[67px] h-[21px]"></p>
-
-					<div class="mt-[15px] flex gap-[20px]">
-						<div class="rounded-full shimmer w-[40px] h-[40px]"></div>
-						<div class="rounded-full shimmer w-[40px] h-[40px]"></div>
-						<div class="rounded-full shimmer w-[40px] h-[40px]"></div>
-						<div class="rounded-full shimmer w-[40px] h-[40px]"></div>
-						<div class="rounded-full shimmer w-[40px] h-[40px]"></div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="mt-[20px] shimmer w-full h-[60px]"></div>
-	</footer>
-	<!-- footer end  -->
+	<footer-shimmer></footer-shimmer>
+	<!-- end footer  -->
 	</div>
 </template>
 
 <script>
+	import HeaderShimmer from "./header-shimmer";
+	import FooterShimmer from "./footer-shimmer";
 
     export default {
-        name: 'list-shimmer',
+		name: 'list-shimmer',
+
+		components: {
+			HeaderShimmer,
+			FooterShimmer,
+		}
     }
 </script>
 

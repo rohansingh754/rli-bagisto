@@ -7,7 +7,8 @@
 				{{truncateText(stripTags(page.html_content), textTruncate)}}
 			</p>
             <router-link :to="'/pages/' + page.url_key">
-			    <p class="text-[15px] font-bold text-dark">Read More</p>
+			    <p class="text-[15px] font-bold text-dark">{{ $t('Read More') }}
+                </p>
             </router-link>
 		</div>
 	</section>

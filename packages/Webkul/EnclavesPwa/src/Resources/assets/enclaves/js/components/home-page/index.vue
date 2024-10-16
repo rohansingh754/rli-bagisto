@@ -1,6 +1,6 @@
 <template>
-    <guest-home v-if="!customer"></guest-home>
-    <customer-home v-else></customer-home>
+    <guest-home></guest-home>
+    <!-- <customer-home v-else></customer-home> -->
 </template>
 
 <script>

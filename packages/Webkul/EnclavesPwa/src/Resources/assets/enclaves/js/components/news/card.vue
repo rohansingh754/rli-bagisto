@@ -6,7 +6,8 @@
 		<p class="mt-3 text-[14px] font-bold text-dark">{{truncateText(stripTags(news.short_description), 75)}}</p>
 
         <router-link :to="'/newses/' + news.id">
-			<button class="mt-3 inline-block text-center text-[14px] font-normal text-primary underline">Read more</button>
+			<button class="mt-3 inline-block text-center text-[14px] font-normal text-primary underline">{{ $t('Read more') }}
+            </button>
 		</router-link>
 	</div>
 </template>

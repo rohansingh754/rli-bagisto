@@ -2,7 +2,7 @@
     <div>
 	<breadcrumb :links="breadcrumbLinks" >
 		<div class="mt-5 text-[12px] font-normal text-dark">
-			Filter Results (2): House & Lot - Monthly Budget 19,900
+			{{ $t('Filter Results (2): House & Lot - Monthly Budget 19,900') }}
 			<span class="fixed right-6 z-[999] top-[96px]" @click="handleToggleDrawerUP('askToJoy')">
 				<image-component
 					:src="themeAssets + 'images/joy-icon.png'"
@@ -18,7 +18,7 @@
 	<!-- Ask Joy result -->
 	 <section class="mt-6">
 		<div class="container">
-			<h1 class="text-[20px] font-bold text-dark">Projects</h1>
+			<h1 class="text-[20px] font-bold text-dark">{{ $('Projects') }}</h1>
 			<div class="mt-4 grid grid-cols-2 gap-[25px]">
 				<product-card v-for="(product, index) in products" :key="index" :product="product"></product-card>
 			</div>
@@ -28,9 +28,8 @@
 				:to="{ path: '/ask-joy-result/compare', query: { ids: productIds } }"
 				class="mt-6 inline-block w-full rounded-full bg-[linear-gradient(268.1deg,_#CC035C_7.47%,_#FCB115_98.92%)] px-7 py-5 text-center text-[14px] font-medium text-white"
 				>
-				Compare
+				{{ $t('Compare') }}
 			</router-link>
-
 		</div>
 	 </section>
 

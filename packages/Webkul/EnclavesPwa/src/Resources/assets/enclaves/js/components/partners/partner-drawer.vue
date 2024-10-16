@@ -1,7 +1,8 @@
 <template>
 	<div class="z-[999] bg-white p-5 partner-drawer-container rounded-full">
 		<div class="flex justify-between items-center gap-2 border-[#8B8B8B4D] pb-4 border-b-[1px]">
-			<h3 class="font-bold text-[20px] text-dark">Join as Affiliate Marketer</h3>
+			<h3 class="font-bold text-[20px] text-dark">{{ $t('Join as Affiliate Marketer') }}
+			</h3>
 			<span
 				class="flex justify-center items-center bg-[#F3F4F6] rounded-full w-[35px] h-[35px] cursor-pointer"
 				@click="closeDrawer()"
@@ -25,9 +26,11 @@
 				</div>
 
 				<div class="relative border-[0.5px] mt-3 px-6 pr-6 py-[11px] border-text-gray rounded-full overflow-hidden">
-					<span class="block ml-1 font-normal text-[10px] text-text-gray leading-none">Work</span>
+					<span class="block ml-1 font-normal text-[10px] text-text-gray leading-none">{{ $t('Work') }}
+					</span>
 					<select name="" id="" class="border-0 bg-transparent w-full font-normal text-[16px] text-dark appearance-none outline-none">
-						<option value="Agapeya Towns" selected>Agapeya Towns</option>
+						<option value="Agapeya Towns" selected>{{ $t('Agapeya Towns') }}
+						</option>
 					</select>
 					<div class="right-0 absolute inset-y-0 flex items-center opacity-40 px-2 text-primary pointer-events-none">
 						<svg width="13" height="8" viewBox="0 0 13 8" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -36,7 +39,8 @@
 					</div>
 				</div>
 				<div class="relative border-[0.5px] mt-3 px-6 pr-6 py-[11px] border-text-gray rounded-full overflow-hidden">
-					<span class="block ml-1 font-normal text-[10px] text-text-gray leading-none">What market would you like to?</span>
+					<span class="block ml-1 font-normal text-[10px] text-text-gray leading-none">{{ $t('What market would you like to?') }}
+					</span>
 					<select name="" id="" class="border-0 bg-transparent w-full font-normal text-[16px] text-dark appearance-none outline-none">
 						<option value="Agapeya Towns" selected>Agapeya Towns</option>
 						<option value="Agapeya Towns" >Agapeya Towns</option>
@@ -52,9 +56,13 @@
 
 				<div class="flex items-start gap-3 mt-8">
 					<input id="link-checkbox" type="checkbox" value="" class="checbox-primary">
-					<label for="link-checkbox" class="font-normal text-[#000000E0] text-[14px]">By clicking Submit, you agree to Homeful.ph's <a href="#" class="font-bold text-[#000000E0] text-[14px]">Privacy Policy</a> and <a href="#" class="font-bold text-[#000000E0] text-[14px]">Terms of Use.</a></label>
+					<label for="link-checkbox" class="font-normal text-[#000000E0] text-[14px]">{{ $t('By clicking Submit, you agree to Homeful.phs') }}
+					 <a href="#" class="font-bold text-[#000000E0] text-[14px]">{{ $t('Privacy Policy') }}
+					 </a> and <a href="#" class="font-bold text-[#000000E0] text-[14px]">{{ $t('Terms of Use.') }}
+					 </a></label>
 				</div>
-				<button class="inline-block bg-[linear-gradient(268.1deg,_#CC035C_7.47%,_#FCB115_98.92%)] disabled:opacity-[0.4] mt-4 px-7 py-5 rounded-full w-full font-medium text-[15px] text-center text-white">Submit</button>
+				<button class="inline-block bg-[linear-gradient(268.1deg,_#CC035C_7.47%,_#FCB115_98.92%)] disabled:opacity-[0.4] mt-4 px-7 py-5 rounded-full w-full font-medium text-[15px] text-center text-white">{{ $t('Submit') }}
+				</button>
 			</form>
 		</div>
 	</div>

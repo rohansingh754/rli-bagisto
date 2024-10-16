@@ -5,11 +5,13 @@
 		<!-- breadcrumb end -->
 		<section class="mt-6">
 			<div class="container">
-				<h1 class="text-[20px] font-bold text-dark">Projects</h1>
+				<h1 class="text-[20px] font-bold text-dark">{{ $t('Projects') }}
+				</h1>
 				<div class="mt-4 grid grid-cols-2 gap-[25px]">
 					<product-card v-for="(product, index) in products" :key="index" :product="product"></product-card>
 				</div>
-				<a href="#" class="mt-6 inline-block w-full rounded-full bg-[linear-gradient(268.1deg,_#CC035C_7.47%,_#FCB115_98.92%)] px-7 py-5 text-center text-[14px] font-medium text-white">Join Us</a>
+				<a href="#" class="mt-6 inline-block w-full rounded-full bg-[linear-gradient(268.1deg,_#CC035C_7.47%,_#FCB115_98.92%)] px-7 py-5 text-center text-[14px] font-medium text-white">{{ $t('Join Us') }}
+				</a>
 			</div>
 		</section>
 	</div>

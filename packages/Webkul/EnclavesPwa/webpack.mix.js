@@ -10,7 +10,7 @@ if (mix.inProduction()) {
 mix.setPublicPath(publicPath).mergeManifest();
 mix.disableNotifications();
 
-mix.js(path.resolve("src/Resources/assets/enclaves/js/app.js"), "enclaves/js/app.js")
+mix.js(path.resolve("src/Resources/assets/enclaves/js/app.js"), "js/app.js")
     .webpackConfig({
         resolve: {
             alias: {
@@ -18,10 +18,10 @@ mix.js(path.resolve("src/Resources/assets/enclaves/js/app.js"), "enclaves/js/app
             },
         },
     })
-    .copy(path.resolve("src/Resources/assets/enclaves/images"), publicPath + "/enclaves/images")
-    .sass(path.resolve("src/Resources/assets/enclaves/sass/app.scss"), "enclaves/css/pwa.css")
-    .sass(path.resolve("src/Resources/assets/enclaves/sass/enclave.scss"), "enclaves/css/enclave.css")
-    .copy(path.resolve("src/Resources/assets/enclaves/fonts"), publicPath + "/enclaves/fonts")
+    .copy(path.resolve("src/Resources/assets/enclaves/images"), publicPath + "/images")
+    .sass(path.resolve("src/Resources/assets/enclaves/sass/app.scss"), "css/pwa.css")
+    .sass(path.resolve("src/Resources/assets/enclaves/sass/enclave.scss"), "css/enclave.css")
+    .copy(path.resolve("src/Resources/assets/enclaves/fonts"), publicPath + "/fonts")
     .options({
         processCssUrls: false,
     });

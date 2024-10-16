@@ -11,7 +11,7 @@
 						class="rounded-full bg-[linear-gradient(268.1deg,_#CC035C_7.47%,_#FCB115_98.92%)] px-2 py-2 text-[17px] font-medium text-white"
 						@click="getAllCategories()"
 						>
-						All
+						{{ $t('All') }}
 					</span>
 
 					<span

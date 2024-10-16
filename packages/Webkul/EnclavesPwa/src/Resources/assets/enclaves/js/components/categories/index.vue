@@ -12,7 +12,7 @@
                 <button
                     class="text-[12px] font-medium text-primary underline"
                     @click="handleToggleDrawerUP('storeDetails')">
-                    Store Details
+                    {{ $('Store Details') }}
                 </button>
             </div>
         </div>

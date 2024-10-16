@@ -14,12 +14,14 @@
 				<span
 					class="w-full rounded-[100px] bg-[#F7F7F7] py-7 text-center text-[15px] font-normal text-dark"
 					@click="updateParams('type', 'Condominuim')"
-						>Condominuim
+					>
+					Condominuim
 				</span>
 				<span
 					class="w-full rounded-[100px] bg-[#F7F7F7] py-7 text-center text-[15px] font-normal text-dark"
 					@click="updateParams('type', 'all')"
-					>All Kinds
+					>
+					All Kinds
 				</span>
 				<span
 					class="flex h-[59px] w-[59px] cursor-pointer items-center justify-center rounded-full bg-[#F3F4F6] shadow-[0px_4px_4px] shadow-black/25"
