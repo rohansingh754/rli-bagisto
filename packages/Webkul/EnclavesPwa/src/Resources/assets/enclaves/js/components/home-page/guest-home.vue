@@ -21,12 +21,14 @@
                         v-if="slides[index]"
                         >
                         <div class="relative overflow-hidden rounded-[20px]">
-                            <image-component
-                                :src="item.base_image.medium_image_url"
-                                :alt="item.name"
-                                :class="'w-full'"
-                                >
-                            </image-component>
+                            <div class="w-full min-h-[392px]">
+                                <image-component
+                                    :src="item.base_image.medium_image_url"
+                                    :alt="item.name"
+                                    :class="'w-full'"
+                                    >
+                                </image-component>
+                            </div>
                             <div class="absolute bottom-0 left-0 right-0 flex items-start justify-between gap-4 bg-[linear-gradient(180deg,_#00000000_0%,_#000000_100%)] px-[20px] pb-[20px] pt-[120px] max-385:gap-2 max-385:px-3">
                                 <div class="">
                                     <h2 class="text-[20px] font-normal leading-none text-white max-385:text-[18px]">{{item.name}}</h2>
