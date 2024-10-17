@@ -28,15 +28,15 @@
             <template v-if="isLoading">
                 <!-- Shimmer Load -->
                 <div class="shimmer rounded-1xl mt-[10px] h-[65px] w-[30%]"></div>
-                
+
                 <x-blog::shimmer.blogs.item count="6"/>
             </template>
 
             <template v-else>
                 <!-- Breadcrumbs -->
                 <x-shop::breadcrumbs name="blogs"></x-shop::breadcrumbs>
-                
-                <div class="mt-10 grid grid-cols-3 gap-6 max-lg:grid-cols-2">
+
+                <div class="mt-10 grid grid-cols-4 gap-6 max-lg:grid-cols-2">
                     <x-blog::blogs.items.post-item v-for="blog in blogs"/>
                 </div>
 
@@ -92,6 +92,8 @@
                         this.loadMoreTxt = `{{ trans('blog::app.shop.blog.load-more') }}`;
 
                         this.blogs = response.data.data;
+                        console.log(this.blogs);
+
                     }).catch(error => {
                         console.log(error);
                     });
