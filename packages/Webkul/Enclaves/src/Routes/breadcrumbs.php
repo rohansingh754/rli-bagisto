@@ -38,3 +38,10 @@ Breadcrumbs::for('transactions.view', function (BreadcrumbTrail $trail, $entity)
     $trail->push(trans('enclaves::app.shop.customers.account.transactions.index.title'), route('shop.customers.account.transactions.view', $entity->id));
 });
 
+Breadcrumbs::for('partners', function (BreadcrumbTrail $trail) {
+    $trail->parent('home');
+
+    $trail->push(trans('enclaves::app.shop.partners.braedcurmb'), route('shop.partners.index'));
+
+    $trail->push('Parnter name', route('shop.partners.index'));
+});

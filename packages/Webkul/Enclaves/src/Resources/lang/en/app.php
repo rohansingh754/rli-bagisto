@@ -148,7 +148,7 @@ return [
                         'no_record'        => 'No Record Found!',
                         'add_record'       => 'Add Details to go',
                         'personal_details' => [
-                            'full_name'       => 'Full Name', 
+                            'full_name'       => 'Full Name',
                             'dob'             => 'Date of Birth',
                             'email'           => 'Email',
                             'phone'           => 'Phone',
@@ -277,7 +277,7 @@ return [
 
                 'inquiries' => [
                     'submit-heading' => 'Submit A Heading',
-                    
+
                     'title'         => 'Inquiries',
                     'help_test'     => 'How can we help you?',
                     'submit-header' => 'Submit Ticket',
@@ -347,7 +347,7 @@ return [
             'processing'      => 'Loan Consulting Fee',
             'select'          => 'Select',
             'load-calculator' => 'Loan Calculator',
-            
+
             'cart'            => [
                 'add-to-cart' => 'Choose Unit',
             ],
@@ -405,6 +405,10 @@ return [
                 'all-products'  => 'All Products',
             ],
         ],
+
+        'partners' => [
+            'braedcurmb' => 'Partner with Us',
+        ]
     ],
 
     'admin' => [
@@ -412,7 +416,7 @@ return [
             'title'     => 'Button Setting',
             'btn-title' => 'Button Title',
         ],
-        
+
         'settings' => [
             'themes' => [
                 'edit' => [
@@ -587,14 +591,14 @@ return [
                 'image' => [
                     'error-message'   => "System can't find the image at the web address you provided",
                     'success-message' => "Image Uploaded successfully",
-                    'is-loading'      => "Loading...", 
+                    'is-loading'      => "Loading...",
                     'title'           => 'Image CDN',
                     'info'            => '',
                     'add-btn'         => 'Upload Image',
                     'review-btn'      => 'Review',
                     'url'             => 'URL',
                     'type'            => 'Type',
-                    
+
                     'logo_path'             => 'Logo Path',
                     'banner_path'           => 'Banner Path',
                     'reload'                => 'Page Reload',
@@ -607,7 +611,7 @@ return [
                     'title'       => 'Image CDN',
                     'info'        => 'Add Image CDN Url with comma(,) separated',
                     'add-btn'     => 'Review Image',
-                    'is-loading'  => "Loading...", 
+                    'is-loading'  => "Loading...",
                     'url'         => 'URL',
                     'not-found'   => "System can't find the image at the web address you provided.",
                 ],

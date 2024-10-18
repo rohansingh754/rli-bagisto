@@ -13,13 +13,13 @@
 
 <!-- SEO Meta Content -->
 @push('meta')
-    <meta 
-        name="description" 
+    <meta
+        name="description"
         content="{{ trim($product->meta_description) != "" ? $product->meta_description : \Illuminate\Support\Str::limit(strip_tags($product->description), 120, '') }}"
     />
 
-    <meta 
-        name="keywords" 
+    <meta
+        name="keywords"
         content="{{ $product->meta_keywords }}"
     />
 
@@ -31,54 +31,54 @@
 
     <?php $productBaseImage = product_image()->getProductBaseImage($product); ?>
 
-    <meta 
-        name="twitter:card" 
+    <meta
+        name="twitter:card"
         content="summary_large_image"
     />
 
-    <meta 
-        name="twitter:title" 
-        content="{{ $product->name }}" 
-    />
-
-    <meta 
-        name="twitter:description" 
-        content="{!! htmlspecialchars(trim(strip_tags($product->description))) !!}"
-    />
-
-    <meta 
-        name="twitter:image:alt" 
-        content="" 
-    />
-
-    <meta 
-        name="twitter:image" 
-        content="{{ $productBaseImage['medium_image_url'] }}"
-    />
-
-    <meta 
-        property="og:type" 
-        content="og:product" 
-    />
-
-    <meta 
-        property="og:title" 
+    <meta
+        name="twitter:title"
         content="{{ $product->name }}"
     />
 
-    <meta 
-        property="og:image" 
-        content="{{ $productBaseImage['medium_image_url'] }}" 
+    <meta
+        name="twitter:description"
+        content="{!! htmlspecialchars(trim(strip_tags($product->description))) !!}"
     />
 
-    <meta 
-        property="og:description" 
-        content="{!! htmlspecialchars(trim(strip_tags($product->description))) !!}" 
+    <meta
+        name="twitter:image:alt"
+        content=""
     />
 
-    <meta 
-        property="og:url" 
-        content="{{ route('shop.product_or_category.index', $product->url_key) }}" 
+    <meta
+        name="twitter:image"
+        content="{{ $productBaseImage['medium_image_url'] }}"
+    />
+
+    <meta
+        property="og:type"
+        content="og:product"
+    />
+
+    <meta
+        property="og:title"
+        content="{{ $product->name }}"
+    />
+
+    <meta
+        property="og:image"
+        content="{{ $productBaseImage['medium_image_url'] }}"
+    />
+
+    <meta
+        property="og:description"
+        content="{!! htmlspecialchars(trim(strip_tags($product->description))) !!}"
+    />
+
+    <meta
+        property="og:url"
+        content="{{ route('shop.product_or_category.index', $product->url_key) }}"
     />
 @endPush
 
@@ -99,7 +99,7 @@
     <script>
 		document.addEventListener("DOMContentLoaded", () => {
 			let img = document.querySelectorAll('.et-slider img');
-            
+
 			let active = 1;
 
 			let prev = 0;
@@ -150,7 +150,7 @@
 
         <!-- Breadcrumbs -->
         <x-shop::breadcrumbs name="product" :entity="$product"></x-shop::breadcrumbs>
-        
+
         <!-- Product Information Vue Component -->
         <v-product ref="details" :product-id="{{ $product->id }}">
             <x-shop::shimmer.products.view />
@@ -169,9 +169,9 @@
                             ref="formData"
                             @submit="handleSubmit($event, addToCart)"
                             >
-                            <input 
-                                type="hidden" 
-                                name="product_id" 
+                            <input
+                                type="hidden"
+                                name="product_id"
                                 value="{{ $product->id }}"
                             >
 
@@ -180,10 +180,10 @@
                                 name="is_buy_now"
                                 v-model="is_buy_now"
                             >
-                            
-                            <input 
-                                type="hidden" 
-                                name="quantity" 
+
+                            <input
+                                type="hidden"
+                                name="quantity"
                                 :value="qty"
                             >
 
@@ -197,7 +197,7 @@
                                         <h3 class="hidden pt-[23px] text-[15px] font-normal leading-[18px] text-[#8B8B8B] sm:flex sm:text-[20px] sm:leading-[50px]">
                                             Product Description
                                         </h3>
-                                        
+
                                         <p class="text-xl max-lg:text-[12px] max-md:leading-6" v-html="product.description"></p>
                                     {!! view_render_event('bagisto.shop.products.description.after', ['product' => $product]) !!}
                                 </div>
@@ -231,8 +231,8 @@
                                     <div v-if="product.short_description">
                                         {!! view_render_event('bagisto.shop.products.short_description.before', ['product' => $product]) !!}
 
-                                        <p 
-                                            class="max-lg:text-small mt-6 text-base text-[#6E6E6E] max-lg:mt-4" 
+                                        <p
+                                            class="max-lg:text-small mt-6 text-base text-[#6E6E6E] max-lg:mt-4"
                                             v-html="product.short_description"
                                         ></p>
 
@@ -258,7 +258,7 @@
 
                                         <!-- Add To Cart Button -->
                                         {!! view_render_event('bagisto.shop.products.view.add_to_cart.before', ['product' => $product]) !!}
-                                        
+
                                         @if ($product->getTypeInstance()->showQuantityBox())
                                             <button
                                                 type="submit"
@@ -268,9 +268,9 @@
                                                 @lang('shop::app.products.view.add-to-cart')
                                             </button>
                                         @endif
-                                        
+
                                         {!! view_render_event('bagisto.shop.products.view.add_to_cart.after', ['product' => $product]) !!}
-                                        
+
                                         <!-- Buy Now Button -->
                                         {!! $product->button_text != '0' && $product->button_text ? $product->button_information : '' !!}
 
@@ -299,7 +299,7 @@
                             </div>
 
                             <!-- Mobile button -->
-                            <div 
+                            <div
                                 id="show-div"
                                 class="fixed bottom-0 z-[9999] -ml-[15px] w-full border-t-2 bg-white p-[15px] max-md:p-[10px] md:hidden"
                                 >
@@ -353,8 +353,8 @@
                                 <x-slot:content>
                                     <div class="flex h-[320px] flex-col gap-2 overflow-auto px-[50px] max-md:px-[10px] md:gap-5">
                                         <div class="flex items-start gap-5">
-                                            <img 
-                                                class="h-[90px] w-[90px] rounded-full object-cover max-md:h-[50px] max-md:w-[60px]" 
+                                            <img
+                                                class="h-[90px] w-[90px] rounded-full object-cover max-md:h-[50px] max-md:w-[60px]"
                                                 src="{{ bagisto_asset('images/phone1.png') }}" />
 
                                                 <div class="flex h-[24px] w-[24px] min-w-[24px] items-center justify-center rounded-full bg-[#1973E8] text-[15px] font-normal text-white max-md:h-[20px] max-md:w-[20px] max-md:min-w-[20px] max-md:text-[10px]">
@@ -367,9 +367,9 @@
                                         </div>
 
                                         <div class="flex items-start gap-5">
-                                            <img 
-                                                class="h-[90px] w-[90px] rounded-full object-cover max-md:h-[50px] max-md:w-[60px]" 
-                                                src="{{ bagisto_asset('images/phone2.png') }}" 
+                                            <img
+                                                class="h-[90px] w-[90px] rounded-full object-cover max-md:h-[50px] max-md:w-[60px]"
+                                                src="{{ bagisto_asset('images/phone2.png') }}"
                                             />
                                                 <div class="flex h-[24px] w-[24px] min-w-[24px] items-center justify-center rounded-full bg-[#1973E8] text-[15px] font-normal text-white max-md:h-[20px] max-md:w-[20px] max-md:min-w-[20px] max-md:text-[10px]">
                                                     @lang('2')
@@ -381,9 +381,9 @@
                                         </div>
 
                                         <div class="flex items-start gap-5">
-                                            <img 
-                                                class="h-[90px] w-[90px] rounded-full object-cover max-md:h-[50px] max-md:w-[60px]" 
-                                                src="{{ bagisto_asset('images/phone3.png') }}" 
+                                            <img
+                                                class="h-[90px] w-[90px] rounded-full object-cover max-md:h-[50px] max-md:w-[60px]"
+                                                src="{{ bagisto_asset('images/phone3.png') }}"
                                             />
                                                 <div class="flex h-[24px] w-[24px] min-w-[24px] items-center justify-center rounded-full bg-[#1973E8] text-[15px] font-normal text-white max-md:h-[20px] max-md:w-[20px] max-md:min-w-[20px] max-md:text-[10px]">
                                                     @lang('3')
@@ -395,9 +395,9 @@
                                         </div>
 
                                         <div class="flex items-start gap-5">
-                                            <img 
-                                                class="h-[90px] w-[90px] rounded-full object-cover max-md:h-[50px] max-md:w-[60px]" 
-                                                src="{{ bagisto_asset('images/phone4.png') }}" 
+                                            <img
+                                                class="h-[90px] w-[90px] rounded-full object-cover max-md:h-[50px] max-md:w-[60px]"
+                                                src="{{ bagisto_asset('images/phone4.png') }}"
                                             />
                                                 <div class="flex h-[24px] w-[24px] min-w-[24px] items-center justify-center rounded-full bg-[#1973E8] text-[15px] font-normal text-white max-md:h-[20px] max-md:w-[20px] max-md:min-w-[20px] max-md:text-[10px]">
                                                     @lang('4')
@@ -409,9 +409,9 @@
                                         </div>
 
                                         <div class="flex items-start gap-5">
-                                            <img 
-                                                class="h-[90px] w-[90px] rounded-full object-cover max-md:h-[50px] max-md:w-[60px]" 
-                                                src="{{ bagisto_asset('images/phone5.png') }}" 
+                                            <img
+                                                class="h-[90px] w-[90px] rounded-full object-cover max-md:h-[50px] max-md:w-[60px]"
+                                                src="{{ bagisto_asset('images/phone5.png') }}"
                                             />
                                                 <div class="flex h-[24px] w-[24px] min-w-[24px] items-center justify-center rounded-full bg-[#1973E8] text-[15px] font-normal text-white max-md:h-[20px] max-md:w-[20px] max-md:min-w-[20px] max-md:text-[10px]">
                                                     @lang('5')
@@ -457,7 +457,7 @@
                                                 @lang('Selling price')
                                             </p>
 
-                                            <span class="text-sm font-semibold text-black"> 
+                                            <span class="text-sm font-semibold text-black">
                                                 @lang('₱10,000')
                                             </span>
 
@@ -469,15 +469,15 @@
                                         <p class="text-[15px] font-normal text-[#8b8b8b]">
                                             @lang('Sample Computation')
                                         </p>
-                                        
+
                                         <div class="flex w-full items-center justify-between gap-4 rounded-full border border-[#D9D9D9] bg-white px-[20px] py-[10px] max-md:px-[10px]">
                                             <p class="text-[20px] font-normal max-md:text-[14px]">
                                                 @lang('Years')
                                             </p>
-                                                
+
                                             <p class="flex items-center gap-1.5 text-[20px] font-normal text-[#CC035C] max-md:text-[14px]">
                                                 @lang('30 years')
-                                                
+
                                                 <svg
                                                     width="20"
                                                     height="12"
@@ -555,10 +555,10 @@
                                 <x-slot:footer class="px-1 py-1">
                                     <div class="mb-3 flex items-center gap-2">
                                         <div class="mx-auto flex w-full flex-col items-start justify-center gap-[7px] rounded-full px-3 text-[15px] font-normal leading-3 text-white lg:mt-auto">
-                                            <span class="text-xl font-semibold text-black"> 
+                                            <span class="text-xl font-semibold text-black">
                                                 @lang('₱10,000')
                                             </span>
-                                            
+
                                             <span class="whitespace-nowrap text-[15px] font-normal tracking-tighter text-[#8b8b8b]">
                                                 @lang('Loan Consulting Fee')
                                             </span>
@@ -605,7 +605,7 @@
                             is_buy_now: 0,
 
                             is_kyc_process: 0,
-                            
+
                             qty: 1,
 
                             product: @json($product),
@@ -616,7 +616,7 @@
 
                     methods: {
                         productQuickGuideRedirect() {
-                            if (this.product.ekyc_redirect_uri) {   
+                            if (this.product.ekyc_redirect_uri) {
                                 window.location.href = this.product.ekyc_redirect_uri;
                             } else {
                                 this.$emitter.emit('add-flash', { type: 'warning', message: 'URL Not Found!' });
@@ -629,7 +629,7 @@
 
                         addToCart(params) {
                             this.isAdding = 1;
-                            
+
                             let formData = new FormData(this.$refs.formData);
 
                             this.$axios.post('{{ route("shop.api.checkout.cart.store") }}', formData, {
@@ -644,11 +644,11 @@
                                         this.$emitter.emit('update-mini-cart', response.data.data);
 
                                         this.$emitter.emit('add-flash', { type: 'success', message: response.data.message });
-                                        
+
                                         this.$refs.productQuickGuideModal.toggle();
 
                                         /**
-                                         * 
+                                         *
                                          * NOTE: FOR FUTURE USE. DON'T REMOVE IT.
                                             if (this.product.ekyc_redirect_uri) {
                                                 window.location.href = this.product.ekyc_redirect_uri;
@@ -658,7 +658,7 @@
                                                 } else {
                                                     window.location.href = response.data.ekyc_redirect;
                                                 }
-                                            } 
+                                            }
                                         **/
                                     } else {
                                         this.$emitter.emit('add-flash', { type: 'warning', message: response.data.data.message });

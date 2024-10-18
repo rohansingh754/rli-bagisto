@@ -87,7 +87,7 @@
                                 class="border-b-[1px] border-[#E2E2E2] pb-5"
                                 >
                                 <router-link
-                                    :to="'/pages/about-us'"
+                                    :to="'/pages/pwa-about-us'"
                                     class="text-[17px] font-medium text-dark"
                                     >
                                     {{ $t('About Us') }}

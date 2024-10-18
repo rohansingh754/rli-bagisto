@@ -14,12 +14,14 @@ use Webkul\Enclaves\Http\Controllers\Shop\Customer\Account\InquiriesController;
 use Webkul\Enclaves\Http\Controllers\Shop\Customer\Account\HelpSeminarController;
 use Webkul\Enclaves\Http\Controllers\Shop\Customer\Account\NewsUpdatesController;
 use Webkul\Enclaves\Http\Controllers\Shop\Customer\Account\TransactionController;
+use Webkul\Enclaves\Http\Controllers\Shop\Partner\PartnersController;
+use Webkul\Enclaves\Http\Controllers\Shop\EnclaveMenu\EnclaveMenuController;
 
 Route::group(['middleware' => ['locale', 'theme', 'currency']], function () {
 
     Route::controller(ProductController::class)->prefix('products')->group(function () {
         Route::get('', 'index')->name('enclaves.products.index');
-        
+
         Route::post('customer-profile-update', 'profileUpdate')->name('enclaves.customers.account.profile.update');
     });
 
@@ -89,6 +91,22 @@ Route::group(['middleware' => ['locale', 'theme', 'currency']], function () {
 
         Route::controller(EkycController::class)->prefix('ekyc')->group(function () {
             Route::get('', 'index')->name('enclaves.api.property.verify-url.index');
+        });
+
+        Route::controller(EnclaveMenuController::class)->prefix('menus')->group(function () {
+            Route::get('', 'menuItems')->name('enclaves.api.menus');
+        });
+    });
+
+    Route::group(['prefix' => 'partners'], function () {
+        Route::controller(PartnersController::class)->group(function () {
+            Route::get('webhook', 'handle')->name('shop.partners.webhook.request');
+
+            Route::get('/', 'index')->name('shop.partners.index');
+
+            Route::get('list', 'blogFrontEnd')->name('shop.partners.list');
+
+            Route::get('{id}', 'view')->name('shop.partner.view');
         });
     });
 });
