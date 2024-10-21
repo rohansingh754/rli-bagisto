@@ -12,7 +12,7 @@
                 <button
                     class="text-[12px] font-medium text-primary underline"
                     @click="handleToggleDrawerUP('storeDetails')">
-                    {{ $('Store Details') }}
+                    {{ $t('Store Details') }}
                 </button>
             </div>
         </div>
@@ -21,7 +21,7 @@
 	<!-- posts -->
 	<section class="pt-6">
         <div class="pl-4 flex items-center justify-between">
-            <h1 class="text-[20px] font-bold text-dark" >Projects</h1>
+            <h1 class="text-[20px] font-bold text-dark" >{{$t('Projects')}}</h1>
             <span class="" @click="handleToggleDrawerUP('askToJoy')">
                 <image-component
                     :src="themeAssets + 'images/joy-icon.png'"
@@ -42,7 +42,6 @@
 		</div>
 	</section>
 	<!-- posts end -->
-
     </div>
 </template>
 

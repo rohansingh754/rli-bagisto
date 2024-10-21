@@ -18,7 +18,7 @@
 	<!-- Ask Joy result -->
 	 <section class="mt-6">
 		<div class="container">
-			<h1 class="text-[20px] font-bold text-dark">{{ $('Projects') }}</h1>
+			<h1 class="text-[20px] font-bold text-dark">{{ $t('Projects') }}</h1>
 			<div class="mt-4 grid grid-cols-2 gap-[25px]">
 				<product-card v-for="(product, index) in products" :key="index" :product="product"></product-card>
 			</div>

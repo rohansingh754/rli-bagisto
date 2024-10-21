@@ -1,7 +1,7 @@
 <template>
 	<div class="z-[999] bg-white p-5">
 		<div class="flex justify-between items-center gap-2 border-[#8B8B8B4D] pb-4 border-b-[1px]">
-			<h3 class="font-bold text-[20px] text-dark">{{ $('Store Details') }}</h3>
+			<h3 class="font-bold text-[20px] text-dark">{{ $t('Store Details') }}</h3>
 			<span
 				class="flex justify-center items-center bg-[#F3F4F6] rounded-full w-[35px] h-[35px] cursor-pointer"
 				@click="closeAskTojoy()"
