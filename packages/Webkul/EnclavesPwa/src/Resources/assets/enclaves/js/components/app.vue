@@ -129,7 +129,7 @@
                                 v-if="! currentUser"
                                 class="border-b-[1px] border-[#E2E2E2] pb-5">
                                 <router-link
-                                    :to="'/pages/join-us'"
+                                    :to="'/pages/pwa-join-us'"
                                     class="text-[17px] font-medium text-dark"
                                     >
                                     {{ $t('Partner with us') }}
@@ -153,7 +153,7 @@
                                 class="border-b-[1px] border-[#E2E2E2] pb-5"
                                 >
                                 <router-link
-                                    :to="'/pages/contact-us'"
+                                    :to="'/pages/pwa-contact-us'"
                                     class="text-[17px] font-medium text-dark"
                                     >
                                     {{ $t('Talk to Us') }}

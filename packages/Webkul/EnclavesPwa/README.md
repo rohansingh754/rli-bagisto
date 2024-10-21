@@ -72,4 +72,7 @@ php artisan optimize:cache
 php artisan vendor:publish --provider="Webkul\EnclavePwa\Providers\EnclavePwaServiceProvider" --force
 ```
 
+```
+php artisan db:seed --class=Webkul\\EnclavePwa\\Database\\Seeders\\DatabaseSeeder
+```
 > That's it, now go to https://yourdomain/mobile
