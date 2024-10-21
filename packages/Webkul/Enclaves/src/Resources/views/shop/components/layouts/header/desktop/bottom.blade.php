@@ -57,7 +57,7 @@
                     </a>
                     <ul
                         v-if="menu.submenu.length"
-                        class="absolute right-0 top-10 hidden min-w-52 flex-col gap-5 rounded-xl bg-white px-7 py-6 shadow-[20px_4px_54px] shadow-black/10 group-hover:flex">
+                        class="absolute right-0 top-8 hidden min-w-52 flex-col gap-5 rounded-xl bg-white px-7 py-6 shadow-[20px_4px_54px] shadow-black/10 group-hover:flex">
                         <li v-for="sMenu in menu.submenu">
                             <a
                                 :href="sMenu.url"

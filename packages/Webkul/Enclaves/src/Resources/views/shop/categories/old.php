@@ -1,40 +1,86 @@
 <!-- SEO Meta Content -->
 @push('meta')
+    <meta name="description" content="{{ trim($category->meta_description) != "" ? $category->meta_description : \Illuminate\Support\Str::limit(strip_tags($category->description), 120, '') }}"/>
+
+    <meta name="keywords" content="{{ $category->meta_keywords }}"/>
+
     @if (core()->getConfigData('catalog.rich_snippets.categories.enable'))
+        <script type="application/ld+json">
+            {!! app('Webkul\Product\Helpers\SEO')->getCategoryJsonLd($category) !!}
+        </script>
     @endif
 @endPush
+
+
+@push ('styles')
+    <style>
+        .product-price p {
+            color: black !important;
+        }
+    </style>
+@endpush
 
 <x-shop::layouts>
     <!-- Page Title -->
     <x-slot:title>
-        {{ 'All Products' }}
+        {{ trim($category->meta_title) != "" ? $category->meta_title : $category->name }}
     </x-slot>
 
-    <!-- Category Vue Component -->
-    <v-category></v-category>
+    @if (in_array($category->display_mode, [null, 'description_only', 'products_and_description']))
+        @if ($category->description)
+
+            <div class="container px-[60px] max-lg:px-[30px]">
+                <div class="mt-[40px] flex flex-wrap items-start gap-[40px] max-lg:gap-[20px]">
+                    @if ($category->banner_path)
+                        <img
+                            class="max-h-[172px] w-full max-w-[344px]"
+                            src="{{ $category->banner_url }}"
+                            alt="{{ $category->name }}"
+                            width="344"
+                            height="172"
+                        >
+                    @endif
+
+                    <div class="flex-1">
+                        <x-shop::layouts.read-more-smooth
+                            text="{!! $category->description !!}"
+                            limit=300
+                        >
+                        </x-shop::layouts.read-more-smooth>
+                    </div>
+                </div>
+                </p>
+            </div>
+        @endif
+    @endif
+
+    @if (in_array($category->display_mode, [null, 'products_only', 'products_and_description']))
+        <!-- Category Vue Component -->
+        <v-category></v-category>
+    @endif
 
     @pushOnce('scripts')
-        <script
-            type="text/x-template"
+        <script 
+            type="text/x-template" 
             id="v-category-template"
             >
             <div class="container px-[60px] max-lg:px-[30px]">
                 <div class="mt-[40px] flex items-start gap-[40px] max-lg:gap-[20px]">
                     <!-- Product Listing Filters -->
-                    @include('enclaves::products-list.filters')
+                    @include('shop::categories.filters')
 
                     <!-- Product Listing Container -->
                     <div class="flex-1">
                         <!-- Desktop Product Listing Toolbar -->
                         <div class="max-md:hidden">
-                            @include('enclaves::products-list.toolbar')
+                            @include('shop::categories.toolbar')
                         </div>
 
                         <!-- //v-if="products.length" -->
                         <template v-if="products.length || isLoading">
                             <!-- Product List Card Container -->
-                            <div
-                                v-if="filters.toolbar.mode === 'list'"
+                            <div 
+                                v-if="filters.toolbar.mode === 'list'" 
                                 class="mt-8 grid grid-cols-1 gap-6"
                                 >
                                 <!-- Product Card Shimmer Effect -->
@@ -53,10 +99,11 @@
                                             <x-shop::media.images.lazy
                                                 @click="redirectToProduct(product)"
                                                 class="w-full cursor-pointer rounded-sm bg-[#F5F5F5] transition-all duration-300 group-hover:scale-105"
+                                                ::key="imageComponentRerander"
                                                 ::src="product.base_image.medium_image_url"
                                             ></x-shop::media.images.lazy>
 
-                                            <div class="action-items bg-black">
+                                            <div class="action-items bg-black"> 
                                                 <p
                                                     class="absolute left-[20px] top-[20px] inline-block rounded-[44px] bg-[#E51A1A] px-[10px] text-[14px] text-white"
                                                     v-if="product.on_sale"
@@ -75,14 +122,14 @@
 
                                         <div class="relative grid w-full content-start gap-2.5">
                                             <div class="flex gap-[16px]">
-                                                <div
-                                                    class="font-popins cursor-pointer pr-[30px] text-[16px] font-bold"
+                                                <div 
+                                                    class="font-popins cursor-pointer pr-[30px] text-[16px] font-bold" 
                                                     v-text="product.name"
                                                     @click="redirectToProduct(product)"
                                                 >
                                                 </div>
 
-                                                <div
+                                                <div 
                                                     class="absolute right-[0px] cursor-pointer text-2xl"
                                                     :class="product.is_wishlist ? 'icon-heart-fill' : 'icon-heart'"
                                                     role="button"
@@ -94,7 +141,7 @@
                                             </div>
 
                                             <div class="grid flex-wrap items-center justify-between gap-5 max-425:grid">
-                                                <div class="grid gap-[12px]">
+                                                <div class="product-price grid gap-[12px]">
 
                                                     <p class="font-popins text-[20px] font-medium" v-html="product.price_html"></p>
 
@@ -106,9 +153,9 @@
                                                 <p class="text-[14px] text-[#6E6E6E]" v-if="! product.avg_ratings">
                                                     @lang('shop::app.components.products.card.review-description')
                                                 </p>
-
+                                            
                                                 <p v-else class="text-[14px] text-[#6E6E6E]">
-                                                    <x-shop::products.star-rating
+                                                    <x-shop::products.star-rating 
                                                         ::value="product && product.avg_ratings ? product.avg_ratings : 0"
                                                         :is-editable=false
                                                     >
@@ -139,10 +186,11 @@
                                                 <x-shop::media.images.lazy
                                                     @click="redirectToProduct(product)"
                                                     class="w-full cursor-pointer rounded-sm bg-[#F5F5F5] transition-all duration-300 group-hover:scale-105"
+                                                    ::key="imageComponentRerander"
                                                     ::src="product.base_image.medium_image_url"
                                                 ></x-shop::media.images.lazy>
 
-                                                <div class="action-items bg-black">
+                                                <div class="action-items bg-black"> 
                                                     <p
                                                         class="absolute left-[20px] top-[20px] inline-block rounded-[44px] bg-[#E51A1A] px-[10px] text-[14px] text-white"
                                                         v-if="product.on_sale"
@@ -161,13 +209,13 @@
 
                                             <div class="grid grid-cols-1 gap-5 max-lg:grid-cols-1">
                                                 <div class="flex gap-[16px]">
-                                                    <p
-                                                        class="font-popins cursor-pointer pr-[30px] text-[16px] font-bold"
+                                                    <p 
+                                                        class="font-popins cursor-pointer pr-[30px] text-[16px] font-bold" 
                                                         v-text="product.name"
                                                         @click="redirectToProduct(product)"
                                                     ></p>
-
-                                                    <span
+                                                
+                                                    <span 
                                                         class="absolute right-[10px] cursor-pointer text-2xl"
                                                         :class="product.is_wishlist ? 'icon-heart-fill' : 'icon-heart'"
                                                         role="button"
@@ -179,11 +227,11 @@
                                                 </div>
 
                                                 <div class="flex flex-wrap justify-between">
-                                                    <div class="max-lg:mb-4">
-                                                        <div
-                                                            class="font-popins text-wrap text-[15px] font-medium"
+                                                    <div class="product-price max-lg:mb-4">
+                                                        <p 
+                                                            class="font-popins text-wrap text-[15px] font-medium" 
                                                             v-html="product.price_html">
-                                                        </div>
+                                                        </p>
 
                                                         <p class="font-popins text-[11px] font-medium text-[#A0A0A0]">
                                                             @lang('enclaves::app.shop.customers.total-contract-price')
@@ -204,18 +252,18 @@
 
                                 <template v-else>
                                     <x-shop::shimmer.products.cards.grid count="6"></x-shop::shimmer.products.cards.grid>
-                                </template>
+                                </template> 
                             </div>
                         </template>
-
+                        
                         <!-- Empty Products Container -->
                         <template v-else>
                             <div class="m-auto grid h-[476px] w-[100%] place-content-center items-center justify-items-center text-center">
-                                <img
+                                <img 
                                     src="{{ bagisto_asset('images/thank-you.png') }}"
                                     alt="placeholder"
                                 />
-
+                        
                                 <p class="text-[20px]">
                                     @lang('shop::app.categories.view.empty')
                                 </p>
@@ -227,8 +275,8 @@
                             <x-shop::shimmer.products.cards.grid count="6"></x-shop::shimmer.products.cards.grid>
                         </template>
 
-                        <div
-                            class="row mt-12 text-center"
+                        <div 
+                            class="row mt-12 text-center" 
                             v-if="links.next"
                             >
                             <button
@@ -257,13 +305,13 @@
 
                         isDrawerActive: {
                             toolbar: false,
-
+                            
                             filter: false,
                         },
 
                         filters: {
                             toolbar: {},
-
+                            
                             filter: {},
                         },
 
@@ -272,6 +320,8 @@
                         links: {},
 
                         isCustomer: '{{ auth()->guard("customer")->check() }}',
+
+                        imageComponentRerander: 1,
                     }
                 },
 
@@ -309,14 +359,18 @@
                     getProducts() {
                         this.isDrawerActive = {
                             toolbar: false,
-
+                            
                             filter: false,
                         };
 
-                        this.$axios.get("{{ route('shop.api.products.index') }}", {
-                            params: this.queryParams
+                        this.isLoading = true;
+
+                        this.$axios.get("{{ route('shop.api.products.index', ['category_id' => $category->id]) }}", {
+                            params: this.queryParams 
                         })
                         .then(response => {
+                            ++this.imageComponentRerander;
+
                             this.isLoading = false;
 
                             this.products = response.data.data;
@@ -333,7 +387,7 @@
                         if (this.links.next) {
                             this.$axios.get(this.links.next).then(response => {
                                 this.products = [...this.products, ...response.data.data];
-
+                                
                                 this.isMoreLoading = false;
 
                                 this.links = response.data.links;

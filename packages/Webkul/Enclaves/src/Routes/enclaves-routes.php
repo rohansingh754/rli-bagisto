@@ -98,15 +98,17 @@ Route::group(['middleware' => ['locale', 'theme', 'currency']], function () {
         });
     });
 
-    Route::group(['prefix' => 'partners'], function () {
-        Route::controller(PartnersController::class)->group(function () {
-            Route::get('webhook', 'handle')->name('shop.partners.webhook.request');
+    Route::controller(PartnersController::class)->prefix('partners')->group(function () {
+        Route::get('webhook', 'handle')->name('shop.partners.webhook.request');
 
-            Route::get('/', 'index')->name('shop.partners.index');
+        Route::get('/', 'index')->name('shop.partners.index');
 
-            Route::get('list', 'blogFrontEnd')->name('shop.partners.list');
+        Route::get('list', 'blogFrontEnd')->name('shop.partners.list');
 
-            Route::get('{id}', 'view')->name('shop.partner.view');
-        });
+        Route::get('{id}', 'view')->name('shop.partner.view');
+    });
+
+    Route::controller(PartnersController::class)->prefix('partners')->group(function () {
+        Route::get('/', 'index')->name('shop.partners.index');
     });
 });

@@ -622,6 +622,16 @@ return [
             'attribute' => [
                 'redirect_uri' => 'Ekyc Redirect Url',
             ],
+
+            'pages' => [
+                'about-us'   => [
+                    'title'   => 'About Us',
+                ],
+
+                'contact-us'   => [
+                    'title'   => 'Contact Us',
+                ],
+            ],
         ],
     ],
 ];

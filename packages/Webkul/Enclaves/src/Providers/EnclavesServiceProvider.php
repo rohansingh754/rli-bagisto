@@ -29,8 +29,8 @@ class EnclavesServiceProvider extends ServiceProvider
             __DIR__ . '/../Resources/views/shop' => resource_path('themes/enclaves/views/shop'),
         ]);
 
-        require __DIR__.'/../Routes/breadcrumbs.php';
-        
+        require __DIR__ . '/../Routes/breadcrumbs.php';
+
         $this->app->register(EventServiceProvider::class);
 
         $this->app->register(ModuleServiceProvider::class);

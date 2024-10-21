@@ -6,24 +6,36 @@
 
 @pushOnce('scripts')
     <script type="text/x-template" id="v-partner-card-template">
-        <div class="cursor-pointer max-lg:min-w-[120px] md:min-w-64 lg:min-w-[300px]">
-            <x-shop::media.images.lazy
-                class="h-32 w-full rounded-3xl shadow-inner transition-all duration-300 group-hover:scale-105 md:h-72 lg:h-72"
-                ::src="blog.base_image"
-                ::alt="blog.base_image"
-            ></x-shop::media.images.lazy>
 
-            <p
-                class="font-popins mt-5 overflow-hidden text-ellipsis whitespace-nowrap text-[20px] font-bold max-sm:text-[14px]"
-                v-text="blog.name"
-            ></p>
-
-            <button
-                @click="redirectBlogPage(blog)"
-                class="w-full mt-[5px] rounded-full border-[1px] border-[#CC035C] pl-3 pr-3 py-1.5 text-[#CC035C] max-sm:text-[12px]">
-                @lang('blog::app.shop.blog.read-more')
-            </button>
-        </div>
+            <div class="active group mt-11">
+                <h2 class="flex items-start justify-between gap-1 rounded-[18px] bg-[#F3F4F6] px-4 py-3 text-xl font-bold text-[#111827] max-sm:text-[16px]">
+                    Affiliate Marketer
+                    <span class="icon-arrow-down mt-1 block text-[24px] text-secondary group-[.active]:rotate-180"></span>
+                </h2>
+                <div class="hidden group-[.active]:block">
+                    <div class="bg-white p-5">
+                        <p class="line-clamp-[25] overflow-hidden text-ellipsis text-[15px] font-normal leading-[18px] text-[#0F0E0E]">
+                            Are you looking to boost your income effortlessly? <br><br>
+                            Join our "Affiliate Marketer" program today! Perfect for digital marketers, social media influencers, housewives and office worker.<br><br>
+                            <strong class="text-[19px] leading-[22px]">Here's how it works:</strong><br>
+                            1. 📣 Simply advertise our provided ads with your personalized link.<br>
+                            2. 💰 Earn referral income when  your link leads to a successfully property purchases.<br>
+                            3. 💸 Get as much as 20,000 pesos for every 1,000,000 successful sales! (taxes may apply).<br><br>
+                            Seize the chance to make money from the comfort of your home or work.  Join us now and start earning while you refer buyers to us!<br><br>
+                            Interested?
+                            Are you looking to boost your income effortlessly? <br><br>
+                            Join our "Affiliate Marketer" program today! Perfect for digital marketers, social media influencers, housewives and office worker.<br><br>
+                            <strong class="text-[19px] leading-[22px]">Here's how it works:</strong><br>
+                            1. 📣 Simply advertise our provided ads with your personalized link.<br>
+                            2. 💰 Earn referral income when  your link leads to a successfully property purchases.<br>
+                            3. 💸 Get as much as 20,000 pesos for every 1,000,000 successful sales! (taxes may apply).<br><br>
+                            Seize the chance to make money from the comfort of your home or work.  Join us now and start earning while you refer buyers to us!<br><br>
+                            Interested?
+                        </p>
+                        <a href="./product.html" class="absolute inset-x-0 bottom-0 mt-2.5 block rounded-full bg-[linear-gradient(268.1deg,_#CC035C_7.47%,_#FCB115_98.92%)] px-4 py-[14px] text-center text-[15px] font-medium text-white max-385:px-3 max-385:text-[13px]">Join Us</a>
+                    </div>
+                </div>
+            </div>
     </script>
 
     <script type="module">
@@ -35,7 +47,12 @@
             data() {
                 return {
                     isCustomer: '{{ auth()->guard("customer")->check() }}',
+                    accorian:[];
                 }
+            },
+
+            mounted(){
+
             },
 
             methods: {

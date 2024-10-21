@@ -22,5 +22,6 @@ class DatabaseSeeder extends Seeder
         $this->call(CustomerAttributeAndOptions::class);
         $this->call(FooterSocialMediaLinksSeeder::class);
         $this->call(AttributeTableSeeder::class);
+        $this->call(CmsTableSeeder::class);
     }
 }
