@@ -7,11 +7,13 @@
 @pushOnce('scripts')
     <script type="text/x-template" id="v-blog-card-template">
         <div class="max-w-[280px] cursor-pointer max-lg:max-w-[122px] md:max-w-[256px] lg:max-w-[300px]">
-            <x-shop::media.images.lazy
-                class="w-full rounded-3xl shadow-inner transition-all duration-300 group-hover:scale-105 max-lg:h-32 md:h-60 lg:h-64"
-                ::src="blog.base_image"
-                ::alt="blog.base_image"
-            ></x-shop::media.images.lazy>
+            <div class="h-80 w-full overflow-hidden">
+                <x-shop::media.images.lazy
+                    class="h-full w-full rounded-[20px] object-cover"
+                    ::src="blog.base_image"
+                    ::alt="blog.base_image"
+                ></x-shop::media.images.lazy>
+			</div>
 
             <p
                 class="font-popins mt-[10px] overflow-hidden text-ellipsis whitespace-nowrap text-[20px] font-bold max-sm:text-[14px]"

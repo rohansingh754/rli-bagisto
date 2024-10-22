@@ -9,7 +9,7 @@ Breadcrumbs::for('blog', function (BreadcrumbTrail $trail) {
 
     $trail->push(trans('blog::app.shop.blog.title'), route('shop.article.index'));
 
-    $trail->push(trans('blog::app.shop.blog.announcements'), route('shop.article.index'));
+    $trail->push(trans('blog::app.shop.blog.news_and_updates'), route('shop.article.index'));
 
     $trail->push(trans('blog::app.shop.blog.details_page'), route('shop.article.index'));
 });
@@ -18,5 +18,5 @@ Breadcrumbs::for('blog', function (BreadcrumbTrail $trail) {
 Breadcrumbs::for('blogs', function (BreadcrumbTrail $trail) {
     $trail->parent('home');
 
-    $trail->push(trans('blog::app.shop.blog.announcements'), route('shop.article.index'));
+    $trail->push(trans('blog::app.shop.blog.news_and_updates'), route('shop.article.index'));
 });

@@ -8,61 +8,194 @@
 @pushOnce('scripts')
     <script type="text/x-template" id="v-carousel-template">
 
-		<!-- Hero section -->
-		<div class="grid grid-cols-2 flex-col-reverse overflow-hidden max-1100:flex sm:px-[34px]">
-			<div class="sm:bg-full min-w-full bg-[url('../images/hero-bg.png')] bg-contain bg-right-top bg-no-repeat py-[70px] max-lg:py-5">
-				<div class="m-auto w-full max-w-[532px] px-5 max-1180:max-w-[472px] max-1100:mx-0 max-1100:h-auto sm:px-0">
-					
-					<div class="max-lg:h-[160px] md:h-[250px] lg:h-[250px]">
-						<p class="font-bold text-[#CC035C] max-md:text-[12px] lg:text-xs">
-							@lang('enclaves::app.shop.homepage.slider.title')
-						</p>
-
-						<h1 class="hero-heading mt-2 pr-6 text-[60px] font-bold leading-[74px] max-1180:text-[46px] max-lg:text-[35px] max-lg:leading-[42px] sm:mt-[18px]">
-						</h1>
+		<!-- slider -->
+	 <section class="bg-[url(./../images/hero-bg.png)] bg-cover bg-no-repeat pt-16 max-sm:pt-0">
+		<div class="relative overflow-hidden">
+			<span class="icon-arrow-left absolute left-[23%] top-1/2 z-10 flex h-12 w-12 -translate-y-full cursor-pointer items-center justify-center border-2 border-[#E9E9E9] max-[1400px]:left-[20%] max-[1260px]:left-[18%] max-xl:left-20 max-lg:left-10 max-md:hidden"></span>
+			<span class="icon-arrow-right absolute right-[23%] top-1/2 z-10 flex h-12 w-12 -translate-y-full cursor-pointer items-center justify-center border-2 border-[#E9E9E9] max-[1400px]:right-[20%] max-[1260px]:right-[18%] max-xl:right-20 max-lg:right-10 max-md:hidden"></span>
+			<div class="active group">
+				<div class="homeful-slide mx-auto w-[630px] max-w-full group-[.next]:w-max group-[.prev]:w-max group-[.next]:opacity-60 group-[.prev]:opacity-60">
+					<div class="relative max-w-[574px] overflow-hidden rounded-[20px]">
+						<img src="./../images/hero-1.png" alt="Agapeya Towns" class="w-full rounded-[20px]">
+						<div class="absolute bottom-0 left-0 right-0 flex items-start justify-between gap-4 bg-[linear-gradient(180deg,_#00000000_0%,_#000000_100%)] px-9 pb-9 pt-20 max-sm:flex-wrap max-sm:px-4">
+							<div class="">
+								<h2 class="text-3xl font-bold text-white">Agapeya Towns</h2>
+								<p class="mt-1 text-xl font-normal text-[#CDCDCD]">Calamba, Laguna</p>
+							</div>
+							<a href="./product.html" class="flex items-center gap-2 rounded-full bg-[linear-gradient(268.1deg,_#CC035C_7.47%,_#FCB115_98.92%)] px-4 py-[14px] text-center text-[15px] font-medium text-white">View Project <span class="icon-arrow-right-stylish text-[24px]px] inline-block"></span></a>
+						</div>
 					</div>
-					
-					<a 
-						href="javascript:void(0)" 
-						class="hero-btn mt-[94px] flex h-[100px] max-w-max items-center gap-[18px] rounded-[20px] bg-[linear-gradient(268.1deg,_#CC035C_7.47%,_#FCB115_98.92%)] px-[60px] py-[30px] text-[25px] font-medium text-white max-lg:mt-5 max-lg:h-[50px] max-lg:px-[26px] max-lg:py-[18px] max-lg:text-[14px] sm:text-[25px]"
-					>
-						<span class="" v-text="activeButtonText"></span>
-						<span class="icon-arrow-right-stylish inline-block cursor-pointer text-[18px] font-medium sm:text-[40px]"></span>
-					</a>
-
-					<div class="dot-container hidden"></div>
+					<div class="mt-7 flex justify-between gap-5 max-md:flex-wrap max-md:px-4">
+						<div class="">
+							<p class="text-sm font-normal text-[#8B8B8B]">Starts at</p>
+							<p class="homefull-text-gradient mt-1 text-xl font-bold leading-7">₱2,900,000</p>
+						</div>
+						<div class="w-[127px]">
+							<p class="text-sm font-normal text-[#8B8B8B]">Total Units Sold</p>
+							<p class="mt-1 text-xl font-normal leading-7 text-black">200+</p>
+						</div>
+						<div class="">
+							<p class="text-sm font-normal text-[#8B8B8B]">Product type</p>
+							<p class="mt-1 max-w-[440px] text-xl font-normal leading-7 text-black">2 Storey Duplex (FA: 50sqm LA:70sqm) 2 Bedroom, 1 Toilet & Bath and 1 Carport</p>
+						</div>
+					</div>
 				</div>
 			</div>
-			<div class="et-slider-section sm:mt-[72px]">
-				<div class="et-slider">
-					<a
-						v-for="(image, index) in images"
-						class="fade"
-						ref="slides"
-						rel="preload"
-						aria-label="Image Slide"
-						:href="image.link || '#'"
-						:key="index"
-						>
-						<div 
-							class="shimmer h-[120px] w-[640px]" 
-							v-show="isLoading"
-							>
+			<div class="next z-1 group absolute right-0 top-10 origin-top translate-x-1/2 scale-75 bg-white max-xl:hidden">
+				<div class="homeful-slide mx-auto w-[630px] max-w-full group-[.next]:w-max group-[.prev]:w-max group-[.next]:opacity-60 group-[.prev]:opacity-60">
+					<div class="relative max-w-[574px] overflow-hidden rounded-[20px]">
+						<img src="./../images/hero-1.png" alt="Agapeya Towns" class="w-full rounded-[20px]">
+						<div class="group-[.next]:hi max-sm:px-4dden absolute bottom-0 left-0 right-0 flex items-start justify-between gap-4 bg-[linear-gradient(180deg,_#00000000_0%,_#000000_100%)] px-9 pb-9 pt-20 group-[.prev]:hidden max-sm:flex-wrap">
+							<div class="">
+								<h2 class="text-3xl font-bold text-white">Agapeya Towns</h2>
+								<p class="mt-1 text-xl font-normal text-[#CDCDCD]">Calamba, Laguna</p>
+							</div>
+							<a href="./product.html" class="flex items-center gap-2 rounded-full bg-[linear-gradient(268.1deg,_#CC035C_7.47%,_#FCB115_98.92%)] px-4 py-[14px] text-center text-[15px] font-medium text-white">View Project <span class="icon-arrow-right-stylish text-[24px]px] inline-block"></span></a>
 						</div>
-
-						<img
-							class="aspect-[2.743/1] w-full"
-							:class="image.className"
-							:src="image.image"
-							:srcset="image.image + ' 1920w, ' + image.image.replace('storage', 'cache/large') + ' 1280w,' + image.image.replace('storage', 'cache/medium') + ' 1024w, ' + image.image.replace('storage', 'cache/small') + ' 525w'"
-							alt="homepage-image"
-							@load="onLoad"
-							v-show="! isLoading"
-						/>
-					</a>
+					</div>
+					<div class="group-[.nex max-md:flex-wrapt]:hidden mt-7 flex justify-between gap-5 group-[.prev]:hidden max-md:px-4">
+						<div class="">
+							<p class="text-sm font-normal text-[#8B8B8B]">Starts at</p>
+							<p class="homefull-text-gradient mt-1 text-xl font-bold leading-7">₱2,900,000</p>
+						</div>
+						<div class="w-[127px]">
+							<p class="text-sm font-normal text-[#8B8B8B]">Total Units Sold</p>
+							<p class="mt-1 text-xl font-normal leading-7 text-black">200+</p>
+						</div>
+						<div class="">
+							<p class="text-sm font-normal text-[#8B8B8B]">Product type</p>
+							<p class="mt-1 max-w-[440px] text-xl font-normal leading-7 text-black">2 Storey Duplex (FA: 50sqm LA:70sqm) 2 Bedroom, 1 Toilet & Bath and 1 Carport</p>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="group hidden">
+				<div class="homeful-slide mx-auto w-[630px] max-w-full group-[.next]:w-max group-[.prev]:w-max group-[.next]:opacity-60 group-[.prev]:opacity-60">
+					<div class="relative max-w-[574px] overflow-hidden rounded-[20px]">
+						<img src="./../images/hero-1.png" alt="Agapeya Towns" class="w-full rounded-[20px]">
+						<div class="group-[.next]:hi max-sm:px-4dden absolute bottom-0 left-0 right-0 flex items-start justify-between gap-4 bg-[linear-gradient(180deg,_#00000000_0%,_#000000_100%)] px-9 pb-9 pt-20 group-[.prev]:hidden max-sm:flex-wrap">
+							<div class="">
+								<h2 class="text-3xl font-bold text-white">Agapeya Towns</h2>
+								<p class="mt-1 text-xl font-normal text-[#CDCDCD]">Calamba, Laguna</p>
+							</div>
+							<a href="./product.html" class="flex items-center gap-2 rounded-full bg-[linear-gradient(268.1deg,_#CC035C_7.47%,_#FCB115_98.92%)] px-4 py-[14px] text-center text-[15px] font-medium text-white">View Project <span class="icon-arrow-right-stylish text-[24px]px] inline-block"></span></a>
+						</div>
+					</div>
+					<div class="group-[.nex max-md:flex-wrapt]:hidden mt-7 flex justify-between gap-5 group-[.prev]:hidden max-md:px-4">
+						<div class="">
+							<p class="text-sm font-normal text-[#8B8B8B]">Starts at</p>
+							<p class="homefull-text-gradient mt-1 text-xl font-bold leading-7">₱2,900,000</p>
+						</div>
+						<div class="w-[127px]">
+							<p class="text-sm font-normal text-[#8B8B8B]">Total Units Sold</p>
+							<p class="mt-1 text-xl font-normal leading-7 text-black">200+</p>
+						</div>
+						<div class="">
+							<p class="text-sm font-normal text-[#8B8B8B]">Product type</p>
+							<p class="mt-1 max-w-[440px] text-xl font-normal leading-7 text-black">2 Storey Duplex (FA: 50sqm LA:70sqm) 2 Bedroom, 1 Toilet & Bath and 1 Carport</p>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="group hidden">
+				<div class="homeful-slide mx-auto w-[630px] max-w-full group-[.next]:w-max group-[.prev]:w-max group-[.next]:opacity-60 group-[.prev]:opacity-60">
+					<div class="relative max-w-[574px] overflow-hidden rounded-[20px]">
+						<img src="./../images/hero-1.png" alt="Agapeya Towns" class="w-full rounded-[20px]">
+						<div class="group-[.next]:hi max-sm:px-4dden absolute bottom-0 left-0 right-0 flex items-start justify-between gap-4 bg-[linear-gradient(180deg,_#00000000_0%,_#000000_100%)] px-9 pb-9 pt-20 group-[.prev]:hidden max-sm:flex-wrap">
+							<div class="">
+								<h2 class="text-3xl font-bold text-white">Agapeya Towns</h2>
+								<p class="mt-1 text-xl font-normal text-[#CDCDCD]">Calamba, Laguna</p>
+							</div>
+							<a href="./product.html" class="flex items-center gap-2 rounded-full bg-[linear-gradient(268.1deg,_#CC035C_7.47%,_#FCB115_98.92%)] px-4 py-[14px] text-center text-[15px] font-medium text-white">View Project <span class="icon-arrow-right-stylish text-[24px]px] inline-block"></span></a>
+						</div>
+					</div>
+					<div class="group-[.nex max-md:flex-wrapt]:hidden mt-7 flex justify-between gap-5 group-[.prev]:hidden max-md:px-4">
+						<div class="">
+							<p class="text-sm font-normal text-[#8B8B8B]">Starts at</p>
+							<p class="homefull-text-gradient mt-1 text-xl font-bold leading-7">₱2,900,000</p>
+						</div>
+						<div class="w-[127px]">
+							<p class="text-sm font-normal text-[#8B8B8B]">Total Units Sold</p>
+							<p class="mt-1 text-xl font-normal leading-7 text-black">200+</p>
+						</div>
+						<div class="">
+							<p class="text-sm font-normal text-[#8B8B8B]">Product type</p>
+							<p class="mt-1 max-w-[440px] text-xl font-normal leading-7 text-black">2 Storey Duplex (FA: 50sqm LA:70sqm) 2 Bedroom, 1 Toilet & Bath and 1 Carport</p>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="group hidden">
+				<div class="homeful-slide mx-auto w-[630px] max-w-full group-[.next]:w-max group-[.prev]:w-max group-[.next]:opacity-60 group-[.prev]:opacity-60">
+					<div class="relative max-w-[574px] overflow-hidden rounded-[20px]">
+						<img src="./../images/hero-1.png" alt="Agapeya Towns" class="w-full rounded-[20px]">
+						<div class="group-[.next]:hi max-sm:px-4dden absolute bottom-0 left-0 right-0 flex items-start justify-between gap-4 bg-[linear-gradient(180deg,_#00000000_0%,_#000000_100%)] px-9 pb-9 pt-20 group-[.prev]:hidden max-sm:flex-wrap">
+							<div class="">
+								<h2 class="text-3xl font-bold text-white">Agapeya Towns</h2>
+								<p class="mt-1 text-xl font-normal text-[#CDCDCD]">Calamba, Laguna</p>
+							</div>
+							<a href="./product.html" class="flex items-center gap-2 rounded-full bg-[linear-gradient(268.1deg,_#CC035C_7.47%,_#FCB115_98.92%)] px-4 py-[14px] text-center text-[15px] font-medium text-white">View Project <span class="icon-arrow-right-stylish text-[24px]px] inline-block"></span></a>
+						</div>
+					</div>
+					<div class="group-[.nex max-md:flex-wrapt]:hidden mt-7 flex justify-between gap-5 group-[.prev]:hidden max-md:px-4">
+						<div class="">
+							<p class="text-sm font-normal text-[#8B8B8B]">Starts at</p>
+							<p class="homefull-text-gradient mt-1 text-xl font-bold leading-7">₱2,900,000</p>
+						</div>
+						<div class="w-[127px]">
+							<p class="text-sm font-normal text-[#8B8B8B]">Total Units Sold</p>
+							<p class="mt-1 text-xl font-normal leading-7 text-black">200+</p>
+						</div>
+						<div class="">
+							<p class="text-sm font-normal text-[#8B8B8B]">Product type</p>
+							<p class="mt-1 max-w-[440px] text-xl font-normal leading-7 text-black">2 Storey Duplex (FA: 50sqm LA:70sqm) 2 Bedroom, 1 Toilet & Bath and 1 Carport</p>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="prev z-1 group absolute left-0 top-10 origin-top -translate-x-1/2 scale-75 bg-white max-xl:hidden">
+				<div class="homeful-slide prev mx-auto w-[630px] max-w-full group-[.next]:w-max group-[.prev]:w-max group-[.next]:opacity-60 group-[.prev]:opacity-60">
+					<div class="relative max-w-[574px] overflow-hidden rounded-[20px]">
+						<img src="./../images/hero-1.png" alt="Agapeya Towns" class="w-full rounded-[20px]">
+						<div class="group-[.next]:hi max-sm:px-4dden absolute bottom-0 left-0 right-0 flex items-start justify-between gap-4 bg-[linear-gradient(180deg,_#00000000_0%,_#000000_100%)] px-9 pb-9 pt-20 group-[.prev]:hidden max-sm:flex-wrap">
+							<div class="">
+								<h2 class="text-3xl font-bold text-white">Agapeya Towns</h2>
+								<p class="mt-1 text-xl font-normal text-[#CDCDCD]">Calamba, Laguna</p>
+							</div>
+							<a href="./product.html" class="flex items-center gap-2 rounded-full bg-[linear-gradient(268.1deg,_#CC035C_7.47%,_#FCB115_98.92%)] px-4 py-[14px] text-center text-[15px] font-medium text-white">View Project <span class="icon-arrow-right-stylish text-[24px]px] inline-block"></span></a>
+						</div>
+					</div>
+					<div class="group-[.nex max-md:flex-wrapt]:hidden mt-7 flex justify-between gap-5 group-[.prev]:hidden max-md:px-4">
+						<div class="">
+							<p class="text-sm font-normal text-[#8B8B8B]">Starts at</p>
+							<p class="homefull-text-gradient mt-1 text-xl font-bold leading-7">₱2,900,000</p>
+						</div>
+						<div class="w-[127px]">
+							<p class="text-sm font-normal text-[#8B8B8B]">Total Units Sold</p>
+							<p class="mt-1 text-xl font-normal leading-7 text-black">200+</p>
+						</div>
+						<div class="">
+							<p class="text-sm font-normal text-[#8B8B8B]">Product type</p>
+							<p class="mt-1 max-w-[440px] text-xl font-normal leading-7 text-black">2 Storey Duplex (FA: 50sqm LA:70sqm) 2 Bedroom, 1 Toilet & Bath and 1 Carport</p>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
+		<div class="container">
+			<div class="scrollbar-hide mt-7 overflow-auto pb-9">
+				<div class="homeful-slider-thumbs mx-auto flex w-[max-content] gap-3">
+					<div
+						v-for="category in categories"
+						class="thumb active group w-[75px] cursor-pointer">
+						<img :src="category.images.logo_url" alt="Agapeya" class="rounded-[8px] border border-transparent transition hover:border-primary group-[.active]:border-primary">
+						<p class="mt-[5px] text-[12px] font-normal leading-none text-[#8B8B8B] transition">@{{category.name}}</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	 </section>
+	<!-- slider end -->
     </script>
 
     <script type="module">
@@ -76,144 +209,67 @@
 					activeButtonText: '',
 
 					isLoading: true,
+
+					categories: [],
+
+					activeCategory: {
+						category: null,
+						products: [],
+					},
+
+					sliderData:[],
                 };
             },
 
             mounted() {
-				let sliderImg = document.querySelectorAll('.et-slider img');
-				
-				let active = 0;
 
-				let prev = sliderImg.length - 1;
-
-				let next = 1;
-
-				let dotContainer, dots = [];
-
-				let dummyHeading = document.querySelector('.hero-heading');
-
-				let dummyButton = document.querySelector('.hero-btn');
-
-				let typing;
-
-				let sliderDots = () => {
-					dotContainer = document.querySelector('.dot-container');
-
-					for (let i = 0; i < sliderImg.length; i++) {
-						let span = document.createElement('span')
-
-						if (i == 0) span.classList.add('active')
-
-						span.classList.add('dot')
-
-						dotContainer.appendChild(span);
-					}
-				}
-
-				sliderDots()
-
-				let changeContent = () => {
-					dummyButton.setAttribute('href', this.images[active]['link']);
-
-					let slider_syntax = this.images[active]['slider_syntax'];
-
-					this.activeButtonText = this.images[active]['button_text'];
-
-					slider_syntax = slider_syntax.split('')
-
-					let titleCounts = ''
-
-					let pos = 0;
-
-					clearInterval(typing);
-
-					typing = setInterval(() => {
-						titleCounts += slider_syntax[pos]
-
-						dummyHeading.innerHTML = titleCounts
-
-						pos++;
-
-						if (pos == slider_syntax.length) {
-							clearInterval(typing)
-						}
-					}, 30);
-				}
-
-				changeContent();
-
-				let changeImage = () => {
-					dots = document.querySelectorAll('.dot-container .dot');
-
-					sliderImg.forEach((ele, i) => {
-						if (i === prev) {
-							ele.className = 'prev'
-						} else if (i === active) {
-							ele.className = 'active';
-						} else if (i === next) {
-							ele.className = 'next'
-						} else {
-							ele.className = 'd-none'
-						}
-
-						dots[i].classList.remove('active');
-					})
-
-					dots[active].classList.add('active');
-				}
-
-				changeImage();
-
-				function setSliderInterval() {
-					prev = active;
-
-					active = next;
-
-					if (active + 1 == sliderImg.length) {
-						next = 0;
-					} else {
-						next = active + 1;
-					}
-
-					changeImage()
-
-					changeContent()
-				}
-
-				let sliderInterval = setInterval(() => {
-					setSliderInterval();
-				}, 5000);
-
-				let dotEvents = () => {
-					dots.forEach((ele, i) => {
-						ele.addEventListener('click', () => {
-							active = i;
-
-							if (i == sliderImg.length - 1) {
-								next = 0;
-								prev = active - 1
-							} else if (i == 0) {
-								prev = sliderImg.length - 1;
-								next = active + 1;
-							} else {
-								next = i + 1;
-								prev = active - 1;
-							}
-							
-							changeImage()
-							changeContent()
-							clearInterval(sliderInterval)
-						})
-					})
-				}
-
-				dotEvents();
+				this.getCategories();
             },
 
             methods: {
 				onLoad() {
                     this.isLoading = false;
                 },
+
+				async getCategories() {
+
+					const response = await this.$axios.get("{{ route('shop.api.categories.index', []) }}");
+
+					if(response){
+						this.categories = response.data.data;
+
+						for (const category of this.categories) {
+
+							const products = await this.getCategoryProduct(category.id);
+							console.log(category.id, 'product', products);
+
+							if (products.length) {
+								this.sliderData.push({
+									'category': category,
+									'products': products,
+								});
+							}
+						}
+					}
+                },
+
+				async getCategoryProduct(category_id){
+					let params = {
+						category_id:category_id,
+						limit:10,
+						sort: 'id-desc',
+						featured: 1,
+					}
+
+					try {
+						const response = await this.$axios.get(`{{ route('shop.api.products.index') }}`, { params: params })
+
+						return response.data.data;
+					} catch (error) {
+						console.error(error);
+						return [];
+					}
+				},
             }
         });
     </script>

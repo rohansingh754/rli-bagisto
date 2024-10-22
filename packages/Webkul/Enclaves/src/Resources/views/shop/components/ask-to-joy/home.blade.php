@@ -1,45 +1,38 @@
-<v-partners-carousel
+<v-ask-to-joy-home
     src="{{ $src }}"
     title="{{ $title }}"
     navigation-link="{{ $navigationLink ?? '' }}"
 >
-
-    <div class="container mt-[150px] max-lg:px-[30px] max-sm:mt-[30px]">
-        <div class="shimmer mt-[50px] h-[40px] w-[160px] mx-auto"></div>
-
-        <x-enclaves-shop::shimmer.partners.carousel count="4" />
-    </div>
-
-</v-partners-carousel>
+    <x-enclaves-shop::shimmer.ask-to-joy.home />
+</v-ask-to-joy-home>
 
 @pushOnce('scripts')
-    <script type="text/x-template" id="v-partners-carousel-template">
+    <script type="text/x-template" id="v-ask-to-joy-home-template">
         <!-- Section new place made just for you -->
          <template v-if="isLoading">
-            <div class="container mt-[150px] max-lg:px-[30px] max-sm:mt-[30px]">
-                <div class="shimmer mt-[50px] h-[40px] w-[160px] mx-auto"></div>
-
-                <x-enclaves-shop::shimmer.partners.carousel count="4" />
-            </div>
+                <x-enclaves-shop::shimmer.ask-to-joy.home />
         </template>
 
-        <!-- Partner with Us -->
+        <!-- Ask Joy -->
         <section
             v-else
-            class="bg-[url(./../images/partners-bg.png)] bg-contain bg-bottom bg-no-repeat py-14">
+            class="bg-[url(./../images/ask-joy-bg.png)] bg-cover bg-bottom bg-no-repeat py-32 max-md:py-20">
             <div class="container">
-                <h2 class="text-center text-3xl font-bold text-dark max-sm:text-2xl">Partner with Us</h2>
-
-                <div class="mt-14 grid grid-cols-3 gap-4 max-lg:grid-cols-2 max-md:grid-cols-1">
-                    <x-enclaves-shop::partners.items.carousel-item v-for="partner in blogs" />
+                <div class="flex items-center justify-center gap-7 rounded-[86px] bg-[linear-gradient(268.1deg,_#CC035C_7.47%,_#FCB115_98.92%)] px-6 max-md:py-10 max-md:text-center">
+                    <div class="">
+                        <h2 class="max-w-[352px] text-3xl font-bold text-white max-sm:text-2xl">Need Help in deciding what product to buy?</h2>
+                        <a href="#" class="mt-9 inline-block rounded-full bg-white px-14 py-5 text-lg font-normal text-primary max-lg:mt-4 max-sm:text-base">Ask Joy</a>
+                    </div>
+                    <img src="{{ bagisto_asset('images/ask-joy-img.png') }}" alt="" class="-mb-8 -mt-8 h-[466px] w-[466px] rounded-full max-lg:h-96 max-lg:w-96 max-md:hidden">
                 </div>
             </div>
         </section>
+        <!-- Ask Joy end -->
     </script>
 
     <script type="module">
-        app.component('v-partners-carousel', {
-            template: '#v-partners-carousel-template',
+        app.component('v-ask-to-joy-home', {
+            template: '#v-ask-to-joy-home-template',
 
             props: [
                 'src',

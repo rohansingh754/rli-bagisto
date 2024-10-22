@@ -632,6 +632,12 @@ return [
                     'title'   => 'Contact Us',
                 ],
             ],
+
+            'theme' => [
+                'about-homeful' => [
+                    'title' => 'About Homeful'
+                ]
+            ]
         ],
     ],
 ];

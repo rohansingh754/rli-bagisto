@@ -94,8 +94,9 @@ class EventServiceProvider extends ServiceProvider
             $viewRenderEventManager->addTemplate('enclaves::shop.checkout.onepage.properties.index');
         });
 
-        // Event::listen('bagisto.shop.layout.content.after', function ($viewRenderEventManager) {
-        //     $viewRenderEventManager->addTemplate('enclaves::shop.partners.layouts.index');
-        // });
+        Event::listen('bagisto.shop.layout.content.after', function ($viewRenderEventManager) {
+            $viewRenderEventManager->addTemplate('enclaves::shop.ask-to-joy.layouts.index');
+            $viewRenderEventManager->addTemplate('enclaves::shop.partners.layouts.index');
+        });
     }
 }

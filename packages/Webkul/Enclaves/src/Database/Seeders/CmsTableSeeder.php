@@ -4,12 +4,20 @@ namespace Webkul\Enclaves\Database\Seeders;
 
 use Carbon\Carbon;
 use Illuminate\Database\Seeder;
+use Illuminate\Http\File;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
+
 
 // Path: php artisan db:seed --class="Webkul\\Enclaves\\Database\Seeders\\CmsTableSeeder"
 
 class CmsTableSeeder extends Seeder
 {
+    /**
+     * Base path for the images.
+     */
+    const BASE_PATH = 'packages/Webkul/Enclaves/src/Resources/assets/images/seeders/cms/';
+
     /**
      * Seed the application's database.
      *
@@ -25,7 +33,10 @@ class CmsTableSeeder extends Seeder
                 "meta_title" => 'About us',
                 "meta_description" => 'About us',
                 "meta_keywords" => 'aboutus',
-                "html_content" => view('enclaves::admin.cms.seeders.about-us')->render(),
+                "html_content" => view('enclaves::admin.seeders.cms.about-us', [
+                    'aboutUs' => $this->storeFileIfExists('enclave/cms', 'about-us.png', 'about-us.png'),
+                    'bigLogo' => $this->storeFileIfExists('enclave/cms', 'logo-big.png', 'logo-big.png')
+                ])->render(),
             ],
             [
                 "url_key" => 'contact-us',
@@ -33,7 +44,9 @@ class CmsTableSeeder extends Seeder
                 "meta_title" => 'Contact Us',
                 "meta_description" => 'Contact Us',
                 "meta_keywords" => 'contactus',
-                "html_content" => view('enclaves::admin.cms.seeders.contact-us')->render(),
+                "html_content" => view('enclaves::admin.seeders.cms.contact-us', [
+                    'mainImage' => $this->storeFileIfExists('enclave/cms', 'contact.png', 'contact.png')
+                ])->render(),
             ],
         ];
 
@@ -71,6 +84,26 @@ class CmsTableSeeder extends Seeder
                     ],
                 ]);
             }
+        }
+    }
+
+    /**
+     * Store image in storage.
+     *
+     * @return void
+     */
+    public function storeFileIfExists($targetPath, $file, $default = null)
+    {
+        if (file_exists(base_path(self::BASE_PATH . $file))) {
+            return 'storage/' . Storage::putFile($targetPath, new File(base_path(self::BASE_PATH . $file)));
+        }
+
+        if (! $default) {
+            return;
+        }
+
+        if (file_exists(base_path(self::BASE_PATH . $default))) {
+            return 'storage/' . Storage::putFile($targetPath, new File(base_path(self::BASE_PATH . $default)));
         }
     }
 }

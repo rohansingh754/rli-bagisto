@@ -51,7 +51,7 @@
 
                 <section class="py-11">
                     <div class="flex items-center justify-between rounded-[20px] border border-[#D9D9D9] px-6 py-5 max-sm:px-3 max-sm:py-3">
-                        <img src="./../images/elanvital-product.png" alt="" class="max-sm:w-1/2">
+                        <img src="{{ bagisto_asset('images/elanvital-product.png') }}" alt="" class="max-sm:w-1/2">
                         <a href="#" class="block px-6 py-5 text-lg font-normal text-primary underline max-sm:px-2">Store Details</a>
                     </div>
                 </section>
