@@ -22,8 +22,8 @@
                     Here’s how it works
                 </p>
                 <div class="mt-7 flex items-center justify-between gap-[2px]">
-                    <a href="#" class="block rounded-full border border-primary px-6 py-[18px] text-center text-lg font-normal text-primary max-xl:w-2/5 max-xl:px-2 max-sm:text-base">Read more</a>
-                    <a href="#" class="block rounded-full bg-[linear-gradient(268.1deg,_#CC035C_7.47%,_#FCB115_98.92%)] px-20 py-5 text-center text-lg font-normal text-white max-[1270px]:px-14 max-xl:w-3/5 max-xl:px-2 max-sm:text-base">Join Us</a>
+                    <a href="#" class="block w-2/5 rounded-full border border-primary px-2 py-[18px] text-center text-lg font-normal text-primary max-sm:py-3 max-sm:text-base">Read more</a>
+                    <a href="#" class="block w-3/5 rounded-full bg-[linear-gradient(268.1deg,_#CC035C_7.47%,_#FCB115_98.92%)] px-2 py-5 text-center text-lg font-normal text-white max-sm:py-3 max-sm:text-base">Join Us</a>
                 </div>
             </div>
     </script>
