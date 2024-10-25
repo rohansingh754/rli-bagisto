@@ -46,8 +46,7 @@ class EnclaveMenuController extends Controller
             ],
             [
                 'label' => 'Our Brands',
-                'type'  => 'link',
-                'url'   => './our-brand',
+                'type'  => 'button',
                 'visible' => true,
                 'submenu' => $this->productCategories(),
             ],

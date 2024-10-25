@@ -11,7 +11,6 @@
     @endif
 @endPush
 
-
 @push ('styles')
     <style>
         .product-price p {
@@ -51,8 +50,18 @@
 
                 <section class="py-11">
                     <div class="flex items-center justify-between rounded-[20px] border border-[#D9D9D9] px-6 py-5 max-sm:px-3 max-sm:py-3">
-                        <img src="{{ bagisto_asset('images/elanvital-product.png') }}" alt="" class="max-sm:w-1/2">
-                        <a href="#" class="block px-6 py-5 text-lg font-normal text-primary underline max-sm:px-2">Store Details</a>
+                        <div class="h-[70px] w-[230px] overflow-hidden max-md:h-[60px] max-md:w-[160px] max-sm:w-1/3">
+                            <img
+                                class="w-full h-full"
+                                src="{{ asset('storage/' . $category->logo_path) }}"
+                                alt="">
+                        </div>
+                        <button
+                            class="block px-6 py-5 text-lg font-normal text-primary underline max-sm:px-2"
+                            @click="storeDeails()"
+                            >
+                            Store Details
+                        </button>
                     </div>
                 </section>
 
@@ -174,6 +183,92 @@
                         </div>
                     </div>
                 </div>
+
+                <x-enclaves-shop::modal.story-details ref="storyDetailsGuideModal">
+                    <!-- Modal Header -->
+                    <x-slot:header>
+                        <div class="flex w-full">
+                            <h2 class="text-[25px] font-bold max-md:text-[10px]">
+                                @lang('Store Details')
+                            </h2>
+                        </div>
+                    </x-slot:header>
+
+                    <!-- Modal Content Id -->
+                    <x-slot:content>
+                        <div class="flex h-[320px] flex-col gap-2 overflow-auto max-md:px-[10px] md:gap-5">
+                            <div class="flex h-[366px]">
+
+                                <div class="h-full w-[323px] overflow-hidden rounded-[20px] flex justify-center items-center">
+                                    <div>
+                                        <img
+                                            class="w-10/12 max-h-full rounded-[20px]"
+                                            src="{{ asset('storage/' . $category->logo_path) }}"
+                                            alt="">
+                                    </div>
+                                </div>
+
+                                <div class="h-full w-[531px] pl-[50px]">
+                                    <p class="text-[15px] font-normal max-md:text-[10px]">
+                                        Amenities include a clubhouse, basketball court, swimming pool, and playgrounds for the convenience and happiness of Filipino families.
+                                    </p>
+                                    <p class="text-[15px] font-normal max-md:text-[10px] mt-2.5">
+                                        They offer exquisitely crafted homes and condominium units with modern architectural features and practical layouts in an exclusive gated community.
+                                    </p>
+                                    <p class="text-[15px] font-normal max-md:text-[10px] mt-2.5">
+                                        Elanvital Enclaves is Joy-Nostalg Raemulan Lands' Middle Income Market Segment.
+                                    </p>
+                                    <p class="text-[15px] font-normal max-md:text-[10px]">
+                                        Amenities include a clubhouse, basketball court, swimming pool, and playgrounds for the convenience and happiness of Filipino families.
+                                    </p>
+                                    <p class="text-[15px] font-normal max-md:text-[10px] mt-2.5">
+                                        They offer exquisitely crafted homes and condominium units with modern architectural features and practical layouts in an exclusive gated community.
+                                    </p>
+                                    <p class="text-[15px] font-normal max-md:text-[10px] mt-2.5">
+                                        Elanvital Enclaves is Joy-Nostalg Raemulan Lands' Middle Income Market Segment.
+                                    </p>
+                                    <p class="text-[15px] font-normal max-md:text-[10px]">
+                                        Amenities include a clubhouse, basketball court, swimming pool, and playgrounds for the convenience and happiness of Filipino families.
+                                    </p>
+                                    <p class="text-[15px] font-normal max-md:text-[10px] mt-2.5">
+                                        They offer exquisitely crafted homes and condominium units with modern architectural features and practical layouts in an exclusive gated community.
+                                    </p>
+                                    <p class="text-[15px] font-normal max-md:text-[10px] mt-2.5">
+                                        Elanvital Enclaves is Joy-Nostalg Raemulan Lands' Middle Income Market Segment.
+                                    </p>
+                                    <p class="text-[15px] font-normal max-md:text-[10px]">
+                                        Amenities include a clubhouse, basketball court, swimming pool, and playgrounds for the convenience and happiness of Filipino families.
+                                    </p>
+                                    <p class="text-[15px] font-normal max-md:text-[10px] mt-2.5">
+                                        They offer exquisitely crafted homes and condominium units with modern architectural features and practical layouts in an exclusive gated community.
+                                    </p>
+                                    <p class="text-[15px] font-normal max-md:text-[10px] mt-2.5">
+                                        Elanvital Enclaves is Joy-Nostalg Raemulan Lands' Middle Income Market Segment.
+                                    </p>
+                                    <p class="text-[15px] font-normal max-md:text-[10px]">
+                                        Amenities include a clubhouse, basketball court, swimming pool, and playgrounds for the convenience and happiness of Filipino families.
+                                    </p>
+                                    <p class="text-[15px] font-normal max-md:text-[10px] mt-2.5">
+                                        They offer exquisitely crafted homes and condominium units with modern architectural features and practical layouts in an exclusive gated community.
+                                    </p>
+                                    <p class="text-[15px] font-normal max-md:text-[10px] mt-2.5">
+                                        Elanvital Enclaves is Joy-Nostalg Raemulan Lands' Middle Income Market Segment.
+                                    </p>
+                                    <p class="text-[15px] font-normal max-md:text-[10px]">
+                                        Amenities include a clubhouse, basketball court, swimming pool, and playgrounds for the convenience and happiness of Filipino families.
+                                    </p>
+                                    <p class="text-[15px] font-normal max-md:text-[10px] mt-2.5">
+                                        They offer exquisitely crafted homes and condominium units with modern architectural features and practical layouts in an exclusive gated community.
+                                    </p>
+                                    <p class="text-[15px] font-normal max-md:text-[10px] mt-2.5">
+                                        Elanvital Enclaves is Joy-Nostalg Raemulan Lands' Middle Income Market Segment.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </x-slot:content>
+
+                </x-enclaves-shop::modal.story-details>
             </div>
         </script>
 
@@ -339,6 +434,10 @@
                             low: products.filter(product => product.prices.final.price <= 50),
                             medium: products.filter(product => product.prices.final.price > 50)
                         };
+                    },
+
+                    storeDeails(){
+                        this.$refs.storyDetailsGuideModal.toggle();
                     }
                 },
             });

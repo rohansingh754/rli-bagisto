@@ -56,6 +56,9 @@
             <!-- Confirm Modal Blade Component -->
             <x-shop::modal.confirm />
 
+            <!-- Ask to Joy Modal Blade Component -->
+            <x-shop::modal.ask-to-joy />
+
                 <!-- Page Header Blade Component -->
                 @if ($hasHeader)
                     <x-shop::layouts.header />

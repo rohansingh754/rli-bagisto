@@ -17,6 +17,23 @@
                         @load="onMediaLoad()"
                     >
                     </x-shop::media.images.lazy>
+
+                    <div
+                        class="w-full h-full min-w-[450px] rounded-xl"
+                        v-if="baseFile.type == 'video'"
+                    >
+                        <video
+                            controls
+                            width="475"
+                            @loadeddata="onMediaLoad()"
+                            alt="{{ $product->name }}"
+                        >
+                            <source
+                                :src="baseFile.path"
+                                type="video/mp4"
+                            />
+                        </video>
+                    </div>
                 </div>
             </div>
             <div class="scrollbar-hide mt-7 overflow-auto pb-9 max-sm:pb-0">
@@ -36,8 +53,30 @@
                         </div>
                         <p class="mt-[5px] text-[8px] font-normal leading-none text-[#8B8B8B] transition group-[.active]:text-primary">Facade</p>
                     </div>
+
+                    <div
+                        v-for="(video, index) in media.videos"
+                        class="thumb group w-[82px] cursor-pointer"
+                        :class="activeIndex === 'video_' + index ? 'active' : ''"
+                        >
+                        <div class="h-[50px] w-[75px] overflow-hidden">
+                            <video
+                                class="h-full w-full rounded-[8px] border border-transparent object-cover transition hover:border-primary group-[.active]:border-primary"
+                                @click="change(video, `video_${index}`)"
+                                alt="{{ $product->name }}"
+                            >
+                                <source
+                                    :src="video.video_url"
+                                    type="video/mp4"
+                                />
+                            </video>
+                        </div>
+                        <p class="mt-[5px] text-[8px] font-normal leading-none text-[#8B8B8B] transition group-[.active]:text-primary">Facade</p>
+
+                    </div>
+                    <!-- Need to Set Play Button  -->
                 </div>
-                     <p
+                    <p
                         v-if="media.images.length >= imageLimit"
                         class="absolute right-[0px] top-[0px] cursor-pointer rounded-[5px] bg-black p-[6px] text-[14px] leading-[normal] text-white"
                         v-text="'+' + (media.images.length - imageLimit)"
@@ -178,6 +217,9 @@
 
                     this.baseFile.path = this.media.videos[0].video_url;
                 }
+
+            console.log('media', this.media);
+
             },
 
             beforeDestroy() {
@@ -231,6 +273,9 @@
                     }
 
                     this.activeIndex = index;
+
+                    console.log('change', this.baseFile, this.activeIndex);
+
                 },
 
                 navigate(index) {

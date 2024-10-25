@@ -21,7 +21,11 @@
                 <div class="flex items-center justify-center gap-7 rounded-[86px] bg-[linear-gradient(268.1deg,_#CC035C_7.47%,_#FCB115_98.92%)] px-6 max-md:py-10 max-md:text-center">
                     <div class="">
                         <h2 class="max-w-[352px] text-3xl font-bold text-white max-sm:text-2xl">Need Help in deciding what product to buy?</h2>
-                        <a href="#" class="mt-9 inline-block rounded-full bg-white px-14 py-5 text-lg font-normal text-primary max-lg:mt-4 max-sm:text-base">Ask Joy</a>
+                        <span
+                            @click="$emitter.emit('open-ask-to-joy-modal')"
+                            class="mt-9 inline-block rounded-full bg-white px-14 py-5 text-lg font-normal text-primary max-lg:mt-4 max-sm:text-base cursor-pointer">
+                            Ask Joy
+                        </span>
                     </div>
                     <img src="{{ bagisto_asset('images/ask-joy-img.png') }}" alt="" class="-mb-8 -mt-8 h-[466px] w-[466px] rounded-full max-lg:h-96 max-lg:w-96 max-md:hidden">
                 </div>
