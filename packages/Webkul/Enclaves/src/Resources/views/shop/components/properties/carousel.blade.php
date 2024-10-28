@@ -24,7 +24,7 @@
                         <div class="h-40 w-full overflow-hidden">
                             <x-shop::media.images.lazy
                                 class="h-full w-full rounded-lg object-contain"
-                                ::src="category.images.community_banner_path ?? category.images.banner_url"
+                                ::src="category.images.logo_url"
                             ></x-shop::media.images.lazy>
                         </div>
 

@@ -41,6 +41,7 @@ class EnclaveMenuController extends Controller
                 'label' => 'Ask Joy',
                 'type'  => 'button',
                 'modal' => 'ask-joy-modal',
+                'class' => 'openAskToJoyModel',
                 'visible' => true,
                 'submenu' => []
             ],

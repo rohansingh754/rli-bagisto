@@ -620,7 +620,9 @@ return [
 
         'seeders' => [
             'attribute' => [
-                'redirect_uri' => 'Ekyc Redirect Url',
+                'redirect_uri'                => 'Ekyc Redirect Url',
+                'schedule_redirect_visit_url' => 'Ekyc Redirect Url',
+                'avail_now_redirect_url'      => 'Ekyc Redirect Url',
             ],
 
             'pages' => [

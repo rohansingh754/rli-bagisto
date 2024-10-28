@@ -107,8 +107,4 @@ Route::group(['middleware' => ['locale', 'theme', 'currency']], function () {
 
         Route::get('{id}', 'view')->name('shop.partner.view');
     });
-
-    Route::controller(PartnersController::class)->prefix('partners')->group(function () {
-        Route::get('/', 'index')->name('shop.partners.index');
-    });
 });

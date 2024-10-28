@@ -52,7 +52,7 @@
                     <div class="flex items-center justify-between rounded-[20px] border border-[#D9D9D9] px-6 py-5 max-sm:px-3 max-sm:py-3">
                         <div class="h-[70px] w-[230px] overflow-hidden max-md:h-[60px] max-md:w-[160px] max-sm:w-1/3">
                             <img
-                                class="w-full h-full"
+                                class="w-full h-full object-contain object-left"
                                 src="{{ asset('storage/' . $category->logo_path) }}"
                                 alt="">
                         </div>
@@ -118,7 +118,7 @@
                                                     class="">
                                                     <x-shop::media.images.lazy
                                                         @click="redirectToProduct(product)"
-                                                        class="w-full cursor-pointer rounded-sm bg-[#F5F5F5] transition-all duration-300 group-hover:scale-105"
+                                                        class="w-full cursor-pointer rounded-lg bg-[#F5F5F5] transition-all duration-300 group-hover:scale-105"
                                                         ::key="imageComponentRerander"
                                                         ::src="product.base_image.medium_image_url"
                                                     ></x-shop::media.images.lazy>
@@ -198,7 +198,6 @@
                     <x-slot:content>
                         <div class="flex h-[320px] flex-col gap-2 overflow-auto max-md:px-[10px] md:gap-5">
                             <div class="flex h-[366px]">
-
                                 <div class="h-full w-[323px] overflow-hidden rounded-[20px] flex justify-center items-center">
                                     <div>
                                         <img
@@ -267,7 +266,6 @@
                             </div>
                         </div>
                     </x-slot:content>
-
                 </x-enclaves-shop::modal.story-details>
             </div>
         </script>
@@ -360,9 +358,6 @@
 
                             this.groupProducts(this.products);
 
-                            console.log(this.products);
-
-
                             this.links = response.data.links;
                         }).catch(error => {
                             console.log(error);
@@ -430,9 +425,11 @@
                     },
 
                     groupProducts(products){
+                        let comparePrice = 3000000;
+
                         this.priceGroupProducts = {
-                            low: products.filter(product => product.prices.final.price <= 50),
-                            medium: products.filter(product => product.prices.final.price > 50)
+                            low: products.filter(product => product.prices.final.price <= comparePrice),
+                            medium: products.filter(product => product.prices.final.price > comparePrice)
                         };
                     },
 

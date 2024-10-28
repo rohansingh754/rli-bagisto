@@ -9,7 +9,7 @@
                 <div class="">
                     <x-shop::media.images.lazy
                         alt="{{ trans('shop::app.products.view.gallery.product-image') }}"
-                        class="w-full cursor-pointer rounded-[10px] max-lg:h-[240px] lg:h-[431px]"
+                        class="w-full cursor-pointer rounded-[10px] max-lg:h-[240px] lg:h-[431px] object-cover"
                         v-show="! isMediaLoading"
                         v-if="baseFile.type == 'image'"
                         ::key="refreshBaseImageComponent"
@@ -19,7 +19,7 @@
                     </x-shop::media.images.lazy>
 
                     <div
-                        class="w-full h-full min-w-[450px] rounded-xl"
+                        class="w-full h-full min-w-[450px] rounded-xl  max-lg:h-[240px] lg:h-[431px] overflow-hidden flex items-center justify-center"
                         v-if="baseFile.type == 'video'"
                     >
                         <video
@@ -27,6 +27,7 @@
                             width="475"
                             @loadeddata="onMediaLoad()"
                             alt="{{ $product->name }}"
+                            class="max-w-full h-auto object-contain"
                         >
                             <source
                                 :src="baseFile.path"

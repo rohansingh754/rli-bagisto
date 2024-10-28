@@ -44,7 +44,7 @@
                         class="relative h-full pb-14">
                         <div class="h-80 min-h-80 max-h-80">
                             <x-shop::media.images.lazy
-                                class="relative h-full w-full"
+                                class="relative h-full w-full object-contain"
                                 ::src="blog.base_image"
                                 ::alt="blog.base_image"
                             ></x-shop::media.images.lazy>
@@ -117,7 +117,7 @@
 
                     <!-- Modal Content Id -->
                     <x-slot:content>
-                        <div class="flex h-[320px] flex-col gap-2 overflow-auto max-md:px-[10px]">
+                        <div class="flex h-full max-h-[60vh] flex-col gap-2 overflow-auto max-md:px-[10px]">
                             <div class="mx-auto w-[360px] max-sm:w-full">
                                 <form action="">
                                     <div class="">

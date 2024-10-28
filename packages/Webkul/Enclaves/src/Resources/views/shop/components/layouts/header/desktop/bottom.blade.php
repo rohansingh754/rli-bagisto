@@ -45,6 +45,7 @@
                     <span
                         v-if="menu.type == 'button'"
                         class="text-lg font-normal text-dark transitio hover:text-primary cursor-pointer"
+                        :class="menu.class ?? ''"
                         v-text="menu.label"
                         >
                     </span>
@@ -87,18 +88,24 @@
 
         mounted() {
             this.getMenus();
+
         },
 
+        watch: {
+            menus() {
+                this.attachListeners();
+            }
+        },
         methods: {
             getMenus() {
                 this.$axios.get("{{ route('enclaves.api.menus') }}")
-                    .then(response => {
-                        this.isLoading = false;
+                .then(response => {
+                    this.isLoading = false;
 
-                        this.menus = response.data.data;
-                    }).catch(error => {
-                        console.log(error);
-                    });
+                    this.menus = response.data.data;
+                }).catch(error => {
+                    console.log(error);
+                });
             },
 
             get() {
@@ -119,6 +126,22 @@
 
                     return result;
                 }, []);
+            },
+
+            openAskToJoyModel(){
+                console.log('check');
+
+            },
+
+            attachListeners() {
+                this.$nextTick(() => {
+                    let openModels = document.getElementsByClassName('openAskToJoyModel');
+                    Array.from(openModels).forEach(e => {
+                        e.addEventListener('click', () => {
+                            this.$emitter.emit('open-ask-to-joy-modal');
+                        });
+                    });
+                });
             }
         },
     });

@@ -31,7 +31,7 @@
                 <h2 class="text-center text-3xl font-bold text-dark max-sm:text-2xl">Partner with Us</h2>
 
                 <div class="mt-14 grid grid-cols-3 gap-4 max-lg:grid-cols-2 max-md:grid-cols-1">
-                    <x-enclaves-shop::partners.items.carousel-item v-for="partner in blogs" />
+                    <x-enclaves-shop::partners.items.carousel-item v-for="partner in partners" />
                 </div>
             </div>
         </section>
@@ -49,16 +49,18 @@
 
             data() {
                 return {
-                    isLoading: true,
+                    isLoading: false,
 
                     blogs: [],
+
+                    partners: [1,2,3],
 
                     offset: 323,
                 };
             },
 
             mounted() {
-                this.getblogs();
+                {{-- this.getblogs(); --}}
             },
 
             methods: {
