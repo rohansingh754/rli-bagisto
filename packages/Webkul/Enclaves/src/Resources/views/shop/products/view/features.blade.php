@@ -3,6 +3,7 @@
 	<div class="mt-6 grid max-w-[652px] grid-cols-2 gap-x-12 gap-y-3 max-xl:grid-cols-1 max-md:grid-cols-2 max-md:gap-x-6 max-sm:grid-cols-1">
 	@php
 		unset($attributeData[10]);
+
 	@endphp
 
 	@foreach ($attributeData as $attribute)

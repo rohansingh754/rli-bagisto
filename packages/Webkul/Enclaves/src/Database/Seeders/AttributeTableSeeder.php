@@ -43,8 +43,8 @@ class AttributeTableSeeder extends Seeder
                 'updated_at'          => $now,
             ],
             [
-                'code'                => 'schedule_redirect_visit_url',
-                'admin_name'          => trans('enclaves::app.admin.seeders.attribute.schedule_redirect_visit_url', [], $defaultLocale),
+                'code'                => 'schedule_visit_redirect_url',
+                'admin_name'          => trans('enclaves::app.admin.seeders.attribute.schedule_visit_redirect_url', [], $defaultLocale),
                 'type'                => 'text',
                 'validation'          => null,
                 'position'            => 1,

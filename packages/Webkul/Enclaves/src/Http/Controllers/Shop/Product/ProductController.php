@@ -3,13 +3,19 @@
 namespace Webkul\Enclaves\Http\Controllers\Shop\Product;
 
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Resources\Json\JsonResource;
 use Webkul\Customer\Repositories\CustomerRepository;
-use Webkul\Enclaves\Helpers\Customer\CustomerHelper;
-use Webkul\Enclaves\Http\Controllers\Controller;
+use Webkul\Marketing\Jobs\UpdateCreateSearchTerm as UpdateCreateSearchTermJob;
 use Webkul\Product\Repositories\ProductRepository;
 use Webkul\Category\Repositories\CategoryRepository;
 use Webkul\Marketing\Repositories\URLRewriteRepository;
 use Webkul\Theme\Repositories\ThemeCustomizationRepository;
+// use Webkul\Shop\Http\Resources\ProductResource;
+use Webkul\Enclaves\Helpers\Customer\CustomerHelper;
+use Webkul\Enclaves\Http\Controllers\Controller;
+use Webkul\Product\Helpers\View as ProductViewHelper;
+use Webkul\Enclaves\Http\Resources\ProductResource;
+
 class ProductController extends Controller
 {
     /**
@@ -18,7 +24,7 @@ class ProductController extends Controller
      * @var int Status
      */
     protected const STATUS = 1;
-    
+
     /**
      * Create a new controller instance.
      *
@@ -29,9 +35,9 @@ class ProductController extends Controller
         protected CustomerRepository $customerRepository,
         protected CategoryRepository $categoryRepository,
         protected ThemeCustomizationRepository $themeCustomizationRepository,
-        protected URLRewriteRepository $urlRewriteRepository
-    ) {
-    }
+        protected URLRewriteRepository $urlRewriteRepository,
+        protected ProductViewHelper $productViewHelper,
+    ) {}
 
     /**
      * Show the view for the specified resource.
@@ -61,5 +67,34 @@ class ProductController extends Controller
         return new JsonResponse([
             'message' => trans('shop::app.customers.account.profile.edit-success'),
         ]);
+    }
+
+    /**
+     * Product listings.
+     */
+    public function getProducts(): JsonResource
+    {
+        $products = $this->productRepository->getAll(request()->query());
+
+        if (! empty(request()->query('query'))) {
+            /**
+             * Update or create search term only if
+             * there is only one filter that is query param
+             */
+            if (count(request()->except(['mode', 'sort', 'limit'])) == 1) {
+                UpdateCreateSearchTermJob::dispatch([
+                    'term'       => request()->query('query'),
+                    'results'    => $products->total(),
+                    'channel_id' => core()->getCurrentChannel()->id,
+                    'locale'     => app()->getLocale(),
+                ]);
+            }
+        }
+
+        foreach ($products as $product) {
+            $product->attributes = $this->productViewHelper->getAdditionalData($product);
+        }
+
+        return ProductResource::collection($products);
     }
 }

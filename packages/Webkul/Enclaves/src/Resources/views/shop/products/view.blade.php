@@ -10,6 +10,9 @@
 
     $attributeData = collect($customAttributeValues)->filter(fn ($item) => ! empty($item['value']));
 
+    $attributeDatakeyValue = collect($attributeData)->mapWithKeys(function ($item) {
+                                return [$item['code'] => $item['value']];
+                            })->all();
 @endphp
 
 <!-- SEO Meta Content -->
@@ -155,8 +158,8 @@
                                 </div>
 
                                 <div class="max-md:w-full max-sm:grid">
-                                    <h1 class="text-3xl font-medium text-dark max-sm:mt-6 max-sm:text-xl">Agapeya Towns</h1>
-                                    <p class="mt-2 text-lg font-normal text-primary max-sm:text-sm max-sm:font-semibold">Calamba, Laguna</p>
+                                    <h1 class="text-3xl font-medium text-dark max-sm:mt-6 max-sm:text-xl">{{$product->name}}</h1>
+                                    <p class="mt-2 text-lg font-normal text-primary max-sm:text-sm max-sm:font-semibold">{{ $attributeDatakeyValue['location'] }}</p>
                                     <div class="mt-8 flex gap-5 max-sm:-order-1 max-sm:mt-0">
                                         <div class="">
                                             <p class="text-sm font-normal text-[#8B8B8B] max-sm:text-[12px]">Price Starts At</p>
@@ -167,10 +170,15 @@
                                             <p class="mt-1 text-xl font-normal leading-7 text-black max-sm:mt-[2px] max-sm:font-bold">200+</p>
                                         </div>
                                     </div>
+
+                                    {{-- <div class="flex flex-col">
+                                        @include('shop::products.view.types.configurable')
+                                    </div> --}}
+
                                     <div class="flex items-center justify-center gap-7 bg-white max-[880px]:flex-wrap max-md:fixed max-md:inset-x-0 max-md:bottom-0 max-md:z-50 max-md:flex-nowrap max-md:px-6 max-md:py-4 max-md:shadow-[0px_-3px_11px] max-md:shadow-black/10 max-sm:gap-5 max-[390px]:gap-3 max-[390px]:px-4 md:mt-6 md:justify-start">
                                         <span
-                                            class="flex flex-col items-center gap-1 text-sm font-normal text-primary underline max-md:text-[#8B8B8B] max-md:no-underline max-sm:text-[12px] cursor-pointer"
-                                            @click="toggleScheduleVisit()"
+                                            class="flex flex-col items-center gap-1 text-sm font-normal text-primary underline max-md:text-[#8B8B8B] max-md:no-underline max-sm:text-[12px] {{ ! $product->schedule_visit_redirect_url ? 'opacity-[0.4]' : 'cursor-pointer' }}"
+                                            @click="{{ $product->schedule_visit_redirect_url ? 'toggleScheduleVisit()' : '' }}"
                                             >
                                             <span>
                                                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -189,7 +197,8 @@
                                         <button
                                             {{-- type="submit" --}}
                                             @click="toggleAvailNowVisit()"
-                                            class="flex items-center gap-2 rounded-full bg-[linear-gradient(268.1deg,_#CC035C_7.47%,_#FCB115_98.92%)] px-9 py-[14px] text-base font-medium text-white max-sm:gap-1.5 max-sm:px-5 max-sm:py-2 max-[390px]:gap-0.5 max-[390px]:px-3 max-[390px]:text-[12px]"
+                                            class="flex items-center gap-2 rounded-full bg-[linear-gradient(268.1deg,_#CC035C_7.47%,_#FCB115_98.92%)] px-9 py-[14px] text-base font-medium text-white max-sm:gap-1.5 max-sm:px-5 max-sm:py-2 max-[390px]:gap-0.5 max-[390px]:px-3 max-[390px]:text-[12px] disabled:opacity-[0.4]"
+                                            {{ ! $product->avail_now_redirect_url ? 'disabled' : '' }}
                                             >
                                             <span class="font-bold">Avail Now
                                                 </span> {{core()->formatPrice($product->price)}}
@@ -488,14 +497,13 @@
                         },
 
                         toggleScheduleVisit() {
-                            {{-- window.location.href = '{{$product->schedule_redirect_visit_url}}'; --}}
-                            this.$refs.scheduleVisitModal.toggle();
+                            window.location.href = '{{$product->schedule_visit_redirect_url}}';
+                            {{-- this.$refs.scheduleVisitModal.toggle(); --}}
                         },
 
                         toggleAvailNowVisit(){
-                            {{-- window.location.href = '{{$product->ekyc_redirect_uri}}'; --}}
-
-                            this.$refs.productQuickGuideModal.toggle();
+                            window.location.href = '{{$product->avail_now_redirect_url}}';
+                            {{-- this.$refs.productQuickGuideModal.toggle(); --}}
                         },
 
                         addToCart(params) {

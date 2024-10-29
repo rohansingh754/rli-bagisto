@@ -86,7 +86,7 @@
                                                     class="">
                                                     <x-shop::media.images.lazy
                                                         @click="redirectToProduct(product)"
-                                                        class="w-full cursor-pointer rounded-sm bg-[#F5F5F5] transition-all duration-300 group-hover:scale-105"
+                                                        class="w-full cursor-pointer bg-[#F5F5F5] transition-all duration-300 group-hover:scale-105 rounded-lg"
                                                         ::key="imageComponentRerander"
                                                         ::src="product.base_image.medium_image_url"
                                                     ></x-shop::media.images.lazy>
@@ -94,7 +94,7 @@
                                                         class="mt-5 text-xl font-bold text-dark"
                                                         v-text="product.name"
                                                         ></h2>
-                                                    <p class="mt-1 text-lg font-normal text-primary">Calamba, Laguna</p>
+                                                    <p class="mt-1 text-lg font-normal text-primary">@{{ product.attributes.find(attr => attr.code === 'location').value }}</p>
                                                     <p class="mt-2 text-sm font-normal text-[#8B8B8B]">Price starts at</p>
                                                     <p
                                                         class="mt-1 text-xl font-bold text-dark"
@@ -126,7 +126,7 @@
                                                         class="mt-5 text-xl font-bold text-dark"
                                                         v-text="product.name"
                                                         ></h2>
-                                                    <p class="mt-1 text-lg font-normal text-primary">Calamba, Laguna</p>
+                                                    <p class="mt-1 text-lg font-normal text-primary">@{{ product.attributes.find(attr => attr.code === 'location').value }}</p>
                                                     <p class="mt-2 text-sm font-normal text-[#8B8B8B]">Price starts at</p>
                                                     <p
                                                         class="mt-1 text-xl font-bold text-dark"
@@ -196,72 +196,19 @@
 
                     <!-- Modal Content Id -->
                     <x-slot:content>
-                        <div class="flex h-[320px] flex-col gap-2 overflow-auto max-md:px-[10px] md:gap-5">
+                        <div class="flex flex-col gap-2 max-md:px-[10px] md:gap-5">
                             <div class="flex h-[366px]">
                                 <div class="h-full w-[323px] overflow-hidden rounded-[20px] flex justify-center items-center">
                                     <div>
-                                        <img
+                                        <x-shop::media.images.lazy
                                             class="w-10/12 max-h-full rounded-[20px]"
                                             src="{{ asset('storage/' . $category->logo_path) }}"
-                                            alt="">
+                                        ></x-shop::media.images.lazy>
                                     </div>
                                 </div>
 
-                                <div class="h-full w-[531px] pl-[50px]">
-                                    <p class="text-[15px] font-normal max-md:text-[10px]">
-                                        Amenities include a clubhouse, basketball court, swimming pool, and playgrounds for the convenience and happiness of Filipino families.
-                                    </p>
-                                    <p class="text-[15px] font-normal max-md:text-[10px] mt-2.5">
-                                        They offer exquisitely crafted homes and condominium units with modern architectural features and practical layouts in an exclusive gated community.
-                                    </p>
-                                    <p class="text-[15px] font-normal max-md:text-[10px] mt-2.5">
-                                        Elanvital Enclaves is Joy-Nostalg Raemulan Lands' Middle Income Market Segment.
-                                    </p>
-                                    <p class="text-[15px] font-normal max-md:text-[10px]">
-                                        Amenities include a clubhouse, basketball court, swimming pool, and playgrounds for the convenience and happiness of Filipino families.
-                                    </p>
-                                    <p class="text-[15px] font-normal max-md:text-[10px] mt-2.5">
-                                        They offer exquisitely crafted homes and condominium units with modern architectural features and practical layouts in an exclusive gated community.
-                                    </p>
-                                    <p class="text-[15px] font-normal max-md:text-[10px] mt-2.5">
-                                        Elanvital Enclaves is Joy-Nostalg Raemulan Lands' Middle Income Market Segment.
-                                    </p>
-                                    <p class="text-[15px] font-normal max-md:text-[10px]">
-                                        Amenities include a clubhouse, basketball court, swimming pool, and playgrounds for the convenience and happiness of Filipino families.
-                                    </p>
-                                    <p class="text-[15px] font-normal max-md:text-[10px] mt-2.5">
-                                        They offer exquisitely crafted homes and condominium units with modern architectural features and practical layouts in an exclusive gated community.
-                                    </p>
-                                    <p class="text-[15px] font-normal max-md:text-[10px] mt-2.5">
-                                        Elanvital Enclaves is Joy-Nostalg Raemulan Lands' Middle Income Market Segment.
-                                    </p>
-                                    <p class="text-[15px] font-normal max-md:text-[10px]">
-                                        Amenities include a clubhouse, basketball court, swimming pool, and playgrounds for the convenience and happiness of Filipino families.
-                                    </p>
-                                    <p class="text-[15px] font-normal max-md:text-[10px] mt-2.5">
-                                        They offer exquisitely crafted homes and condominium units with modern architectural features and practical layouts in an exclusive gated community.
-                                    </p>
-                                    <p class="text-[15px] font-normal max-md:text-[10px] mt-2.5">
-                                        Elanvital Enclaves is Joy-Nostalg Raemulan Lands' Middle Income Market Segment.
-                                    </p>
-                                    <p class="text-[15px] font-normal max-md:text-[10px]">
-                                        Amenities include a clubhouse, basketball court, swimming pool, and playgrounds for the convenience and happiness of Filipino families.
-                                    </p>
-                                    <p class="text-[15px] font-normal max-md:text-[10px] mt-2.5">
-                                        They offer exquisitely crafted homes and condominium units with modern architectural features and practical layouts in an exclusive gated community.
-                                    </p>
-                                    <p class="text-[15px] font-normal max-md:text-[10px] mt-2.5">
-                                        Elanvital Enclaves is Joy-Nostalg Raemulan Lands' Middle Income Market Segment.
-                                    </p>
-                                    <p class="text-[15px] font-normal max-md:text-[10px]">
-                                        Amenities include a clubhouse, basketball court, swimming pool, and playgrounds for the convenience and happiness of Filipino families.
-                                    </p>
-                                    <p class="text-[15px] font-normal max-md:text-[10px] mt-2.5">
-                                        They offer exquisitely crafted homes and condominium units with modern architectural features and practical layouts in an exclusive gated community.
-                                    </p>
-                                    <p class="text-[15px] font-normal max-md:text-[10px] mt-2.5">
-                                        Elanvital Enclaves is Joy-Nostalg Raemulan Lands' Middle Income Market Segment.
-                                    </p>
+                                <div class="h-full w-[531px] pl-[50px] overflow-auto">
+                                    {!! $category->description !!}
                                 </div>
                             </div>
                         </div>
@@ -346,7 +293,7 @@
 
                         this.isLoading = true;
 
-                        this.$axios.get("{{ route('shop.api.products.index', ['category_id' => $category->id]) }}", {
+                        this.$axios.get("{{ route('enclaves.api.product.index', ['category_id' => $category->id]) }}", {
                             params: this.queryParams
                         })
                         .then(response => {
@@ -425,11 +372,11 @@
                     },
 
                     groupProducts(products){
-                        let comparePrice = 3000000;
+                        let comparePrice = 2000000;
 
                         this.priceGroupProducts = {
-                            low: products.filter(product => product.prices.final.price <= comparePrice),
-                            medium: products.filter(product => product.prices.final.price > comparePrice)
+                            low: products.filter(product => product.prices.regular.price <= comparePrice),
+                            medium: products.filter(product => product.prices.regular.price > comparePrice)
                         };
                     },
 
