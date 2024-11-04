@@ -4,13 +4,8 @@ namespace Webkul\Enclaves\Http\Controllers\Shop\Product;
 
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Resources\Json\JsonResource;
-use Webkul\Customer\Repositories\CustomerRepository;
 use Webkul\Marketing\Jobs\UpdateCreateSearchTerm as UpdateCreateSearchTermJob;
 use Webkul\Product\Repositories\ProductRepository;
-use Webkul\Category\Repositories\CategoryRepository;
-use Webkul\Marketing\Repositories\URLRewriteRepository;
-use Webkul\Theme\Repositories\ThemeCustomizationRepository;
-// use Webkul\Shop\Http\Resources\ProductResource;
 use Webkul\Enclaves\Helpers\Customer\CustomerHelper;
 use Webkul\Enclaves\Http\Controllers\Controller;
 use Webkul\Product\Helpers\View as ProductViewHelper;
@@ -32,10 +27,6 @@ class ProductController extends Controller
      */
     public function __construct(
         protected ProductRepository $productRepository,
-        protected CustomerRepository $customerRepository,
-        protected CategoryRepository $categoryRepository,
-        protected ThemeCustomizationRepository $themeCustomizationRepository,
-        protected URLRewriteRepository $urlRewriteRepository,
         protected ProductViewHelper $productViewHelper,
     ) {}
 

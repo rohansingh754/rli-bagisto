@@ -68,27 +68,33 @@
 		},
 
 		mounted() {
-			// Get ask to joy filters
-			let askToJoy = localStorage.getItem('askToJoy');
-
-			this.getProducts();
+			this.getProducts( );
 		},
 
         methods: {
 			async getProducts(){
-                EventBus.$emit('show-ajax-loader');
+				EventBus.$emit('show-ajax-loader');
 
-                const response = await this.$http.get("/api/v1/products", {params: {limit: 10}});
+				let defaultParams = {
+					limit: 10,
+				}
+
+				let askToJoy = JSON.parse(localStorage.getItem('askToJoy'));
+
+				let params = { ...askToJoy, ...defaultParams };
+				console.log(params);
+
+
+				const response = await this.$http.get("/api/v1/products", {
+					params: params
+				});
 
                 if (response.data.data) {
-					this.products = response.data.data
+					this.products = response.data.data;
 
 					if (this.products.length) {
-
 						this.productIds = this.products.map(item => item.id);
-
 					}
-
                 }
 
                 EventBus.$emit('hide-ajax-loader');

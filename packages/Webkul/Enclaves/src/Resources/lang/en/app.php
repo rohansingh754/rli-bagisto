@@ -623,6 +623,20 @@ return [
                 'redirect_uri'                => 'Ekyc Redirect Url',
                 'schedule_visit_redirect_url' => 'Schedule Visit Redirect Url',
                 'avail_now_redirect_url'      => 'Avail Now Redirect Url',
+                'monthly_amortization'        => 'Monthly Amortization',
+                'monthly_amortization_options'        => [
+                    'label'    => 'Monthly Amortization',
+                    'option_1' => 'Starts at 3,450',
+                    'option_2' => 'Starts at 8,270',
+                    'option_3' => 'Starts at 10,400',
+                    'option_4' => 'Starts at 18,800',
+                    'option_5' => 'Starts at 19,900',
+                    'option_6' => 'Starts at 20,950',
+                    'option_7' => 'Starts at 22,350',
+                    'option_8' => 'Starts at 23,900',
+                    'option_9' => 'Starts at 29,350',
+                    'option_10' => 'Starts at 40,500',
+                ],
             ],
 
             'pages' => [

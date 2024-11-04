@@ -82,6 +82,39 @@ class AttributeTableSeeder extends Seeder
                 'created_at'          => $now,
                 'updated_at'          => $now,
             ],
+            [
+                'id'                  => 25,
+                'code'                => 'monthly_amortization',
+                'admin_name'          => trans('enclaves::app.admin.seeders.attribute.monthly_amortization', [], $defaultLocale),
+                'type'                => 'select',
+                'validation'          => null,
+                'position'            => 28,
+                'is_required'         => 0,
+                'is_unique'           => 0,
+                'value_per_locale'    => 0,
+                'value_per_channel'   => 0,
+                'default_value'       => null,
+                'is_filterable'       => 1,
+                'is_configurable'     => 1,
+                'is_user_defined'     => 1,
+                'is_visible_on_front' => 1,
+                'is_comparable'       => 0,
+                'enable_wysiwyg'      => 0,
+                'created_at'          => $now,
+                'updated_at'          => $now,
+                'options'             => [
+                    'option_1'  => 3450,
+                    'option_2'  => 8270,
+                    'option_3'  => 10400,
+                    'option_4'  => 18800,
+                    'option_5'  => 19900,
+                    'option_6'  => 20950,
+                    'option_7'  => 22350,
+                    'option_8'  => 23900,
+                    'option_9'  => 29350,
+                    'option_10' => 40500,
+                ],
+            ],
         ];
 
 
@@ -133,6 +166,26 @@ class AttributeTableSeeder extends Seeder
                         'position'            => 3,
                     ],
                 ]);
+
+                if ($attr['type'] === 'select') {
+
+                    $sort_order = 1;
+                    foreach ($attr['options'] as $label => $option) {
+                        $attribute_option_id =  DB::table('attribute_options')->insertGetId([
+                            'admin_name'   => $option,
+                            'sort_order'   => $sort_order++,
+                            'attribute_id' => $insertedAttrId,
+                        ]);
+
+                        foreach ($locales as $locale) {
+                            DB::table('attribute_option_translations')->insert([
+                                'locale'              => $locale,
+                                'label'               => trans('enclaves::app.admin.seeders.attribute.' . $attr['code'] . '_options.' . $label, [], $locale),
+                                'attribute_option_id' => $attribute_option_id,
+                            ]);
+                        }
+                    }
+                }
             }
         }
     }
