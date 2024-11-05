@@ -75,19 +75,19 @@
 			async getProducts(){
 				EventBus.$emit('show-ajax-loader');
 
-				let defaultParams = {
+				let params = {
 					limit: 10,
 				}
 
 				let askToJoy = JSON.parse(localStorage.getItem('askToJoy'));
-
-				let params = { ...askToJoy, ...defaultParams };
-				console.log(params);
-
+				if (askToJoy) {
+					params = { ...askToJoy, ...params };
+				}
 
 				const response = await this.$http.get("/api/v1/products", {
 					params: params
 				});
+				console.log('ask to joy response', response);
 
                 if (response.data.data) {
 					this.products = response.data.data;

@@ -67,7 +67,7 @@
 			},
 
 			updateParams(key, value){
-				let askToJoy = localStorage.getItem('askToJoy');
+				let askToJoy = localStorage.getItem('askToJoyNewQuery');
 
 				if ( askToJoy === null) {
 					askToJoy = {};
@@ -77,11 +77,15 @@
 					askToJoy[key] = value;
 				}
 
-				localStorage.setItem('askToJoy', JSON.stringify(askToJoy));
+				localStorage.setItem('askToJoyNewQuery', JSON.stringify(askToJoy));
 
 				if (this.step < 4) {
 					this.incrementStep();
-				} else{
+				} else {
+					localStorage.setItem('askToJoy', JSON.stringify(askToJoy));
+					localStorage.removeItem('askToJoyNewQuery');
+					localStorage.removeItem('askToJoyfilterKey');
+
 					if (this.$route.path !== '/ask-joy-result') {
 						this.$router.push('/ask-joy-result');
 						EventBus.$emit('drawer-up-toggle');
