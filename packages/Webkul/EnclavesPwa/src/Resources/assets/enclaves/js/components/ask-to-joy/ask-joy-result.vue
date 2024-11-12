@@ -18,18 +18,32 @@
 	<!-- Ask Joy result -->
 	 <section class="mt-6">
 		<div class="container">
-			<h1 class="text-[20px] font-bold text-dark">{{ $t('Projects') }}</h1>
-			<div class="mt-4 grid grid-cols-2 gap-[25px]">
-				<product-card v-for="(product, index) in products" :key="index" :product="product"></product-card>
+			<div v-if="products.length">
+				<h1 class="text-[20px] font-bold text-dark">{{ $t('Projects') }}</h1>
+				<div class="mt-4 grid grid-cols-2 gap-[25px]">
+					<product-card v-for="(product, index) in products" :key="index" :product="product"></product-card>
+				</div>
+
+				<router-link
+					v-if="productIds.length > 1"
+					:to="{ path: '/ask-joy-result/compare', query: { ids: productIds } }"
+					class="mt-6 inline-block w-full rounded-full bg-[linear-gradient(268.1deg,_#CC035C_7.47%,_#FCB115_98.92%)] px-7 py-5 text-center text-[14px] font-medium text-white"
+					>
+					{{ $t('Compare') }}
+				</router-link>
 			</div>
 
-			<router-link
-				v-if="productIds.length > 1"
-				:to="{ path: '/ask-joy-result/compare', query: { ids: productIds } }"
-				class="mt-6 inline-block w-full rounded-full bg-[linear-gradient(268.1deg,_#CC035C_7.47%,_#FCB115_98.92%)] px-7 py-5 text-center text-[14px] font-medium text-white"
+			<div
+				v-else
+				class="w-full h-96 min-h-72 flex justify-center items-center"
 				>
-				{{ $t('Compare') }}
-			</router-link>
+				<image-component
+					:src="themeAssets + 'images/noresult-found.png'"
+					:alt="'joy'"
+					:class="''"
+					>
+				</image-component>
+			</div>
 		</div>
 	 </section>
 
@@ -84,10 +98,9 @@
 					params = { ...askToJoy, ...params };
 				}
 
-				const response = await this.$http.get("/api/v1/products", {
+				const response = await this.$http.get("/api/pwa/products", {
 					params: params
 				});
-				console.log('ask to joy response', response);
 
                 if (response.data.data) {
 					this.products = response.data.data;

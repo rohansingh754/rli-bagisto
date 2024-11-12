@@ -33,6 +33,8 @@ Route::group(['middleware' => ['locale', 'theme', 'currency']], function () {
          * product routes.
          */
         Route::controller(ProductController::class)->prefix('products')->group(function () {
+            Route::get('', 'allResources');
+
             Route::get('compare', 'getCompareAbleProducts');
         });
 

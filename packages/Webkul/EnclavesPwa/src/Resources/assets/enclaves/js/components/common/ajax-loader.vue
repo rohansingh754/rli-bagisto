@@ -5,7 +5,7 @@
         <list-shimmer v-if="listViews.includes($route.name)"></list-shimmer>
         <category-project-list-shimmer v-else-if="$route.name === 'category'"></category-project-list-shimmer>
 
-        <product-list-shimmer v-else-if="$route.name === 'products'"></product-list-shimmer>
+        <product-list-shimmer v-else-if="$route.name === 'products' || $route.name === 'ask-joy-result'"></product-list-shimmer>
         <product-view-shimmer v-else-if="$route.name === 'product'"></product-view-shimmer>
 
         <page-shimmer v-else-if="$route.name === 'pages'"></page-shimmer>
