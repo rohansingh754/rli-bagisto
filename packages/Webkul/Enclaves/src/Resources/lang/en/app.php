@@ -384,7 +384,7 @@ return [
 
                 'footer' => [
                     'address'       => '17 ADB Ave, Ortigas Center, Pasig, Metro Manila',
-                    'email'         => 'admin@homeful.com',
+                    'email'         => 'info@homeful.com',
                     'mobile-number' => '+63 9456677654',
                     'quick-links'    => 'Quicklinks',
                     'follow-us'     => 'Follow Us',

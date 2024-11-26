@@ -98,5 +98,11 @@ class EventServiceProvider extends ServiceProvider
             $viewRenderEventManager->addTemplate('enclaves::shop.ask-to-joy.layouts.index');
             $viewRenderEventManager->addTemplate('enclaves::shop.partners.layouts.index');
         });
+
+        Event::listen('bagisto.shop.categories.view.after', function ($viewRenderEventManager) {
+            if (core()->getConfigData('blog.settings.general.status')) {
+                $viewRenderEventManager->addTemplate('enclaves::shop.blog.layouts.index');
+            }
+        });
     }
 }

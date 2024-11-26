@@ -91,6 +91,8 @@ Route::group(['middleware' => ['locale', 'theme', 'currency']], function () {
 
         Route::controller(ProductController::class)->prefix('products')->group(function () {
             Route::get('', 'getProducts')->name('enclaves.api.product.index');
+
+            Route::get('soldout-products', 'getSoldOutProducts')->name('enclaves.api.product.soldout.index');
         });
 
         Route::controller(EkycController::class)->prefix('ekyc')->group(function () {

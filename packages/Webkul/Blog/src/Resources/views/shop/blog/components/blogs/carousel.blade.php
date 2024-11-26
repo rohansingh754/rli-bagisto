@@ -16,7 +16,7 @@
     <script type="text/x-template" id="v-blogs-carousel-template">
         <!-- Section new place made just for you -->
         <div
-            class="container mt-32 bg-[url('../images/blog-bg.svg')] bg-right bg-no-repeat [background-size:40%] max-lg:px-[30px] max-sm:mt-[30px]"
+            class="container mt-20 bg-[url('../images/blog-bg.svg')] bg-right bg-no-repeat [background-size:40%] max-lg:px-[30px] max-sm:mt-[30px]"
             v-if="blogs.length > 0"
             >
             <div class="rli-title max-sm:text-6 mb-10 mt-6 flex justify-between items-center">
@@ -29,23 +29,6 @@
             </div>
 
             <div>
-                {{-- <div
-                    class="relative top-[130px] z-10 -m-8 flex justify-between max-md:!top-[60px]"
-                    v-if="blogs.length"
-                    >
-                    <span
-                        class="icon-arrow-left inline-block cursor-pointer border-2 border-[#E9E9E9] bg-white p-[15px] text-[20px] text-[#111111] max-lg:p-[8px]"
-                        @click="swipeLeft"
-                    >
-                    </span>
-
-                    <span
-                        class="icon-arrow-right inline-block cursor-pointer border-2 border-[#E9E9E9] bg-white p-[15px] text-[20px] text-[#111111] max-lg:p-[8px]"
-                        @click="swipeRight"
-                        >
-                    </span>
-                </div> --}}
-
                 <div
                     ref="swiperContainer"
                     class="scrollbar-hide flex gap-4 overflow-auto scroll-smooth justify-between"

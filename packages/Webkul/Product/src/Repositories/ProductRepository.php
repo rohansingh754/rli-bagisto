@@ -47,7 +47,7 @@ class ProductRepository extends Repository
      */
     public function create(array $data)
     {
-        $typeInstance = app(config('product_types.'.$data['type'].'.class'));
+        $typeInstance = app(config('product_types.' . $data['type'] . '.class'));
 
         $product = $typeInstance->create($data);
 
@@ -169,7 +169,8 @@ class ProductRepository extends Repository
 
         if (! $product) {
             throw (new ModelNotFoundException)->setModel(
-                get_class($this->model), $slug
+                get_class($this->model),
+                $slug
             );
         }
 
@@ -220,7 +221,7 @@ class ProductRepository extends Repository
 
             $qb = $query->distinct()
                 ->select('products.*')
-                ->leftJoin('products as variants', DB::raw('COALESCE('.$prefix.'variants.parent_id, '.$prefix.'variants.id)'), '=', 'products.id')
+                ->leftJoin('products as variants', DB::raw('COALESCE(' . $prefix . 'variants.parent_id, ' . $prefix . 'variants.id)'), '=', 'products.id')
                 ->leftJoin('product_price_indices', function ($join) {
                     $customerGroup = $this->customerRepository->getCurrentGroup();
 
@@ -268,31 +269,31 @@ class ProductRepository extends Repository
              * Filter collection by required attributes.
              */
             foreach ($attributes as $attribute) {
-                $alias = $attribute->code.'_product_attribute_values';
+                $alias = $attribute->code . '_product_attribute_values';
 
-                $qb->leftJoin('product_attribute_values as '.$alias, 'products.id', '=', $alias.'.product_id')
-                    ->where($alias.'.attribute_id', $attribute->id);
+                $qb->leftJoin('product_attribute_values as ' . $alias, 'products.id', '=', $alias . '.product_id')
+                    ->where($alias . '.attribute_id', $attribute->id);
 
                 if ($attribute->code == 'name') {
                     $synonyms = $this->searchSynonymRepository->getSynonymsByQuery(urldecode($params['name']));
 
                     $qb->where(function ($subQuery) use ($alias, $synonyms) {
                         foreach ($synonyms as $synonym) {
-                            $subQuery->orWhere($alias.'.text_value', 'like', '%'.$synonym.'%');
+                            $subQuery->orWhere($alias . '.text_value', 'like', '%' . $synonym . '%');
                         }
                     });
                 } elseif ($attribute->code == 'url_key') {
                     if (empty($params['url_key'])) {
-                        $qb->whereNotNull($alias.'.text_value');
+                        $qb->whereNotNull($alias . '.text_value');
                     } else {
-                        $qb->where($alias.'.text_value', 'like', '%'.urldecode($params['url_key']).'%');
+                        $qb->where($alias . '.text_value', 'like', '%' . urldecode($params['url_key']) . '%');
                     }
                 } else {
                     if (is_null($params[$attribute->code])) {
                         continue;
                     }
 
-                    $qb->where($alias.'.'.$attribute->column_name, 1);
+                    $qb->where($alias . '.' . $attribute->column_name, 1);
                 }
             }
 
@@ -321,12 +322,12 @@ class ProductRepository extends Repository
                             $values = explode(',', $params[$attribute->code]);
 
                             if ($attribute->type == 'price') {
-                                $attributeQuery->whereBetween('product_attribute_values.'.$attribute->column_name, [
+                                $attributeQuery->whereBetween('product_attribute_values.' . $attribute->column_name, [
                                     core()->convertToBasePrice(current($values)),
                                     core()->convertToBasePrice(end($values)),
                                 ]);
                             } else {
-                                $attributeQuery->whereIn('product_attribute_values.'.$attribute->column_name, $values);
+                                $attributeQuery->whereIn('product_attribute_values.' . $attribute->column_name, $values);
                             }
                         });
                     }
@@ -349,13 +350,13 @@ class ProductRepository extends Repository
                     } else {
                         $alias = 'sort_product_attribute_values';
 
-                        $qb->leftJoin('product_attribute_values as '.$alias, function ($join) use ($alias, $attribute) {
-                            $join->on('products.id', '=', $alias.'.product_id')
-                                ->where($alias.'.attribute_id', $attribute->id)
-                                ->where($alias.'.channel', core()->getRequestedChannelCode())
-                                ->where($alias.'.locale', core()->getRequestedLocaleCode());
+                        $qb->leftJoin('product_attribute_values as ' . $alias, function ($join) use ($alias, $attribute) {
+                            $join->on('products.id', '=', $alias . '.product_id')
+                                ->where($alias . '.attribute_id', $attribute->id)
+                                ->where($alias . '.channel', core()->getRequestedChannelCode())
+                                ->where($alias . '.locale', core()->getRequestedLocaleCode());
                         })
-                            ->orderBy($alias.'.'.$attribute->column_name, $sortOptions['order']);
+                            ->orderBy($alias . '.' . $attribute->column_name, $sortOptions['order']);
                     }
                 } else {
                     /* `created_at` is not an attribute so it will be in else case */
@@ -410,7 +411,7 @@ class ProductRepository extends Repository
                 ->whereIn('products.id', $indices['ids']);
 
             //Sort collection
-            $qb->orderBy(DB::raw('FIELD(id, '.implode(',', $indices['ids']).')'));
+            $qb->orderBy(DB::raw('FIELD(id, ' . implode(',', $indices['ids']) . ')'));
 
             return $qb;
         });
@@ -487,5 +488,20 @@ class ProductRepository extends Repository
         }
 
         return $query->max('min_price') ?? 0;
+    }
+
+    /**
+     * Get all sold out products.
+     */
+    public function getAllWithNoInventory(array $params = [])
+    {
+        $query = $this->getAll($params);
+        $productIds = $query->pluck('id');
+
+        return $this->model->whereIn('id', $productIds)
+            ->whereDoesntHave('inventories', function ($query) {
+                $query->where('qty', '>', 0);
+            })
+            ->paginate($query->perPage());
     }
 }

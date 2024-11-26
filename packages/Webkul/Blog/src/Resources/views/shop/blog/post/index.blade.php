@@ -40,9 +40,9 @@
                     <x-blog::blogs.items.post-item v-for="blog in blogs"/>
                 </div>
 
-                <div class="mt-3 text-center"
-                    v-if="limit < blogs.length"
-                >
+                <div
+                    v-if="limit < allBlogs.length"
+                    class="mt-3 text-center">
                     <button
                         class="rounded-[20px] bg-[#CC035C] px-[25px] py-[10px] text-white"
                         @click="getMoreBlogs()"
@@ -62,8 +62,9 @@
                 return {
                     isLoading: true,
                     blogs: {},
-                    limit: `{{ $limit }}`,
+                    limit: `{{ $limit }}` > 0 ? `{{ $limit }}` : 4,
                     loadMoreTxt: `{{ trans('blog::app.shop.blog.load-more') }}`,
+                    allBlogs:{},
                 };
             },
 
@@ -73,26 +74,18 @@
 
             methods: {
                 getMoreBlogs() {
-                    this.limit += `{{ $limit }}`;
-
-                    this.loadMoreTxt = `{{ trans('blog::app.shop.blog.loading') }}`;
-
-                    this.getPosts();
+                    this.limit += this.limit;
+                    this.blogs = this.allBlogs.slice(0, this.limit);
                 },
 
                 getPosts() {
-                    this.$axios.get("{{ route('shop.blogs.front-end') }}", {
-                        params: {
-                            limit: this.limit,
-                        }
-                    })
+                    this.$axios.get("{{ route('shop.blogs.front-end') }}")
                     .then(response => {
                         this.isLoading = false;
 
                         this.loadMoreTxt = `{{ trans('blog::app.shop.blog.load-more') }}`;
-
-                        this.blogs = response.data.data;
-                        console.log(this.blogs);
+                        this.allBlogs = response.data.data
+                        this.blogs = this.allBlogs.slice(0, this.limit);
 
                     }).catch(error => {
                         console.log(error);

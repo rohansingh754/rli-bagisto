@@ -16,7 +16,7 @@
                 ></x-shop::media.images.lazy>
 			</div>
             <p
-                class="font-popins mt-5 overflow-hidden text-ellipsis whitespace-nowrap text-[20px] font-bold max-sm:text-[14px]"
+                class="line-clamp-2 font-popins mt-[10px] overflow-hidden text-ellipsis text-[20px] font-bold max-sm:text-[14px]"
                 v-text="blog.name"
             ></p>
 

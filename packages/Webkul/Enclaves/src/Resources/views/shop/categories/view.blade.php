@@ -35,6 +35,8 @@
             id="v-category-template"
             >
 
+            {!!view_render_event('bagisto.shop.categories.view.before') !!}
+
             <div class="container px-[60px] max-lg:px-[30px]">
                 <section class="pt-11">
                     <div class="flex justify-start">
@@ -183,6 +185,42 @@
                         </div>
                     </div>
                 </div>
+                <div class="mt-[60px]">
+                    <h2 class="text-lg font-bold text-dark">Sold out Projects</h2>
+
+                    <div class="flex items-start gap-[40px] max-lg:gap-[20px]">
+                        <div class="mt-11 grid grid-cols-4 gap-x-20 gap-y-11 max-sm:grid-cols-1">
+                            <div
+                                v-for="product in soldOutProducts"
+                                class="">
+                                <x-shop::media.images.lazy
+                                    @click="redirectToProduct(product)"
+                                    class="w-full cursor-pointer rounded-lg bg-[#F5F5F5] transition-all duration-300 group-hover:scale-105"
+                                    ::key="imageComponentRerander"
+                                    ::src="product.base_image.medium_image_url"
+                                ></x-shop::media.images.lazy>
+                                <h2
+                                    class="mt-5 text-xl font-bold text-dark"
+                                    v-text="product.name"
+                                    ></h2>
+                                <p class="mt-1 text-lg font-normal text-primary">@{{ product.attributes.find(attr => attr.code === 'location').value }}</p>
+                                <p class="mt-2 text-sm font-normal text-[#8B8B8B]">Price starts at</p>
+                                <p
+                                    class="mt-1 text-xl font-bold text-dark"
+                                    v-text="product.min_price"
+                                    >
+                                </p>
+                                <span
+                                    class="mt-5 block w-full rounded-full border border-primary px-5 py-5 text-center text-lg font-normal text-primary max-lg:px-3 max-lg:py-3 cursor-pointer"
+                                    @click="redirectToProduct(product)"
+                                    >
+                                    View Property
+                                </span>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
 
                 <x-enclaves-shop::modal.story-details ref="storyDetailsGuideModal">
                     <!-- Modal Header -->
@@ -215,6 +253,8 @@
                     </x-slot:content>
                 </x-enclaves-shop::modal.story-details>
             </div>
+
+            {!!view_render_event('bagisto.shop.categories.view.after') !!}
         </script>
 
         <script type="module">
@@ -245,6 +285,8 @@
 
                         priceGroupProducts: [],
 
+                        soldOutProducts: [],
+
                         links: {},
 
                         isCustomer: '{{ auth()->guard("customer")->check() }}',
@@ -273,6 +315,10 @@
                     queryString() {
                         window.history.pushState({}, '', '?' + this.queryString);
                     },
+                },
+
+                mounted() {
+                    this.getSoldOutProducts();
                 },
 
                 methods: {
@@ -306,6 +352,25 @@
                             this.groupProducts(this.products);
 
                             this.links = response.data.links;
+                        }).catch(error => {
+                            console.log(error);
+                        });
+                    },
+
+                    getSoldOutProducts() {
+                        this.isDrawerActive = {
+                            toolbar: false,
+
+                            filter: false,
+                        };
+
+
+                        this.$axios.get("{{ route('enclaves.api.product.soldout.index', ['category_id' => $category->id]) }}")
+                        .then(response => {
+                            this.soldOutProducts = response.data.data;
+
+                            console.log(this.soldOutProducts);
+
                         }).catch(error => {
                             console.log(error);
                         });

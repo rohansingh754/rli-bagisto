@@ -38,7 +38,7 @@
                 </div>
             </div>
             <div class="scrollbar-hide mt-7 overflow-auto pb-9 max-sm:pb-0">
-                <div class="homeful-slider-thumbs mx-auto flex w-[max-content] gap-2.5">
+                <div class="homeful-slider-thumbs mx-auto flex gap-2.5">
                     <div
                         v-for="(image, index) in media.images"
                         class="thumb group w-[82px] cursor-pointer"

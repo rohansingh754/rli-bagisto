@@ -88,4 +88,33 @@ class ProductController extends Controller
 
         return ProductResource::collection($products);
     }
+
+    /**
+     * Product listings.
+     */
+    public function getSoldOutProducts(): JsonResource
+    {
+        $products = $this->productRepository->getAllWithNoInventory(request()->query());
+
+        if (! empty(request()->query('query'))) {
+            /**
+             * Update or create search term only if
+             * there is only one filter that is query param
+             */
+            if (count(request()->except(['mode', 'sort', 'limit'])) == 1) {
+                UpdateCreateSearchTermJob::dispatch([
+                    'term'       => request()->query('query'),
+                    'results'    => $products->total(),
+                    'channel_id' => core()->getCurrentChannel()->id,
+                    'locale'     => app()->getLocale(),
+                ]);
+            }
+        }
+
+        foreach ($products as $product) {
+            $product->attributes = $this->productViewHelper->getAdditionalData($product);
+        }
+
+        return ProductResource::collection($products);
+    }
 }
