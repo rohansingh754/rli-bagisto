@@ -17,3 +17,10 @@
         background-position: 1250px 0
     }
 }
+
+.shrink {
+    transform: scale(0.1);
+    opacity: 0;
+    transform-origin: top right; /* Shrinks toward the corner */
+    transition: all 0.5s ease-in-out;
+}

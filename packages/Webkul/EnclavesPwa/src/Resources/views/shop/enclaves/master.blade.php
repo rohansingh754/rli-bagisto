@@ -23,6 +23,7 @@
 
         <link rel="stylesheet" href="{{ asset($themeAssetsPath . 'css/pwa.css?v=' . strtotime("now")) }}">
         <link rel="stylesheet" href="{{ asset($themeAssetsPath . 'css/enclave.css?v=' . strtotime("now")) }}">
+        <link rel="stylesheet" href="{{ asset($themeAssetsPath . 'css/tailwind_custom.css?v=' . strtotime("now")) }}">
         <link rel="manifest" href="{{ asset('manifest.json') }}">
         <link rel="manifest" href="{{ asset('manifest.webmanifest') }}">
 

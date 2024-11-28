@@ -39,9 +39,13 @@
             }
         },
 
-        mounted () {
-
+        mounted() {
+            let this_this = this;
             this.getProductAdditinalInformation(this.product.id);
+
+            EventBus.$on('update-product-attributes', function(newProductId) {
+                this_this.getProductAdditinalInformation(newProductId);
+            });
         },
 
         methods: {
@@ -55,6 +59,15 @@
                         this_this.viewableAttributes = response.data.data.filter(attr => {
                             return attr.value != null;
                         });
+
+                        if (this_this.viewableAttributes.length) {
+                            const result = this_this.viewableAttributes.find(item => item.code === 'location');
+
+                            if (result) {
+                                document.querySelector('.product-location').innerHTML = result.value;
+                            }
+                        }
+
                     })
                     .catch(function (error) {});
 

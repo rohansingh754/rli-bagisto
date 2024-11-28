@@ -13,6 +13,21 @@
                         </image-component>
                     </span>
                 </div>
+                <div
+                    v-if="!askToJoyAskVisited"
+                    class="ask-to-joy-ask top-[100px] right-[10px] z-[999] fixed w-[238px]">
+                    <img :src="themeAssets + 'images/ask-joy-modal.png'" alt="" class="float-right">
+                    <div class="top-11 right-10 z-10 absolute bg-[url(./../images/ask-joy-modal-bg.png)] w-[195px] h-[195px]">
+                        <p class="top-20 right-10 absolute w-[110px] font-normal text-base text-dark leading-[18px]">{{ $t('Looking for a home that suits you?') }} </p>
+                        <a href="#" class="right-12 bottom-10 absolute font-bold text-[15px] text-primary underline">{{ $t('Ask Joy') }}</a>
+                        <span class="
+                            bottom-[14px] left-7 z-10 absolute flex justify-center items-center bg-[#F3F4F6] rounded-full w-[35px] h-[35px] cursor-pointer"
+                            @click="closeAskToJoyAsk()"
+                            >
+                            <span class="text-[#989898] text-[14px] icon-cancel"></span>
+                        </span>
+                    </div>
+                </div>
                 <div class="homeful-slider-wrap relative mt-4">
                     <div
                         class="homeful-slide active"
@@ -236,6 +251,7 @@
                 },
                 newses:[],
                 partners: ['one', 'two', 'three', 'Demo'],
+                askToJoyAskVisited: localStorage.getItem('PwaAskToJoyAskvisited'),
 			}
         },
 
@@ -444,6 +460,12 @@
             handleToggleDrawerUP(key) {
                 EventBus.$emit('drawer-up-toggle-popup', key);
             },
+
+            closeAskToJoyAsk(){
+                const askToJoyAsk = document.querySelector('.ask-to-joy-ask');
+                askToJoyAsk.classList.add('shrink');
+                localStorage.setItem('PwaAskToJoyAskvisited', true);
+            }
         }
     }
 </script>

@@ -26,40 +26,10 @@
 	 <!-- store link end-->
 
 	 <!-- slider section -->
-	  <section class="product-slider mt-5">
-		<div class="homeful-slider-wrap relative mt-4">
-			<div class="homeful-slide active">
-                <image-component
-                    :src="sliderActiveImage.large_image_url"
-                    :alt="'Facade'"
-                    :classes="'w-full'"
-                    >
-                </image-component>
-			</div>
-		</div>
-		<div
-            v-if="product"
-            class="scrollbar-hide mt-6 overflow-auto">
-			<div class="homeful-slider-thumbs flex w-[max-content] gap-3">
-				<div
-                    v-for="(image, index) in product.images"
-                    :key="index"
-                    :class="sliderActiveImage.id === image.id ? 'active' : ''"
-                    class="thumb ml-5 w-[75px] cursor-pointer"
-                    @click="changeSlideImage(image)"
-                    >
-                    <image-component
-                        :src="image.large_image_url"
-                        :alt="'Facade'"
-                        :classes="'rounded-[8px] border border-transparent transition hover:border-primary'"
-                        >
-                    </image-component>
-					<p class="mt-[5px] text-[12px] font-normal leading-none text-text-gray transition">Facade</p>
-				</div>
-			</div>
-		</div>
-	  </section>
-	 <!-- slider section end-->
+	<section class="product-slider mt-5">
+        <gallery-images v-if="product" :product="product"></gallery-images>
+    </section>
+	<!-- slider section end-->
 
 	 <section class="mt-7" v-if="product">
 		<div class="container">
@@ -67,7 +37,7 @@
 				<div class="">
 					<p class="text-[12px] font-normal text-text-gray">{{ $t('Starts at') }}
                     </p>
-					<p class="homefull-text-gradient mt-[5px] text-[20px] font-bold leading-5">{{product.formatted_price}}</p>
+					<p class="final-price homefull-text-gradient mt-[5px] text-[20px] font-bold leading-5">{{product.formatted_price}}</p>
 				</div>
 				<div class="w-[127px]">
 					<p class="text-[12px] font-normal text-text-gray">{{ $t('Total Sold') }}
@@ -76,7 +46,7 @@
 				</div>
 			</div>
 			<h1 class="mt-8 text-[20px] font-bold text-dark">{{product.name}}</h1>
-			<p class="mt-2 text-[14px] font-semibold text-primary">Calamba, Laguna</p>
+			<p class="product-location mt-2 text-[14px] font-semibold text-primary"></p>
 			<p
                 class="product-description mt-5 border-b border-[#D9D9D9] text-[15px] font-normal text-dark"
                 v-html="productDes"
@@ -85,6 +55,12 @@
 			<span class="text-[15px] font-bold text-dark" v-if="shouldShowButton" @click="toggleShowMore()">
                  {{ showMore ? $t('Show Less') : $t('Show More') }}
             </span>
+
+            <configurable-options
+                v-if="product.type == 'configurable'"
+                :product="product"
+                :form-data="formData">
+            </configurable-options>
 
 			<!-- features -->
             <attributes :product="product"></attributes>
@@ -118,8 +94,10 @@
 
 		</span>
 		<span
-            @click="handleToggleDrawerUP('availNow')"
-            class="flex items-center gap-2 rounded-full bg-[linear-gradient(268.1deg,_#CC035C_7.47%,_#FCB115_98.92%)] px-11 py-[14px] text-[16px] font-medium text-white max-385:px-6 max-385:text-[13px]">
+            @click="product.in_stock ? handleToggleDrawerUP('availNow') : ''"
+            class="flex items-center gap-2 rounded-full bg-[linear-gradient(268.1deg,_#CC035C_7.47%,_#FCB115_98.92%)] px-11 py-[14px] text-[16px] font-medium text-white max-385:px-6 max-385:text-[13px]"
+			:class="product && !product.in_stock ? 'opacity-5' : ''"
+            >
             {{ $t('Avail Now') }}
 
             <br>{{ $t('for') }}
@@ -137,6 +115,8 @@
 
 <script>
     import Attributes               from './attributes';
+    import galleryImages               from './gallery-images';
+    import configurableOptions       from './configurable-options';
     import FooterNav                from '../layouts/footer-nav';
     import ImageComponent           from "../common/image-component";
 	import Breadcrumb               from "../common/breadcrumb";
@@ -149,6 +129,8 @@
             FooterNav,
             ImageComponent,
             Breadcrumb,
+            configurableOptions,
+            galleryImages,
         },
 
         data () {
@@ -179,7 +161,6 @@
 
                     selected_configurable_option: 0
                 },
-                sliderActiveImage: {},
                 showMore: false,
                 maxWords: 450,
                 scheduleVisitDrawer: 0,
@@ -223,8 +204,6 @@
                 this.$http.get('/api/v1/products/' + productId)
                     .then(response => {
                         this.product = response.data.data;
-
-                        this.sliderActiveImage = this.product.images[0];
 
                         this.breadcrumbLinks[this.breadcrumbLinks.length - 1].name = this.product.name;
 
@@ -347,10 +326,6 @@
             buyNow (event) {
                 this.is_buy_now = 1;
                 this.validateBeforeSubmit();
-            },
-
-            changeSlideImage (Image) {
-                this.sliderActiveImage = Image;
             },
 
             stripTags(html) {

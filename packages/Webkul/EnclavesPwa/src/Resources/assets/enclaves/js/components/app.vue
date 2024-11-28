@@ -1,7 +1,7 @@
 <template>
     <div id="app-inner">
         <!-- header -->
-        <welcome-model v-if="this.$route.params.welcomeModel"></welcome-model>
+        <welcome-model v-if="!visited"></welcome-model>
 
         <header class="ticky top-0 z-[999] border-b-[1px] border-[#E9E9E9] bg-white">
             <div class="container px-[18px] py-6">
@@ -13,7 +13,7 @@
                             >
                         </span>
                     </div>
-                    <router-link :to="{ name: 'home', params: { welcomeModel: true } }">
+                    <router-link :to="{ name: 'home' }">
                         <span class="homeful-logo mr-auto">
                             <img :src="themeAssets + 'images/logo.png'" alt="homeful">
                         </span>
@@ -342,6 +342,7 @@
                         ref:null,
                     },
                 },
+                visited: localStorage.getItem('Pwavisited'),
 			}
 		},
 
@@ -349,7 +350,7 @@
             customer: state => state.customer,
         }),
 
-        mounted() {
+    mounted() {
             // Store components reference in drawersUp object.
             this.drawersUp.askToJoy.ref = this.$refs.asktoJoyRef;
             this.drawersUp.partners.ref = this.$refs.partnerDrawerRef;

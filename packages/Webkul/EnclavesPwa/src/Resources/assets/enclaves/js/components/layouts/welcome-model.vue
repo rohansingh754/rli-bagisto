@@ -48,7 +48,7 @@
                 let element = document.getElementById('welcome-widget-model');
                 element.style.transform = 'translate3d(0, 900px ,0)';
 				element.style.transitionDuration = '0.3s';
-
+                localStorage.setItem('Pwavisited', true);
                 setTimeout(() => {
 				    element.classList.add('hidden');
                 }, 400);
