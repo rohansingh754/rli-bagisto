@@ -16,11 +16,14 @@ use Webkul\Enclaves\Http\Controllers\Shop\Customer\Account\NewsUpdatesController
 use Webkul\Enclaves\Http\Controllers\Shop\Customer\Account\TransactionController;
 use Webkul\Enclaves\Http\Controllers\Shop\Partner\PartnersController;
 use Webkul\Enclaves\Http\Controllers\Shop\EnclaveMenu\EnclaveMenuController;
+use Webkul\Enclaves\Http\Controllers\Shop\Attribute\AttributeController;
 
 Route::group(['middleware' => ['locale', 'theme', 'currency']], function () {
 
     Route::controller(ProductController::class)->prefix('products')->group(function () {
         Route::get('', 'index')->name('enclaves.products.index');
+        Route::get('ask-to-joy', 'askToJoyProductsview')->name('enclaves.products.ask_to_joy');
+        Route::get('ask-to-joy-data', 'getAskToJoyProducts')->name('enclaves.products.ask_to_joy.data');
 
         Route::post('customer-profile-update', 'profileUpdate')->name('enclaves.customers.account.profile.update');
     });
@@ -86,11 +89,11 @@ Route::group(['middleware' => ['locale', 'theme', 'currency']], function () {
 
     Route::group(['prefix' => 'api'], function () {
         Route::controller(CategoryController::class)->prefix('categories')->group(function () {
-            Route::get('', 'index')->name('enclaves.api.categories.index');
+            Route::get('enclave-categories', 'index')->name('enclaves.api.categories.index');
         });
 
         Route::controller(ProductController::class)->prefix('products')->group(function () {
-            Route::get('', 'getProducts')->name('enclaves.api.product.index');
+            Route::get('enclave-products', 'getProducts')->name('enclaves.api.product.index');
 
             Route::get('soldout-products', 'getSoldOutProducts')->name('enclaves.api.product.soldout.index');
         });
@@ -101,6 +104,10 @@ Route::group(['middleware' => ['locale', 'theme', 'currency']], function () {
 
         Route::controller(EnclaveMenuController::class)->prefix('menus')->group(function () {
             Route::get('', 'menuItems')->name('enclaves.api.menus');
+        });
+
+        Route::controller(AttributeController::class)->prefix('enclave/attributes')->group(function () {
+            Route::get('{code}', 'getAttributes')->name('enclaves.api.attribute');
         });
     });
 

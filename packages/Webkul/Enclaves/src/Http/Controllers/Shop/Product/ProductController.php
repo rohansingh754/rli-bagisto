@@ -117,4 +117,19 @@ class ProductController extends Controller
 
         return ProductResource::collection($products);
     }
+
+    /**
+     * Show the view for the ask to joy resources.
+     *
+     * @return \Illuminate\View\View
+     */
+    public function askToJoyProductsview()
+    {
+        return view('enclaves::shop.ask-to-joy.view');
+    }
+
+    public function getAskToJoyProducts()
+    {
+        // Get ask to joy product data as similar pwa
+    }
 }

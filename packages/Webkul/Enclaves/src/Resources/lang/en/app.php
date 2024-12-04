@@ -637,6 +637,20 @@ return [
                     'option_9' => 'Starts at 29,350',
                     'option_10' => 'Starts at 40,500',
                 ],
+                'price_range'  => 'Price Range',
+                'price_range_options'                  => [
+                    'label'     => 'Price Range',
+                    'option_1'  => 'Socialized Housing (750,000)',
+                    'option_2'  => 'Economic Housing (1,200,000)',
+                    'option_3'  => 'Economic Housing (1,500,000)',
+                    'option_4'  => 'Middle Housing (starts at 2,850,000)',
+                    'option_5'  => 'Middle Housing (starts at 3,420,000)',
+                    'option_6'  => 'Middle Housing (starts at 5,800,000)',
+                    'option_7'  => 'Middle Condominium Studio (starts at 2,700,000)',
+                    'option_8'  => 'Middle Condominium studio w/ Balcony (starts at 3,000,000)',
+                    'option_9'  => 'Middle Condominium 1BR (starts at 3,200,000)',
+                    'option_10' => 'Middle Condominium 2BR (starts at 4,200,000)',
+                ],
             ],
 
             'pages' => [
