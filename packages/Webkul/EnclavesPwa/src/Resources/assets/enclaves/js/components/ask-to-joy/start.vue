@@ -15,7 +15,7 @@
 					class="rounded-[100px] bg-[#F7F7F7] px-[97px] py-7 text-[15px] font-normal text-dark"
 					@click="incrementStep()"
 					>
-					Start
+					{{ $t('Start') }}
 				</button>
 			</div>
 		</div>

@@ -112,5 +112,6 @@
 		word-wrap: break-word;
 		border-radius: 40px 40px 0px 0px;
 		padding-top: 2px;
+		max-height:90vh;
 	}
 </style>

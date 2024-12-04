@@ -55,7 +55,6 @@
 			if (askToJoyfilterKey ) {
 				this.FilterKey = askToJoyfilterKey
 			}
-			console.log(askToJoyfilterKey, this.FilterKey);
 
 			this.getAttributes(this.FilterKey);
 		},
@@ -63,7 +62,6 @@
         methods: {
 			async getAttributes(code) {
 				const response = await this.$http.get(`/api/pwa/attributes/${code}`);
-				console.log(response);
 
 				if (response) {
 					this.options = response.data.data.options;
@@ -82,7 +80,7 @@
 
 			updateParams(key, value) {
 
-				if (key == 'monthly_amortization') {
+				if (key == 'monthly_amortization' || key == 'price_range') {
 					value = this.UpdateValueByKey(key, value);
 				}
 
