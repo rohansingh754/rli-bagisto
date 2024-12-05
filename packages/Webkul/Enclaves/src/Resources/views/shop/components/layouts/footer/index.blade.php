@@ -21,7 +21,9 @@ $customization = $themeCustomizationRepository->findOneWhere([
     <div class="container">
         <div class="flex justify-between gap-2 pt-28 max-sm:flex-col max-sm:gap-5">
             <div class="">
-                <p class="text-3xl font-bold text-dark">Contact Us</p>
+                <p class="text-3xl font-bold text-dark">
+                    @lang('enclaves::app.shop.components.layouts.footer.contact-us')
+                </p>
                 <div class="mt-7 flex items-center gap-4">
                     <span class="icon-email text-2xl text-primary"></span>
                     <a
@@ -45,7 +47,9 @@ $customization = $themeCustomizationRepository->findOneWhere([
                 @if (! empty($customization->options)
                 && isset($customization->options['column_3']))
 
-                <p class="text-2xl font-normal text-dark">Follow Us</p>
+                <p class="text-2xl font-normal text-dark">
+                    @lang('enclaves::app.shop.components.layouts.footer.follow-us')
+                </p>
 
                 <div class="mt-9 flex gap-10 max-md:gap-4">
                     @foreach ($customization->options['column_3'] as $socialLinkSection)

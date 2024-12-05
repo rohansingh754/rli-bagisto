@@ -24,21 +24,21 @@ class EnclaveMenuController extends Controller
     {
         $menuItems = [
             [
-                'label' => 'Homepage',
+                'label' => trans('enclaves::app.shop.menus.homepage'),
                 'type'  => 'link',
                 'url'   => route('shop.home.index'),
                 'visible' => true,
                 'submenu' => []
             ],
             [
-                'label' => 'About Us',
+                'label' => trans('enclaves::app.shop.menus.about-us'),
                 'type'  => 'link',
                 'url'   => route('shop.cms.page', 'about-us'),
                 'visible' => true,
                 'submenu' => []
             ],
             [
-                'label' => 'Ask Joy',
+                'label' => trans('enclaves::app.shop.menus.ask-joy'),
                 'type'  => 'button',
                 'modal' => 'ask-joy-modal',
                 'class' => 'openAskToJoyModel',
@@ -46,27 +46,27 @@ class EnclaveMenuController extends Controller
                 'submenu' => []
             ],
             [
-                'label' => 'Our Brands',
+                'label' => trans('enclaves::app.shop.menus.our-brands'),
                 'type'  => 'button',
                 'visible' => true,
                 'submenu' => $this->productCategories(),
             ],
             [
-                'label' => 'Partner with Us',
+                'label' => trans('enclaves::app.shop.menus.partner-with-us'),
                 'type'  => 'link',
                 'url'   => route('shop.partners.index'),
                 'visible' => true,
                 'submenu' => []
             ],
             [
-                'label' => 'Announcements',
+                'label' => trans('enclaves::app.shop.menus.announcements'),
                 'type'  => 'link',
                 'url'   => route('shop.article.index'),
                 'visible' => true,
                 'submenu' => []
             ],
             [
-                'label' => 'Contact Us',
+                'label' => trans('enclaves::app.shop.menus.contact-us'),
                 'type'  => 'link',
                 'url'   => route('shop.cms.page', 'contact-us'),
                 'visible' => true,

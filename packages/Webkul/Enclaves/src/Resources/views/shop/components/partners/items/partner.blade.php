@@ -32,7 +32,9 @@
                             Seize the chance to make money from the comfort of your home or work.  Join us now and start earning while you refer buyers to us!<br><br>
                             Interested?
                         </p>
-                        <a href="./product.html" class="absolute inset-x-0 bottom-0 mt-2.5 block rounded-full bg-[linear-gradient(268.1deg,_#CC035C_7.47%,_#FCB115_98.92%)] px-4 py-[14px] text-center text-[15px] font-medium text-white max-385:px-3 max-385:text-[13px]">Join Us</a>
+                        <a href="./product.html" class="absolute inset-x-0 bottom-0 mt-2.5 block rounded-full bg-[linear-gradient(268.1deg,_#CC035C_7.47%,_#FCB115_98.92%)] px-4 py-[14px] text-center text-[15px] font-medium text-white max-385:px-3 max-385:text-[13px]">
+                            @lang('enclaves::app.shop.partners.join-us')
+                        </a>
                     </div>
                 </div>
             </div>

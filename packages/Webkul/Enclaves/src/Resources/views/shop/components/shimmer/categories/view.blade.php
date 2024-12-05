@@ -1,5 +1,5 @@
-<div class="container px-[60px] max-lg:px-[30px] max-lg:px-[15px]">
-    <div class="flex gap-[40px] md:mt-[40px] items-start max-lg:gap-[20px]">
+<div class="px-0 max-lg:px-[30px] max-lg:px-[15px]">
+    <div class="flex gap-[40px] items-start max-lg:gap-[20px]">
         <!-- Desktop Filter Shimmer Effect -->
 
         <div class="flex-1">
@@ -12,21 +12,20 @@
                         @for ($i = 0;  $i < $count; $i++)
                             <div class="grid gap-4 relative w-full max-lg:grid-cols-1 {{ $attributes['class'] }}">
                                 <div class="relative rounded-sm">
-                                    <div class="shimmer h-[290px] w-full rounded-[20px] max-lg:hidden"></div>
-
-                                    <div class="shimmer hidden h-[125px] w-full rounded-[20px] max-lg:block"></div>
+                                    <div class="shimmer h-[370px] rounded-3xl max-lg:h-[128px]"></div>
                                 </div>
 
-                                <div class="flex flex-wrap content-start gap-3">
-                                    <p class="shimmer h-[24px] w-[75%]"></p>
-                                    <p class="shimmer h-[24px] w-[55%]"></p>
-
-                                    <!-- Needs to implement that in future -->
-                                    <div class="mt-[12px] flex hidden gap-4">
-                                        <span class="shimmer block h-[30px] w-[30px] rounded-full"></span>
-                                        <span class="shimmer block h-[30px] w-[30px] rounded-full"></span>
-                                    </div>
+                                <div class="grid content-start gap-2.5">
+                                    <p class="mt-2 shimmer h-[24px] w-[45%]"></p>
+                                    <p class="mt-1 shimmer h-[24px] w-[45%]"></p>
+                                    <p class="mt-1 shimmer h-[20px] w-[50%]"></p>
+                                    <p class="mt-1 shimmer h-[24px] w-[55%]"></p>
                                 </div>
+
+                                <span
+                                    class="mt-5 block w-full rounded-full px-5 py-5 max-lg:px-3 max-lg:py-3 cursor-pointer shimmer min-h-[70px]"
+                                    >
+                                </span>
                             </div>
                         @endfor
                     </div>

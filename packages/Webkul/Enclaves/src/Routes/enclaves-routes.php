@@ -22,11 +22,14 @@ Route::group(['middleware' => ['locale', 'theme', 'currency']], function () {
 
     Route::controller(ProductController::class)->prefix('products')->group(function () {
         Route::get('', 'index')->name('enclaves.products.index');
-        Route::get('ask-to-joy', 'askToJoyProductsview')->name('enclaves.products.ask_to_joy');
-        Route::get('ask-to-joy-data', 'getAskToJoyProducts')->name('enclaves.products.ask_to_joy.data');
 
         Route::post('customer-profile-update', 'profileUpdate')->name('enclaves.customers.account.profile.update');
     });
+
+    Route::controller(ProductController::class)->prefix('ask-to-joy')->group(function () {
+        Route::get('', 'askToJoyProductsview')->name('enclaves.products.ask_to_joy');
+    });
+
 
     Route::prefix('customer')->group(function () {
         Route::group(['middleware' => ['customer']], function () {
@@ -96,6 +99,8 @@ Route::group(['middleware' => ['locale', 'theme', 'currency']], function () {
             Route::get('enclave-products', 'getProducts')->name('enclaves.api.product.index');
 
             Route::get('soldout-products', 'getSoldOutProducts')->name('enclaves.api.product.soldout.index');
+
+            Route::get('ask-to-joy-products', 'getAskToJoyProducts')->name('enclaves.api.product.ask_to_joy');
         });
 
         Route::controller(EkycController::class)->prefix('ekyc')->group(function () {

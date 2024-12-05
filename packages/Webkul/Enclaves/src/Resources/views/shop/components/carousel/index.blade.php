@@ -8,7 +8,7 @@
 @pushOnce('scripts')
     <script type="text/x-template" id="v-carousel-template">
         <template v-if="isLoading">
-			<x-shop::shimmer.products.slider></x-shop::shimmer.categories.carousel>
+			<x-shop::shimmer.products.slider></x-shop::shimmer.products.slider>
 		</template>
 
 
@@ -47,23 +47,31 @@
 								class="flex items-center gap-2 rounded-full bg-[linear-gradient(268.1deg,_#CC035C_7.47%,_#FCB115_98.92%)] px-4 py-[14px] text-center text-[15px] font-medium text-white cursor-pointer"
 								@click="redirectToProduct(product)"
 								>
-								View Project
+								@lang('enclaves::app.shop.components.layouts.carousel.categories.view-project')
 								<span class="icon-arrow-right-stylish text-[24px]px] inline-block"></span>
 							</span>
 						</div>
 					</div>
 					<div class="mt-7 flex justify-between gap-5 group-[.next]:hidden group-[.prev]:hidden max-md:flex-wrap max-md:px-4">
 						<div class="">
-							<p class="text-sm font-normal text-[#8B8B8B]">Starts at</p>
+							<p class="text-sm font-normal text-[#8B8B8B]">
+								@lang('enclaves::app.shop.components.layouts.carousel.categories.start-at')
+							</p>
 							<p class="homefull-text-gradient mt-1 text-xl font-bold leading-7">@{{product.min_price}}</p>
 						</div>
 						<div class="w-[127px]">
-							<p class="text-sm font-normal text-[#8B8B8B]">Total Units Sold</p>
+							<p class="text-sm font-normal text-[#8B8B8B]">
+								@lang('enclaves::app.shop.components.layouts.carousel.categories.total-units-sold')
+							</p>
 							<p class="mt-1 text-xl font-normal leading-7 text-black">200+</p>
 						</div>
 						<div class="">
-							<p class="text-sm font-normal text-[#8B8B8B]">Product type</p>
-							<p class="mt-1 max-w-[440px] text-xl font-normal leading-7 text-black">2 Storey Duplex (FA: 50sqm LA:70sqm) 2 Bedroom, 1 Toilet & Bath and 1 Carport</p>
+							<p class="text-sm font-normal text-[#8B8B8B]">
+								@lang('enclaves::app.shop.components.layouts.carousel.categories.product-type')
+							</p>
+							<p class="mt-1 max-w-[440px] text-xl font-normal leading-7 text-black">
+								@{{ setPropertyType('property_type', product)}}
+							</p>
 						</div>
 					</div>
 				</div>
@@ -270,6 +278,14 @@
 				redirectToProduct(product) {
 					window.location.href = `{{ route('shop.product_or_category.index', '') }}/` + product.url_key;
 				},
+
+				setPropertyType(attributeCode, product){
+					let attribute = product.attributes.find( data => data.code == attributeCode );
+
+					if(attribute){
+						return attribute.value;
+					}
+				}
             }
         });
     </script>

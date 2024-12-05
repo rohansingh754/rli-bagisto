@@ -36,7 +36,9 @@
                 <!-- Breadcrumbs -->
                 <x-shop::breadcrumbs name="partners"></x-shop::breadcrumbs>
 
-                <h2 class="text-3xl font-bold text-dark mt-9">Partner with Us</h2>
+                <h2 class="text-3xl font-bold text-dark mt-9">
+                    @lang('enclaves::app.shop.partners.title')
+                </h2>
 
                 <div class="mt-11 grid grid-cols-3 gap-16 max-xl:gap-8 max-lg:grid-cols-2 max-md:grid-cols-1">
                     <div
@@ -87,7 +89,7 @@
                                     class="absolute inset-x-0 bottom-0 mt-2.5 block rounded-full bg-[linear-gradient(268.1deg,_#CC035C_7.47%,_#FCB115_98.92%)] px-4 py-[14px] text-center text-[15px] font-medium text-white max-385:px-3 max-385:text-[13px]"
                                     @click="JoinUsPartner()"
                                     >
-                                    Join Us
+                                    @lang('enclaves::app.shop.partners.join-us')
                                 </button>
                             </div>
                         </div>
@@ -110,7 +112,7 @@
                     <x-slot:header>
                         <div class="flex w-full">
                             <h2 class="text-2xl text-[25px] font-bold max-md:text-base">
-                                @lang('Join as Affiliate Marketer')
+                                @lang('enclaves::app.shop.partners.form.title')
                             </h2>
                         </div>
                     </x-slot:header>
@@ -121,26 +123,36 @@
                             <div class="mx-auto w-[360px] max-sm:w-full">
                                 <form action="">
                                     <div class="">
-                                        <label for="f-name" class="block text-sm font-medium text-[#374151]">First Name <span class="text-[#B4173A]">*</span></label>
+                                        <label for="f-name" class="block text-sm font-medium text-[#374151]">
+                                            @lang('enclaves::app.shop.partners.form.first-name')
+                                        <span class="text-[#B4173A]">*</span></label>
                                         <input type="text" name="f-name" class="mt-1.5 block w-full rounded-lg border border-[#D1D5DB] px-4 py-2 text-base font-normal text-dark shadow-[0px_1px_3px] shadow-black/10">
                                     </div>
                                     <div class="mt-5">
-                                        <label for="l-name" class="block text-sm font-medium text-[#374151]">Last Name <span class="text-[#B4173A]">*</span></label>
+                                        <label for="l-name" class="block text-sm font-medium text-[#374151]">
+                                            @lang('enclaves::app.shop.partners.form.last-name')
+                                        <span class="text-[#B4173A]">*</span></label>
                                         <input type="text" name="l-name" class="mt-1.5 block w-full rounded-lg border border-[#D1D5DB] px-4 py-2 text-base font-normal text-dark shadow-[0px_1px_3px] shadow-black/10">
                                     </div>
                                     <div class="mt-5">
-                                        <label for="email" class="block text-sm font-medium text-[#374151]">Email Address <span class="text-[#B4173A]">*</span></label>
+                                        <label for="email" class="block text-sm font-medium text-[#374151]">
+                                            @lang('enclaves::app.shop.partners.form.email')
+                                            <span class="text-[#B4173A]">*</span></label>
                                         <input type="email" name="email" class="mt-1.5 block w-full rounded-lg border border-[#D1D5DB] px-4 py-2 text-base font-normal text-dark shadow-[0px_1px_3px] shadow-black/10">
                                     </div>
                                     <div class="mt-5">
-                                        <label for="phone" class="block text-sm font-medium text-[#374151]">Mobile Number <span class="text-[#B4173A]">*</span></label>
+                                        <label for="phone" class="block text-sm font-medium text-[#374151]">
+                                            @lang('enclaves::app.shop.partners.form.mobile')
+                                            <span class="text-[#B4173A]">*</span></label>
                                         <div class="flex items-center gap-2">
                                             <p class="mt-1.5 text-sm font-normal text-[#9CA3AF]">+93</p>
                                             <input type="text" name="phone" class="mt-1.5 block w-full rounded-lg border border-[#D1D5DB] px-4 py-2 text-base font-normal text-dark shadow-[0px_1px_3px] shadow-black/10">
                                         </div>
                                     </div>
                                     <div class="mt-5">
-                                        <label for="work" class="block text-sm font-medium text-[#374151]">Work <span class="text-[#B4173A]">*</span></label>
+                                        <label for="work" class="block text-sm font-medium text-[#374151]">
+                                            @lang('enclaves::app.shop.partners.form.work')
+                                            <span class="text-[#B4173A]">*</span></label>
                                         <div class="relative mt-1.5 overflow-hidden">
                                             <select name="work" id="" class="block w-full appearance-none rounded-lg border border-[#D1D5DB] bg-transparent px-4 py-2 text-base font-normal text-dark shadow-[0px_1px_3px] shadow-black/10">
                                                 <option value=""></option>
@@ -156,9 +168,17 @@
                                     </div>
                                     <div class="mt-8 flex items-start gap-3">
                                         <input id="link-checkbox" type="checkbox" value="" class="checbox-primary">
-                                        <label for="link-checkbox" class="text-[14px] font-normal text-[#000000E0]">By clicking Submit, you agree to Homeful.ph's <a href="#" class="text-[14px] font-bold text-[#000000E0]">Privacy Policy</a> and <a href="#" class="text-[14px] font-bold text-[#000000E0]">Terms of Use.</a></label>
+                                        <label for="link-checkbox" class="text-[14px] font-normal text-[#000000E0]">
+                                            @lang('enclaves::app.shop.partners.form.termsplit1')
+                                            <a href="#" class="text-[14px] font-bold text-[#000000E0]"> @lang('enclaves::app.shop.partners.form.termsplit2') </a>  @lang('enclaves::app.shop.partners.form.termsplit3')
+                                            <a href="#" class="text-[14px] font-bold text-[#000000E0]">
+                                                @lang('enclaves::app.shop.partners.form.termsplit4')
+                                            </a>
+                                        </label>
                                     </div>
-                                    <button type="submit" class="mt-5 inline-block w-full rounded-full bg-[linear-gradient(268.1deg,_#CC035C_7.47%,_#FCB115_98.92%)] px-7 py-5 text-center text-sm font-medium text-white disabled:opacity-[0.4]" disabled>Submit</button>
+                                    <button type="submit" class="mt-5 inline-block w-full rounded-full bg-[linear-gradient(268.1deg,_#CC035C_7.47%,_#FCB115_98.92%)] px-7 py-5 text-center text-sm font-medium text-white disabled:opacity-[0.4]" disabled>
+                                        @lang('enclaves::app.shop.partners.form.submit')
+                                    </button>
                                 </form>
                             </div>
 

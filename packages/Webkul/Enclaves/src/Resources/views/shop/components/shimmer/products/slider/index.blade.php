@@ -22,7 +22,7 @@
 					</div>
 					<div class="">
 						<p class="w-[50px] h-[20px] shimmer"></p>
-						<p class="mt-2 w-[390px] h-[56px] shimmer"></p>
+						<p class="mt-2 w-[87px] h-[20px] shimmer"></p>
 					</div>
 				</div>
 			</div>

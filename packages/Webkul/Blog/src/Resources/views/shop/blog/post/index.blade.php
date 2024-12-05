@@ -27,7 +27,7 @@
         <div class="container px-[60px] max-lg:px-[30px]">
             <template v-if="isLoading">
                 <!-- Shimmer Load -->
-                <div class="shimmer rounded-1xl mt-[10px] h-[65px] w-[30%]"></div>
+                <div class="shimmer rounded-1xl mb-3 mt-[30px] h-[24px] w-[30%]"></div>
 
                 <x-blog::shimmer.blogs.item count="6"/>
             </template>

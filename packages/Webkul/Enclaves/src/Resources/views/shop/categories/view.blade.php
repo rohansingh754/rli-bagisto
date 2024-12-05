@@ -148,7 +148,7 @@
                                 </template>
 
                                 <template v-else>
-                                    <x-shop::shimmer.categories.view count="6"></x-shop::shimmer.categories.view>
+                                    <x-shop::shimmer.categories.view count="4"></x-shop::shimmer.categories.view>
                                 </template>
                             </div>
                         </template>
@@ -186,40 +186,48 @@
                     </div>
                 </div>
                 <div class="mt-[60px]">
-                    <h2 class="text-lg font-bold text-dark">Sold out Projects</h2>
+                    <template v-if="!isLoading">
+                        <div v-if="soldOutProducts.length">
+                            <h2 class="text-lg font-bold text-dark">Sold out Projects</h2>
+                            <div class="flex items-start gap-[40px] max-lg:gap-[20px]">
+                                <div class="mt-11 grid grid-cols-4 gap-x-20 gap-y-11 max-sm:grid-cols-1">
+                                    <div
+                                        v-for="product in soldOutProducts"
+                                        class="">
+                                        <x-shop::media.images.lazy
+                                            @click="redirectToProduct(product)"
+                                            class="w-full cursor-pointer rounded-lg bg-[#F5F5F5] transition-all duration-300 group-hover:scale-105"
+                                            ::key="imageComponentRerander"
+                                            ::src="product.base_image.medium_image_url"
+                                        ></x-shop::media.images.lazy>
+                                        <h2
+                                            class="mt-5 text-xl font-bold text-dark"
+                                            v-text="product.name"
+                                            ></h2>
+                                        <p class="mt-1 text-lg font-normal text-primary">@{{ product.attributes.find(attr => attr.code === 'location').value }}</p>
+                                        <p class="mt-2 text-sm font-normal text-[#8B8B8B]">Price starts at</p>
+                                        <p
+                                            class="mt-1 text-xl font-bold text-dark"
+                                            v-text="product.min_price"
+                                            >
+                                        </p>
+                                        <span
+                                            class="mt-5 block w-full rounded-full border border-primary px-5 py-5 text-center text-lg font-normal text-primary max-lg:px-3 max-lg:py-3 cursor-pointer"
+                                            @click="redirectToProduct(product)"
+                                            >
+                                            View Property
+                                        </span>
+                                    </div>
+                                </div>
 
-                    <div class="flex items-start gap-[40px] max-lg:gap-[20px]">
-                        <div class="mt-11 grid grid-cols-4 gap-x-20 gap-y-11 max-sm:grid-cols-1">
-                            <div
-                                v-for="product in soldOutProducts"
-                                class="">
-                                <x-shop::media.images.lazy
-                                    @click="redirectToProduct(product)"
-                                    class="w-full cursor-pointer rounded-lg bg-[#F5F5F5] transition-all duration-300 group-hover:scale-105"
-                                    ::key="imageComponentRerander"
-                                    ::src="product.base_image.medium_image_url"
-                                ></x-shop::media.images.lazy>
-                                <h2
-                                    class="mt-5 text-xl font-bold text-dark"
-                                    v-text="product.name"
-                                    ></h2>
-                                <p class="mt-1 text-lg font-normal text-primary">@{{ product.attributes.find(attr => attr.code === 'location').value }}</p>
-                                <p class="mt-2 text-sm font-normal text-[#8B8B8B]">Price starts at</p>
-                                <p
-                                    class="mt-1 text-xl font-bold text-dark"
-                                    v-text="product.min_price"
-                                    >
-                                </p>
-                                <span
-                                    class="mt-5 block w-full rounded-full border border-primary px-5 py-5 text-center text-lg font-normal text-primary max-lg:px-3 max-lg:py-3 cursor-pointer"
-                                    @click="redirectToProduct(product)"
-                                    >
-                                    View Property
-                                </span>
                             </div>
                         </div>
+                    </template>
+                    <template v-else>
+                        <h2 class="h-[28px] w-[30%] shimmer"></h2>
 
-                    </div>
+                        <x-shop::shimmer.categories.sold-out-product count="4"></x-shop::shimmer.categories.sold-out-product>
+                    </template>
                 </div>
 
                 <x-enclaves-shop::modal.story-details ref="storyDetailsGuideModal">

@@ -45,3 +45,9 @@ Breadcrumbs::for('partners', function (BreadcrumbTrail $trail) {
 
     $trail->push('Parnter name', route('shop.partners.index'));
 });
+
+Breadcrumbs::for('ask-to-joy', function (BreadcrumbTrail $trail) {
+    $trail->parent('home');
+
+    $trail->push(trans('enclaves::app.shop.ask-to-joy.braedcurmb'), route('enclaves.products.ask_to_joy'));
+});

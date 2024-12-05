@@ -10,6 +10,7 @@ use Webkul\Enclaves\Helpers\Customer\CustomerHelper;
 use Webkul\Enclaves\Http\Controllers\Controller;
 use Webkul\Product\Helpers\View as ProductViewHelper;
 use Webkul\Enclaves\Http\Resources\ProductResource;
+use Webkul\Enclaves\Repositories\ProductRepository as BaseProductRepository;
 
 class ProductController extends Controller
 {
@@ -28,6 +29,7 @@ class ProductController extends Controller
     public function __construct(
         protected ProductRepository $productRepository,
         protected ProductViewHelper $productViewHelper,
+        protected BaseProductRepository $baseProductRepository,
     ) {}
 
     /**
@@ -125,11 +127,24 @@ class ProductController extends Controller
      */
     public function askToJoyProductsview()
     {
-        return view('enclaves::shop.ask-to-joy.view');
+        return view('enclaves::shop.ask-to-joy.index');
     }
 
     public function getAskToJoyProducts()
     {
-        // Get ask to joy product data as similar pwa
+        $products = $this->baseProductRepository
+            ->getAll(array_merge(request()->query(), [
+                'channel_id'           => core()->getCurrentChannel()->id,
+                'status'               => 1,
+                'visible_individually' => 1,
+            ]));
+
+        foreach ($products as $product) {
+            $product->attributes = $this->productViewHelper->getAdditionalData($product);
+        }
+
+        return response()->json([
+            'data' => ProductResource::collection($products),
+        ]);
     }
 }

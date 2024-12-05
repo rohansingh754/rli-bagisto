@@ -380,20 +380,39 @@ return [
                 'header' => [
                     'login'           => 'Log in',
                     'manage-property' => 'Manage your property.',
+                    'features'        => [
+                        'free-shipping' => 'Free Shipping',
+                        'free-shipping-desc' => 'If goods have problems, Lorem Ipsum is dummy text',
+                        'product-replace' => 'Product Replace',
+                        'product-replace-desc' => 'If goods have problems, Lorem Ipsum is dummy text',
+                        'emi-available' => 'Emi Available',
+                        'emi-available-desc' => 'If goods have problems, Lorem Ipsum is dummy text',
+                        'support' => '24/7 Support',
+                        'support-desc' => 'If goods have problems, Lorem Ipsum is dummy text',
+                    ],
                 ],
 
                 'footer' => [
-                    'address'       => '17 ADB Ave, Ortigas Center, Pasig, Metro Manila',
-                    'email'         => 'info@homeful.com',
-                    'mobile-number' => '+63 9456677654',
-                    'quick-links'    => 'Quicklinks',
-                    'follow-us'     => 'Follow Us',
-                    'search'        => 'Search',
-                    'email-address' => 'Email Address',
-                    'subscribe'     => 'Subscribe',
-                    'copyright'     => 'Copyright © 2010 - :current_year, Raemulan Lands Inc. All rights reserved.',
-
+                    'address'              => '17 ADB Ave, Ortigas Center, Pasig, Metro Manila',
+                    'email'                => 'info@homeful.com',
+                    'mobile-number'        => '+63 9456677654',
+                    'quick-links'          => 'Quicklinks',
+                    'contact-us'           => 'Contact Us',
+                    'follow-us'            => 'Follow Us',
+                    'search'               => 'Search',
+                    'email-address'        => 'Email Address',
+                    'subscribe'            => 'Subscribe',
+                    'copyright'            => 'Copyright © 2010 - :current_year, Raemulan Lands Inc. All rights reserved.',
                     'subscribe-stay-touch' => 'Subscribe to stay in touch.',
+                ],
+
+                'carousel' => [
+                    'categories' => [
+                        'view-project'     => 'View Project',
+                        'start-at'         => 'Starts at',
+                        'total-units-sold' => 'Total Units Sold',
+                        'product-type'     => 'Product type',
+                    ],
                 ],
             ],
 
@@ -408,7 +427,62 @@ return [
 
         'partners' => [
             'braedcurmb' => 'Partner with Us',
-        ]
+            'title'      => 'Partner with Us',
+            'read-more'  => 'Read more',
+            'join-us'    => 'Join Us',
+            'form'       => [
+                'title'      => 'Join as Affiliate Marketer',
+                'first-name' => 'First Name',
+                'last-name'  => 'Last Name ',
+                'email'      => 'Email Address ',
+                'mobile'     => 'Mobile Number ',
+                'work'       => 'Work ',
+                'submit'     => 'Submit',
+                'termsplit1'   => 'By clicking Submit, you agree to Homeful.ph\'s',
+                'termsplit2'   => 'Privacy ',
+                'termsplit3'   => 'and',
+                'termsplit4'   => 'Terms of Use.',
+            ],
+        ],
+
+        'properties' => [
+            'title' => 'Our Brands',
+            'visit-store' => 'Visit Store',
+        ],
+
+        'ask-to-joy' => [
+            'modal' => [
+                'title' => [
+                    'split1' => 'I\'m Joy, here to help you figure out which',
+                    'split2' => 'home',
+                    'split3' => 'to buy.',
+                ],
+                'start' => 'Start',
+                'all-kinds' => 'All Kinds',
+                'by-amortization' => 'By Monthly Amortization Budget',
+                'by-location' => 'By Location',
+                'by-price_range' => 'By Price Range',
+            ],
+            'braedcurmb' => 'Ask To Joy',
+            'title'      => 'Ask To Joy',
+            'load-more'  => 'Load More',
+            'need-help'  => 'Need Help in deciding what product to buy?',
+            'ask-joy'    => 'Ask Joy',
+        ],
+
+        'menus' => [
+            'homepage' => 'Homepage',
+            'about-us' => 'About Us',
+            'ask-joy' => 'Ask Joy',
+            'our-brands' => 'Our Brands',
+            'partner-with-us' => 'Partner With Us',
+            'announcements' => 'Announcements',
+            'contact-us' => 'Contact Us',
+        ],
+
+        'actions' => [
+            'page-loading' => 'Page Loading...',
+        ],
     ],
 
     'admin' => [
