@@ -65,7 +65,7 @@ composer dump-autoload
 ```
 
 ```
-php artisan optimize:cache
+php artisan optimize:clear
 ```
 
 ```
