@@ -48,12 +48,13 @@
                                 <div class="">
                                     <h2 class="text-[20px] font-normal leading-none text-white max-385:text-[18px]">{{item.name}}</h2>
                                     <p
-                                        class="mt-1 text-[12px] font-normal leading-none text-[#CDCDCD]" v-html="truncateText(item.description, 15)"
+                                        class="mt-1 text-[12px] font-normal leading-none text-[#CDCDCD]"
+                                        v-html="item.description ? truncateText(item.description, 15) : ''"
                                         >
                                     </p>
                                 </div>
                                 <router-link :to="'/products/' + item.id">
-                                <button href="./product.html" class="flex items-center gap-2 rounded-full bg-[linear-gradient(268.1deg,_#CC035C_7.47%,_#FCB115_98.92%)] px-4 py-[14px] text-center text-[15px] font-medium text-white max-385:px-3 max-385:text-[13px]">
+                                <button class="flex items-center gap-2 rounded-full bg-[linear-gradient(268.1deg,_#CC035C_7.47%,_#FCB115_98.92%)] px-4 py-[14px] text-center text-[15px] font-medium text-white max-385:px-3 max-385:text-[13px]">
                                     {{ $t('View Project') }}
 
                                     <span class="icon-arrow-right-stylish inline-block text-[24px] max-385:text-[16px]"></span>
