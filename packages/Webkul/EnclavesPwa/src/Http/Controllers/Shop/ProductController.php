@@ -2,9 +2,8 @@
 
 namespace Webkul\EnclavePwa\Http\Controllers\Shop;
 
-use Illuminate\Http\Request;
 use Webkul\Product\Repositories\ProductRepository;
-use Webkul\EnclavePwa\Repositories\ProductRepository as EnclaveProductRepository;
+use Webkul\Enclaves\Repositories\ProductRepository as EnclaveProductRepository;
 use Webkul\EnclavePwa\Http\Controllers\Controller;
 use Webkul\EnclavePwa\Http\Controllers\Restapi\Shop\Catalog\ProductController as APIProductController;
 use Webkul\EnclavePwa\Http\Resources\Catalog\ProductResource;
@@ -19,7 +18,7 @@ class ProductController extends Controller
     public function __construct(
         protected ProductRepository $productRepository,
         protected EnclaveProductRepository $enclaveProductRepository,
-        protected APIProductController $aPIProductController
+        protected APIProductController $aPIProductController,
     ) {}
 
     /**
@@ -41,7 +40,6 @@ class ProductController extends Controller
                 'status'               => 1,
                 'visible_individually' => 1,
             ]));
-
 
         return response()->json([
             'data' => ProductResource::collection($products),
