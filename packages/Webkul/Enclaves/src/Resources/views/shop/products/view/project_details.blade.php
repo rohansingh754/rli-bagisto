@@ -1,5 +1,7 @@
 <div class="mt-8 max-sm:mt-6 max-sm:border-t max-sm:border-[#D9D9D9] max-sm:pt-5">
-	<h2 class="text-base font-medium text-dark">Project Details</h2>
+	<h2 class="text-base font-medium text-dark">
+		@lang('enclaves::app.shop.product.project-details')
+	</h2>
 	<div class="mt-10 max-sm:mt-5">
 		<div
 			class="group"

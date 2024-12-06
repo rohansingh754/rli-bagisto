@@ -100,7 +100,9 @@
                                     v-if="step != 4"
                                     class="relative flex max-md:flex-wrap max-md:justify-center items-center gap-7 bg-white px-20 max-lg:px-10 max-md:py-24 rounded-[30px] max-w-[90vw] h-[586px] max-lg:h-auto max-h-[90vh] overflow-auto scrollbar-hide">
 
-                                    <img src="{{ bagisto_asset('images/ask-to-joy-1.png') }}" alt="" class="w-[390px] max-md:w-full max-lg:w-2/4 max-w-full max-h-full">
+                                    <img
+                                        src="{{ bagisto_asset('images/ask-to-joy-1.png') }}"
+                                        class="w-[390px] max-md:w-full max-lg:w-2/4 max-w-full max-h-full">
                                     <div
                                         v-if="step == 1"
                                         class="font-dm-sans text-center">
@@ -114,7 +116,7 @@
                                     <div
                                         v-if="step == 2"
                                         class="font-dm-sans text-center">
-                                        <div v-if="propertyTypes">
+                                        <div v-if="propertyTypes.length">
                                             <button
                                                 v-for="(option, index) in propertyTypes" :key="index"
                                                 class="inline-block bg-[#F7F7F7] mt-5 px-20 py-4 rounded-[40px] w-80 max-lg:w-auto font-normal text-[15px] text-primary hover:text-dark"
@@ -127,6 +129,20 @@
                                                 @click="updateParams()"
                                                 >
                                                 @lang('enclaves::app.shop.ask-to-joy.modal.all-kinds')
+                                            </button>
+                                        </div>
+                                        <div v-else>
+                                            <button
+                                                class="mt-7 px-20 h-[53px] rounded-[40px] w-80 max-lg:w-auto shimmer"
+                                                >
+                                            </button>
+                                            <button
+                                                class="mt-5 px-20 h-[53px] rounded-[40px] w-80 max-lg:w-auto shimmer"
+                                                >
+                                            </button>
+                                            <button
+                                                class="mt-5 px-20 h-[53px] rounded-[40px] w-80 max-lg:w-auto shimmer"
+                                                >
                                             </button>
                                         </div>
                                     </div>
@@ -164,19 +180,32 @@
                                 </div>
                                 <div
                                     v-else
-                                    class="bg-white flex flex-col gap-7 justify-center max-lg:px-10 px-20 rounded-[30px] scrollbar-hide"
                                     >
-                                    <div
-                                        v-for="(option, index) in stepFourOptions" :key="index"
-                                        class="border-[#E2E2E2] pb-5 border-b-[1px] w-full"
-                                        @click="UpdateStepFourOption(stepThreeFilterKey, option.id)"
-                                        >
-                                        <button
-                                            class="font-medium text-[17px] text-dark text-left"
-                                            >
-                                            @{{ printOptionLables(option) }}
-                                        </button>
-                                        <span class="float-right flex justify-center items-center border-[#EDEFF5] border-[1px] mt-[-4px] rounded-full icon-arrow-down w-7 h-7 text-[24px] text-primary -rotate-90"></span>
+                                    <div v-if="stepFourOptions.length">
+                                        <div class="bg-white flex flex-col gap-7 justify-center max-lg:px-10 px-20 rounded-[30px] scrollbar-hide">
+                                            <div
+                                                v-for="(option, index) in stepFourOptions" :key="index"
+                                                class="border-[#E2E2E2] pb-5 border-b-[1px] w-full"
+                                                @click="UpdateStepFourOption(stepThreeFilterKey, option.id)"
+                                                >
+                                                <button
+                                                    class="font-medium text-[17px] text-dark text-left"
+                                                    >
+                                                    @{{ printOptionLables(option) }}
+                                                </button>
+                                                <span class="float-right flex justify-center items-center border-[#EDEFF5] border-[1px] mt-[-4px] rounded-full icon-arrow-down w-7 h-7 text-[24px] text-primary -rotate-90"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div v-else>
+                                        <div class="border-b-[1px] w-[80%] max-lg:mx-10 mx-20 h-[53px] rounded-[30px] shimmer">
+                                        </div>
+
+                                        <div class="border-b-[1px] w-[80%] mt-2.5 max-lg:mx-10 mx-20 h-[53px] rounded-[30px] shimmer"></div>
+                                        <div class="border-b-[1px] w-[80%] mt-2.5 max-lg:mx-10 mx-20 h-[53px] rounded-[30px] shimmer"></div>
+                                        <div class="border-b-[1px] w-[80%] mt-2.5 max-lg:mx-10 mx-20 h-[53px] rounded-[30px] shimmer"></div>
+                                        <div class="border-b-[1px] w-[80%] mt-2.5 max-lg:mx-10 mx-20 h-[53px] rounded-[30px] shimmer"></div>
+                                        <div class="border-b-[1px] w-[80%] mt-2.5 max-lg:mx-10 mx-20 h-[53px] rounded-[30px] shimmer"></div>
                                     </div>
                                 </div>
                             </div>

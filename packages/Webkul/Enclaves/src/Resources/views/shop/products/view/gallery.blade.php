@@ -52,7 +52,7 @@
                                 alt="{{ trans('shop::app.products.view.gallery.thumbnail-image') }}"
                                 >
                         </div>
-                        <p class="mt-[5px] text-[8px] font-normal leading-none text-[#8B8B8B] transition group-[.active]:text-primary">Facade</p>
+                        {{-- <p class="mt-[5px] text-[8px] font-normal leading-none text-[#8B8B8B] transition group-[.active]:text-primary">Facade</p> --}}
                     </div>
 
                     <div
