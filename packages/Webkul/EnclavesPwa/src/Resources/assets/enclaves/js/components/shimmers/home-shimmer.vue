@@ -11,8 +11,8 @@
 				<h1 class="text-[20px] font-bold text-dark shimmer w-[139px] h-[28px] rounded-[20px]"></h1>
 				<span class="shimmer w-[50px] h-[50px] rounded-[20px]"></span>
 			</div>
-			<div class="homeful-slider-wrap relative mt-4">
-				<div class="homeful-slide active">
+			<div class="relative mt-4">
+				<div class="">
 					<div class="relative overflow-hidden rounded-[20px] shimmer min-h-[382px]">
 					</div>
 					<div class="mt-6 flex items-center justify-between gap-[16px]">
@@ -28,7 +28,8 @@
 					</div>
 					<div class="mt-6">
 						<p class="shimmer w-[100px] h-[18px] rounded-[20px]"></p>
-						<p class="mt-[5px] shimmer w-full h-[36px] rounded-[20px]"></p>
+						<p class="mt-[5px] shimmer w-full h-[22px] rounded-[20px]"></p>
+						<p class="mt-[5px] shimmer w-full h-[22px] rounded-[20px]"></p>
 					</div>
 				</div>
 			</div>

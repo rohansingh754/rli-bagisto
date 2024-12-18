@@ -65,13 +65,13 @@
                 </div>
             </div>
         </footer>
-        <div class="footer">
+        <!-- <div class="footer">
             <span class="sepator"></span>
 
             <p>{{ $t('You have just reached to the bottom of page.') }}</p>
 
             <a @click.prevent="backToTop">{{ $t('Back To Top') }}</a>
-        </div>
+        </div> -->
     </div>
 
 </template>

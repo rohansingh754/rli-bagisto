@@ -7,16 +7,21 @@
         </h2>
         <div class="rounded-[20px] bg-[#F4F8FF]">
             <div
-                v-for="(attribute, index) in viewableAttributes"
-                :key="index"
-                class="mt-5 grid grid-cols-2 items-start gap-x-10 gap-y-2 px-4 py-5 max-385:gap-x-4"
-                v-if="attribute.value"
+
+                class="mt-5 grid grid-cols-1 items-start gap-x-10 gap-y-2 px-4 py-5 max-385:gap-x-4"
                 >
-                <div class="flex items-center gap-5 text-[12px] font-normal text-dark">
-                    {{attribute.label}} :
-                </div>
-                <div class="">
-                    <p class="text-[12px] font-medium text-dark">{{stripTags(attribute.value)}}</p>
+                <div
+                    v-for="(attribute, index) in viewableAttributes"
+                    :key="index"
+                    v-if="attribute.value"
+                    class="grid grid-cols-2 items-start gap-x-10"
+                    >
+                    <div class="flex items-center gap-5 text-[12px] font-normal text-dark">
+                        {{attribute.label}} :
+                    </div>
+                    <div class="">
+                        <p class="text-[12px] font-medium text-dark">{{stripTags(attribute.value)}}</p>
+                    </div>
                 </div>
             </div>
         </div>

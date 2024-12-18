@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use Webkul\EnclavePwa\Http\Controllers\Shop\PageController;
 use Webkul\EnclavePwa\Http\Controllers\Shop\BlogController;
 use Webkul\EnclavePwa\Http\Controllers\Shop\ProductController;
+use Webkul\EnclavePwa\Http\Controllers\Shop\CategoryController;
 use Webkul\Enclaves\Http\Controllers\Shop\Attribute\AttributeController;
 use Webkul\EnclavePwa\Http\Controllers\Shop\EnclaveSupport;
 use Webkul\EnclavePwa\Http\Controllers\Shop\Customer;
@@ -36,6 +37,13 @@ Route::group(['middleware' => ['locale', 'theme', 'currency']], function () {
             Route::get('', 'allResources');
 
             Route::get('compare', 'getCompareAbleProducts');
+        });
+
+        /**
+         * categories routes.
+         */
+        Route::controller(CategoryController::class)->prefix('categories')->group(function () {
+            Route::get('', 'getAll');
         });
 
         /**

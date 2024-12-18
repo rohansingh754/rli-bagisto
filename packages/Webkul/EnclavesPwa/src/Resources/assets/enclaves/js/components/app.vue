@@ -7,17 +7,23 @@
             <div class="container px-[18px] py-6">
                 <div class="flex items-center justify-between">
                     <div class="homeful-toggler cursor-pointer py-[10px] pr-4">
-                        <span
-                            class="block h-3 w-[19px] border-b-[3px] border-t-[3px] border-dark"
-                            @click="opneCloseMenuSidebar()"
-                            >
-                        </span>
+                        <div class="flex items-center">
+                            <div class="w-[40px]">
+                                <span
+                                    class="block h-3 w-[19px] border-b-[3px] border-t-[3px] border-dark"
+                                    @click="opneCloseMenuSidebar()"
+                                    >
+                                </span>
+                            </div>
+                            <div>
+                                <router-link :to="{ name: 'home' }">
+                                    <span class="homeful-logo mr-auto">
+                                        <img :src="themeAssets + 'images/logo.png'" alt="homeful">
+                                    </span>
+                                </router-link>
+                            </div>
+                        </div>
                     </div>
-                    <router-link :to="{ name: 'home' }">
-                        <span class="homeful-logo mr-auto">
-                            <img :src="themeAssets + 'images/logo.png'" alt="homeful">
-                        </span>
-                    </router-link>
                     <div v-if="currentUser" class="flex items-center justify-end flex-nowrap">
                         <a href="#" class="relative mr-3 flex h-[42px] w-[42px] items-center justify-center rounded-full">
                             <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">

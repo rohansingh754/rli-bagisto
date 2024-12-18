@@ -18,7 +18,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Webkul\\PWA\\": "src/"
+            "Webkul\\EnclavePwa\\": "src/"
         }
     },
     "extra": {

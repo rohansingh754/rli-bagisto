@@ -21,6 +21,7 @@ mix.js(path.resolve("src/Resources/assets/enclaves/js/app.js"), "js/app.js")
     .copy(path.resolve("src/Resources/assets/enclaves/images"), publicPath + "/images")
     .sass(path.resolve("src/Resources/assets/enclaves/sass/app.scss"), "css/pwa.css")
     .sass(path.resolve("src/Resources/assets/enclaves/sass/enclave.scss"), "css/enclave.css")
+    .sass(path.resolve("src/Resources/assets/enclaves/sass/tailwind_custom.scss"), "css/tailwind_custom.css")
     .copy(path.resolve("src/Resources/assets/enclaves/fonts"), publicPath + "/fonts")
     .options({
         processCssUrls: false,

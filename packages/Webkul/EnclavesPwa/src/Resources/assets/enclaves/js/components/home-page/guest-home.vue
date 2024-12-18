@@ -15,7 +15,8 @@
                 </div>
                 <div
                     v-if="!askToJoyAskVisited"
-                    class="ask-to-joy-ask top-[100px] right-[10px] z-[999] fixed w-[238px]">
+                    class="ask-to-joy-ask top-[100px] right-[10px] z-[999] fixed w-[238px]"
+                    >
                     <img :src="themeAssets + 'images/ask-joy-modal.png'" alt="" class="float-right">
                     <div class="top-11 right-10 z-10 absolute bg-[url(./../images/ask-joy-modal-bg.png)] w-[195px] h-[195px]">
                         <p class="top-20 right-10 absolute w-[110px] font-normal text-base text-dark leading-[18px]">{{ $t('Looking for a home that suits you?') }} </p>
@@ -48,13 +49,12 @@
                                 <div class="">
                                     <h2 class="text-[20px] font-normal leading-none text-white max-385:text-[18px]">{{item.name}}</h2>
                                     <p
-                                        class="mt-1 text-[12px] font-normal leading-none text-[#CDCDCD]"
-                                        v-html="item.description ? truncateText(item.description, 15) : ''"
+                                        class="mt-1 text-[12px] font-normal leading-none text-[#CDCDCD]" v-html="truncateText(item.description, 15)"
                                         >
                                     </p>
                                 </div>
                                 <router-link :to="'/products/' + item.id">
-                                <button class="flex items-center gap-2 rounded-full bg-[linear-gradient(268.1deg,_#CC035C_7.47%,_#FCB115_98.92%)] px-4 py-[14px] text-center text-[15px] font-medium text-white max-385:px-3 max-385:text-[13px]">
+                                <button href="./product.html" class="flex items-center gap-2 rounded-full bg-[linear-gradient(268.1deg,_#CC035C_7.47%,_#FCB115_98.92%)] px-4 py-[14px] text-center text-[15px] font-medium text-white max-385:px-3 max-385:text-[13px]">
                                     {{ $t('View Project') }}
 
                                     <span class="icon-arrow-right-stylish inline-block text-[24px] max-385:text-[16px]"></span>
@@ -120,13 +120,11 @@
         <!-- section about end -->
 
         <!-- section our brands (Categories) -->
-        <section class="pt-9">
+        <section class="pt-9" v-if="categories">
             <div class="container">
                 <h2 class="text-[20px] font-bold text-dark">{{ $t('Our Brands') }}
                 </h2>
-                <div class="mt-3 grid grid-cols-3 gap-[9px]">
-                    <category-card v-for="category in categories" :key='category.uid' :category="category"></category-card>
-                </div>
+                <our-brands-card :categories="categories"></our-brands-card>
             </div>
         </section>
         <!-- section our brands emd -->
@@ -207,6 +205,7 @@
     import NewsCard               from '../news/card';
     import PartnerCard            from '../partners/card';
     import ImageComponent         from "../common/image-component";
+    import OurBrandsCard          from "../our-brands/card";
 
     export default {
         name: 'guest-home',
@@ -221,6 +220,7 @@
             PartnerCard,
             NewsCard,
             ImageComponent,
+            OurBrandsCard,
         },
 
         data: function () {
@@ -247,7 +247,7 @@
                         'slug':'terms-of-use',
                     },
                     'aboutHomeFul': {
-                        'slug': 'about-homeful',
+                        'slug': 'pwa-about-us',
                     },
                 },
                 newses:[],

@@ -1,11 +1,11 @@
 <template>
 	<div>
 		<div class="homeful-slider-wrap relative mt-4">
-			<div class="homeful-slide active">
+			<div class="homeful-slide active w-full h-[412px] overflow-hidden">
                 <image-component
                     :src="sliderActiveImage.large_image_url"
                     :alt="'Facade'"
-                    :classes="'w-full'"
+                    :classes="'w-full h-full object-fit'"
                     >
                 </image-component>
 			</div>
@@ -18,13 +18,13 @@
                     v-for="(image, index) in images"
                     :key="index"
                     :class="sliderActiveImage.id === image.id ? 'active' : ''"
-                    class="thumb ml-5 w-[75px] cursor-pointer"
+                    class="thumb ml-5 w-[75px] overflow-hidden cursor-pointer"
                     @click="changeSlideImage(image)"
                     >
                     <image-component
                         :src="image.large_image_url"
                         :alt="'Facade'"
-                        :classes="'rounded-[8px] border border-transparent transition hover:border-primary'"
+                        :classes="'rounded-[8px] border border-transparent transition hover:border-primary w-full h-[50px] object-fit'"
                         >
                     </image-component>
 					<p class="mt-[5px] text-[12px] font-normal leading-none text-text-gray transition">Facade</p>
